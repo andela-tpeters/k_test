@@ -1,6 +1,6 @@
 class Airport < ApplicationRecord
   belongs_to :state
 
-  has_many :departure_ro, :class_name: "Route", foreign_key: debtor_id
-  has_many :credits, :class_name: "Route", foreign_key: :creditor_id
+  has_many :departure_routes, class_name: "Route", foreign_key: :departure_id
+  has_many :arrival_routes, class_name: "Route", foreign_key: :arrival_id
 end
