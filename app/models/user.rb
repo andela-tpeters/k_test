@@ -1,3 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :role
+  include Clearance::User
+
+  include Clearance::User
 end

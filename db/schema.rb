@@ -10,12 +10,96 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830180431) do
+ActiveRecord::Schema.define(version: 20160901081005) do
 
-  create_table "roles", force: :cascade do |t|
+  create_table "aircrafts", force: :cascade do |t|
+    t.string   "craft_no"
+    t.integer  "capacity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "airports", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_airports_on_state_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.string   "booking_ref"
+    t.integer  "passenger_id"
+    t.integer  "flight_id"
+    t.boolean  "checked_in"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["flight_id"], name: "index_bookings_on_flight_id"
+    t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.datetime "departure_date"
+    t.time     "arrival_time"
+    t.integer  "aircraft_id"
+    t.integer  "airfare_id"
+    t.integer  "route_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["aircraft_id"], name: "index_flights_on_aircraft_id"
+    t.index ["airfare_id"], name: "index_flights_on_airfare_id"
+    t.index ["route_id"], name: "index_flights_on_route_id"
+  end
+
+  create_table "passengers", force: :cascade do |t|
+    t.string   "picture_url", limit: 40
+    t.string   "phone",       limit: 16
+    t.string   "passport_no", limit: 15
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["user_id"], name: "index_passengers_on_user_id"
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "airport_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["airport_id"], name: "index_routes_on_airport_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.string   "iata_code"
+    t.integer  "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_states_on_country_id"
+  end
+
+  create_table "travel_classes", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "email",                          null: false
+    t.string   "encrypted_password", limit: 128, null: false
+    t.string   "confirmation_token", limit: 128
+    t.string   "remember_token",     limit: 128, null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
 end

@@ -5,12 +5,15 @@ gem "puma", "~> 3.0"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
+gem "bcrypt"
+gem "clearance"
 gem "coffee-rails", "~> 4.2"
 gem "jquery-rails"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.5"
 
 group :development, :test do
+  gem "pry-rails"
   gem "byebug", platform: :mri
   gem 'rspec-rails', '~> 3.5'
 end
