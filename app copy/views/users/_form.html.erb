@@ -1,0 +1,9 @@
+<%= form.email_field :email, type: 'email', class: 'form-control', placeholder: 'Email' %>
+<%= form.password_field :password, type: 'email', class: 'form-control', placeholder: 'Password' %>
+<%= form.submit "Login", class: 'btn btn-default btn-login', remote: true, onclick: 'loginAjax()' %>
+<div class="checkbox">
+  <label>
+    <%= form.check_box :remember_token %>
+    Keep me signed in
+  </label>
+</div>

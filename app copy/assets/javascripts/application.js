@@ -1,0 +1,10 @@
+//= require turbolinks
+//= require jquery
+//= require bootstrap-sprockets
+//= require main
+//= require result-page
+//= require login-register
+//= require form
+//= require dailyscroll
+//= require wow.min
+//= require step-form

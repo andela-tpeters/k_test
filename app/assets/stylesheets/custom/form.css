@@ -1,0 +1,251 @@
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* Colors */
+/* ---------------------------------------- */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+h2.heading {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: left;
+  color: #506982;
+  border-bottom: 1px solid #506982;
+  padding-bottom: 3px;
+  margin-bottom: 20px;
+}
+
+.controls {
+  text-align: left;
+  position: relative;
+}
+.controls input[type="text"],
+.controls input[type="email"],
+.controls input[type="tel"],
+.controls input[type="date"],
+.controls input[type="number"],
+.controls textarea,
+.controls button,
+.controls select {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #c6c6c6;
+  width: 100%;
+  margin-bottom: 18px;
+  color: #888;
+  line-height: 20px;
+  font-family: 'Lato', 'sans-serif';
+  font-size: 16px;
+  font-weight: 300;
+  background-color: #fff;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.controls input[type="number"] {
+  pointer-events: none;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.controls input[type="text"]:focus, .controls input[type="text"]:hover,
+.controls input[type="email"]:focus,
+.controls input[type="email"]:hover,
+.controls input[type="tel"]:focus,
+.controls input[type="tel"]:hover,
+.controls input[type="date"]:focus,
+.controls input[type="date"]:hover,
+.controls input[type="number"]:focus,
+.controls input[type="number"]:hover,
+.controls textarea:focus,
+.controls textarea:hover,
+.controls button:focus,
+.controls button:hover,
+.controls select:focus,
+.controls select:hover {
+  line-height: 20px;
+  outline: none;
+  border-color: #9FB1C1;
+}
+
+.controls .increment-control input{
+  width: 60%;
+}
+
+.controls .increment-control button{
+  width: 19%;
+}
+
+::-webkit-calendar-picker-indicator {
+  margin-right: -10px;
+}
+
+.controls input[type="text"]:focus + label, 
+.controls input[type="text"]:hover + label,
+.controls input[type="email"]:focus + label,
+.controls input[type="email"]:hover + label,
+.controls input[type="tel"]:focus + label,
+.controls input[type="tel"]:hover + label,
+.controls input[type="number"]:focus + label,
+.controls input[type="number"]:hover + label,
+.controls textarea:focus + label,
+.controls textarea:hover + label,
+.controls button:focus + label,
+.controls button:hover + label,
+.controls select:focus + label,
+.controls select:hover + label {
+  color: #077ABC;
+  cursor: text;
+}
+.controls .fa-sort {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+  color: #999;
+}
+.controls select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+.controls label {
+  position: absolute;
+  top: 8px;
+  color: #999;
+  font-size: 16px;
+  display: inline-block;
+  padding: 4px 10px;
+  font-weight: 400;
+  background-color: rgba(255, 255, 255, 0);
+  pointer-events: none;
+  -moz-transition: color 0.3s, top 0.3s, background-color 0.8s;
+  -o-transition: color 0.3s, top 0.3s, background-color 0.8s;
+  -webkit-transition: color 0.3s, top 0.3s, background-color 0.8s;
+  transition: color 0.3s, top 0.3s, background-color 0.8s;
+}
+.controls label.active {
+  right: 22px;
+  color: #9dc7d2;
+  font-weight: 300;
+  background: #fff;
+  padding-right: 0;
+}
+.fixed-form {
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  z-index: 1000;
+}
+@media (min-width:768px) {
+  .fixed-form {
+    left: calc(50% - 750px/2)
+  }
+}
+
+@media (min-width:992px) {
+  .fixed-form {
+    left: calc(50% - 970px/2)
+  }
+}
+
+@media (min-width:1200px) {
+  .fixed-form {
+    left: calc(50% - 1170px/2)
+  }
+}
+.fixed-form .contact-form {
+  background: #f0f8ff;
+  padding: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+}
+.fixed-form .fa-phone {
+  font-size: 22px;
+}
+.fixed-form .fa-remove {
+  color: #686868;
+}
+.fixed-form .collapsed-button[aria-expanded="true"] .fa-phone {
+  font: normal normal normal 14px/1 'Lato', 'sans-serif';
+}
+button[data-toggle="collapse"],
+.fixed-form .button-form-group {
+  margin-bottom: 0
+}
+.fixed-form .collapsed-button[aria-expanded="true"] {
+  display: none;
+}
+.fixed-form .collapsed-button[aria-expanded="false"],
+.fixed-form .collapsed-button {
+    width: 50px;
+}
+.fixed-form .collapsed-button[aria-expanded="true"]:after {
+    font-family: 'Glyphicons Halflings';
+    font-weight: 900;
+    content: "\00d7";
+    padding-right: 20px;
+    float: right; 
+    color: #07B3A1;
+}
+.col
+.controls textarea {
+  resize: none;
+  height: 200px;
+}
+.controls button {
+  cursor: pointer;
+  background-color: #07B3A1;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+}
+.controls button:hover {
+  background-color: #08ccb7;
+}

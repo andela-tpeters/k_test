@@ -14,6 +14,7 @@ Rails.application.configure do
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.public_file_server.headers = {
     'Cache-Control' => 'public, max-age=3600'
   }
