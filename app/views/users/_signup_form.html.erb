@@ -1,18 +1,15 @@
 <div class="box">
     <div class="content registerBox" style="display:none;">
       <div class="form">
-        <%= form_for(@user) do |form| %>
-
+        <%= form_for(@user, :html => {:id => "sign_up_user"},
+                     :format => :json,
+                     :remote => true ) do |form| %>
           <%= form.text_field :first_name, class: 'form-control', placeholder: 'First Name', autofocus: true %>
           <%= form.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
-          <%= form.email_field :email, type: 'email', class: 'form-control', placeholder: 'Email' %>
-          <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
+          <%= form.email_field :email, class: 'form-control', placeholder: 'Email' %>
           <%= form.password_field :password, class: 'form-control', placeholder: 'Password' %>
           <%= form.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
-          <%= form.submit "Create Account", class: 'btn btn-default btn-register', remote: true, onclick: 'loginAjax()' %>
-          
+          <%= form.submit "Create Account", class: 'btn btn-default btn-register' %>
         <% end %>
       </div>
     </div>
