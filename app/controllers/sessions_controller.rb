@@ -1,17 +1,16 @@
-class SessionsController < Devise::SessionsController
+class SessionsController < ApplicationController
   def create
-    resource = warden.authenticate!(scope: resource_name, recall: "sessions#failure")
-    sign_in_and_redirect(resource_name, resource)
+    user = User.find_by_email(params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
+      # redirect_to root_url, notice: ""
+      render :json => {:success => true, :errors => "You have been signed in"}
+    else
+      render :json => {:success => false, :errors => "Out!"}
+    end
   end
 
-  def sign_in_and_redirect(resource_or_scope, resource=nil)
-    scope = Devise::Mapping.find_scope!(resource_or_scope)
-    resource ||= resource_or_scope
-    sign_in(scope, resource) unless warden.user(scope) == resource
-    return render :json => {:success => true, :redirect => stored_location_for(scope) || after_sign_in_path_for(resource)}
-  end
+  def destroy
 
-  def failure
-    render :json => {:success => false, :errors => ["Login failed."]}
   end
 end

@@ -1,27 +1,32 @@
-function loginAjax(){
-    // $.post( "/users/sign_in", function( data ) {
-    //     if(data.success) {
-    //         alert("Success!");           
-    //     } else {
-    //         shakeModal(); 
-    //     }
-    // });    
-    console.log('here')
-}
-
-
-function shakeModal(){
+function shakeModal(errorMessage) {
     $('#loginModal .modal-dialog').addClass('shake');
-    $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
+    foreach(message in errorMessage) {
+        $('.error').addClass('alert alert-danger').html(message);
+    }
     $('input[type="password"]').val('');
     setTimeout( function(){ 
         $('#loginModal .modal-dialog').removeClass('shake'); 
     }, 1000 ); 
 }
 
+function callAjax(form, event) {
+    event.preventDefault();
+    $.post( form.prop('action'), function( data ) {
+        if(data.success) {
+            alert("Success!");           
+        } else {
+            shakeModal(data.errors); 
+        }
+    });    
+}
+
 $(function(){
-    $('#sign_in_user').submit(function(evt){
-        console.log('submit')
-        evt.preventDefault();
+    $('#sign_in_user').submit(function(event) {
+        event.preventDefault();
+        callAjax($(this), event)
+    });
+
+    $('#sign_up_user').submit(function(evt){
+        callAjax($(this), event)
     });
 })

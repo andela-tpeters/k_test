@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :users
   resources :bookings
-  root to: "users#index"
+  resources :sessions
+  root 'users#index'
+
+  post 'login', to: 'sessions#create'
+  post 'signup', to: 'users#create'
 end
