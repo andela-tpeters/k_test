@@ -1,6 +1,6 @@
 function shakeModal(errorMessage) {
     $('#loginModal .modal-dialog').addClass('shake');
-    foreach(message in errorMessage) {
+    for(message in errorMessage) {
         $('.error').addClass('alert alert-danger').html(message);
     }
     $('input[type="password"]').val('');
@@ -21,6 +21,7 @@ function callAjax(form, event) {
 }
 
 $(function(){
+
     $('#sign_in_user').submit(function(event) {
         event.preventDefault();
         callAjax($(this), event)
@@ -29,4 +30,4 @@ $(function(){
     $('#sign_up_user').submit(function(evt){
         callAjax($(this), event)
     });
-})
+});

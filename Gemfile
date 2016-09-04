@@ -26,6 +26,7 @@ end
 group :test do
   gem "capybara"
   gem "factory_girl_rails"
+  gem "simplecov", require: false
   gem "sqlite3"
   gem "database_cleaner"
   gem "codeclimate-test-reporter", require: false

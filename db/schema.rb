@@ -96,7 +96,9 @@ ActiveRecord::Schema.define(version: 20160902185248) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
+    t.string "remember_token"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
 end

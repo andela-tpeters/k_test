@@ -12,11 +12,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(params[:user])
     if @user.save
       render :json => {:success => true}
     else
-      errors = @user.errors.full_messages
+      errors = @user.errors.full_messages.join(", ")
       render :json => {:success => false, :errors => errors}
     end
   end

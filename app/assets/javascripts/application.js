@@ -8,4 +8,4 @@
 //= require dailyscroll
 //= require wow.min
 //= require step-form
-//= require users/new
+//= require modal
