@@ -24,7 +24,7 @@
                      :remote => true ) do |form| %>
         <%= form.email_field :email, class: 'form-control', placeholder: 'Email', autofocus: true %>
         <%= form.password_field :password, class: 'form-control', placeholder: 'Password' %>
-        <%= form.submit "Log in", class: 'btn btn-default btn-register', remote: true, onclick: 'loginAjax()' %>
+        <%= form.submit "Log in", class: 'btn btn-default btn-register' %>
         <div class="checkbox">
             <%#= form.check_box :remember_me %>
             Keep me signed in

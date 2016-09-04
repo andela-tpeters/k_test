@@ -45,57 +45,7 @@
                     </div>
                     </div>
                     <div class="col-md-7 col-sm-12">
-                        <div class="contact-form bottom">
-                            <h2>Book a Flight</h2>
-                            <form action="">
-                              <div class="form-group">
-                                <div class="controls">
-                                  <i class="fa fa-sort"></i>
-                                  <select class="floatLabel">
-                                    <option value="blank" hidden></option>
-                                    <option value="Apple">Lagos</option>
-                                    <option value="Banana">Ibadan</option>
-                                    <option value="Kiwi">PortHarcourt</option>
-                                    <option value="Orange">Abuja</option>
-                                    <option value="Watermelon">Apapa</option>
-                                  </select>
-                                  <label for="location">Departure City</label>
-                                </div>
-                                <div class="controls">
-                                  <i class="fa fa-sort"></i>
-                                  <select class="floatLabel">
-                                    <option value="blank" hidden></option>
-                                    <option value="Apple">Lagos</option>
-                                    <option value="Banana">Ibadan</option>
-                                    <option value="Kiwi">PortHarcourt</option>
-                                    <option value="Orange">Abuja</option>
-                                    <option value="Watermelon">Apapa</option>
-                                  </select>
-                                  <label for="location">Destination</label>
-                                </div>
-                                <div class="controls">
-                                  <i class="fa fa-sort"></i>
-                                  <select class="floatLabel">
-                                    <option value="blank" hidden></option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                  </select>
-                                  <label for="fruit">Number of Passengers</label>
-                                </div>
-                                <div class="controls">
-                                    <input name="arrival" type="text" onfocus="(this.type='date')" class="floatLabel" onblur="(this.type='text')"/>
-                                    <label for="arrival">Departure Date</label>
-                                </div>
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <button class="search-button" data-type="member-1">Search</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        <%= render 'layouts/booking_form' %>
                     </div>
                 </div>
             </div>
@@ -116,13 +66,13 @@
                 <div class="horizontal-tabs">
                   <ul role="tablist" class="nav nav-tabs nav-tabs-horizontal">
                     <li role="presentation" class="active">
-                      <a href="#image03" data-toggle="tab">
+                      <a href="#image01" data-toggle="tab">
                         <span class="day">Saturday<hr></span>
                         Jan 16
                       </a>
                     </li>
                     <li role="presentation">
-                      <a href="#image03" data-toggle="tab">
+                      <a href="#image02" data-toggle="tab">
                         <span class="day">Sunday<hr></span>
                         Jan 17
                       </a>
@@ -134,7 +84,7 @@
                       </a>
                     </li>
                     <li role="presentation">
-                      <a href="#image03" data-toggle="tab">
+                      <a href="#image01" data-toggle="tab">
                         <span class="day">Tuesday<hr></span>
                         Jan 19
                       </a>

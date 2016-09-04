@@ -13,10 +13,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    binding.pry
     if @user.save
       render :json => {:success => true}
     else
-      errors = @user.errors.full_messages.join(", ")
+      errors = @user.errors.full_messages.join('<br>')
       render :json => {:success => false, :errors => errors}
     end
   end

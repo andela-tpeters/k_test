@@ -12,6 +12,7 @@ gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.5"
 gem "figaro"
 gem "font-awesome-rails"
+gem "error_page_assets", "~> 0.4"
 
 group :development, :test do
   gem "pry-rails"
