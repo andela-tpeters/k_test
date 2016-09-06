@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before do
+  before(:each) do
     @user = create(:user)
   end
 
@@ -19,5 +19,9 @@ RSpec.describe User, type: :model do
     scenario "when user is saved with remember me" do
       expect(@user.remember_token).not_to be_blank
     end
+
+    # scenario "when a remember token is generated" do
+    #   expect(@user.generate_remember_token).to be_blank
+    # end
   end
 end
