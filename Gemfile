@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "rails", "~> 5.0.0", ">= 5.0.0.1"
 gem "puma", "~> 3.0"
-gem 'bootstrap-sass', '~> 3.3.6'
+gem "bootstrap-sass", "~> 3.3.6"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
 gem "bcrypt"
@@ -13,11 +13,13 @@ gem "jbuilder", "~> 2.5"
 gem "figaro"
 gem "font-awesome-rails"
 gem "error_page_assets", "~> 0.4"
+gem "activemodel-serializers-xml", git: "https://github.com/rails/activemodel-serializers-xml"
+gem "draper", git: "https://github.com/drapergem/draper"
 
 group :development, :test do
   gem "pry-rails"
   gem "byebug", platform: :mri
-  gem 'rspec-rails', '~> 3.5'
+  gem "rspec-rails", "~> 3.5"
 end
 
 group :production do
