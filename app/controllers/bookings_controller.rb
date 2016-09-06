@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
   # before_action :require_login, only: [:new]
 
   # GET /bookings
@@ -71,5 +72,12 @@ class BookingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
       params.require(:booking).permit(:booking_ref, :passenger_id, :flight_id, :checked_in)
+    end
+
+    def set_user
+      @user = User.new
+      if current_user
+        @decorated_user = UserDecorator.new(current_user)
+      end
     end
 end

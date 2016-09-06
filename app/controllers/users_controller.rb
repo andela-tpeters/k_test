@@ -1,20 +1,25 @@
 class UsersController < ApplicationController
+  layout 'user'
   def show
       
   end
 
   def index
-      @user = User.new
+    @user = User.new
+    if current_user
+      @decorated_user = UserDecorator.new(current_user)
+    end
   end
 
   def new
-      @user = User.new
+    @user = User.new
   end
 
   def create
     @user = User.new(params[:user])
-    binding.pry
     if @user.save
+      sign_in @user
+      redirect_to 'back'
       render :json => {:success => true}
     else
       errors = @user.errors.full_messages.join('<br>')
