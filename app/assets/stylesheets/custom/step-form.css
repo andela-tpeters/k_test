@@ -28,7 +28,8 @@
   z-order: 0;
 }
 
-.setup-content {
+.setup-content,
+.table-content {
   display: block;
   border: solid 2px rgba(15, 147, 219, 0.23);
   margin: 50px 80px;
@@ -36,11 +37,34 @@
   border-radius: 2px;
 }
 
+.table-content .table > tbody > tr td {
+    background: #f0f8ff;
+    margin: 10px;
+    width: 20%;
+    text-align: center;
+    border: #fff solid 6px;
+    border-top: transparent;
+    h6 {
+      border-bottom: 1px solid #fff;
+      padding-bottom: 10px;
+    }
+    h5, h6 { font-weight: 300 }
+}
+
 .stepwizard-step {
   width: 33%;
   display: table-cell;
   text-align: center;
   position: relative;
+}
+
+.btn.btn-success {
+  background: #07B3A1;
+  border-color: #07B3A1;
+}
+
+.btn {
+  border-radius: 2px;
 }
 
 .btn.btn-circle {

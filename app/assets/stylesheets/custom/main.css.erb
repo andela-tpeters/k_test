@@ -297,6 +297,7 @@
 
 #header .navbar-nav.navbar-right >.nav-link #profile-menu {
   margin-top: -5px;
+  padding-right: 15px;
 }
 
 #header .navbar-nav.navbar-right >.nav-link .dropdown-menu>li>a, 
@@ -314,15 +315,11 @@
   padding: 0;
 }
 
-#header .navbar-inverse .navbar-toggle.navbar-user:hover {
+#header .navbar-inverse .navbar-toggle.navbar-user,
+#header .navbar-inverse .navbar-toggle.navbar-user:hover,
+#header .navbar-inverse .navbar-toggle.navbar-user:focus {
     background: none;
-}
-
-#header .navbar-inverse .navbar-toggle.navbar-user .fa-user {
-    color: #07B3A1;
-    font-size: 24px;
-    margin-top: -2px;
-    cursor: pointer;
+    margin-top: 10px;
 }
 
 #header .navbar-inverse .navbar-nav  li.active > a,  
@@ -338,6 +335,11 @@
   color: #00aeef;
 }
 
+#header .navbar-nav.navbar-right >.nav-link .dropdown-menu .media-body {
+  h5, h6 {
+    font-weight: 400;
+  }
+}
 
 /*  Dropdown menu*/
 
@@ -730,6 +732,7 @@ ul.sub-menu {
 
 .action h1{
   margin-top: 0;
+  padding-top: 5px;
 }
 
 .action p{

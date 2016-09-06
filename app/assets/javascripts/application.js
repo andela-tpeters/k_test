@@ -1,11 +1,11 @@
-//= require turbolinks
 //= require jquery
+//= require wow.min
+//= require turbolinks
 //= require bootstrap-sprockets
+//= require custom-form
 //= require main
 //= require result-page
 //= require login-register
-//= require form
 //= require dailyscroll
-//= require wow.min
 //= require step-form
 //= require modal

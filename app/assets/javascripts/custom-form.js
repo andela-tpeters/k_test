@@ -1,4 +1,4 @@
-(function($){
+$(function(){
 	function floatLabel(inputType){
 		$(inputType).each(function(){
 			var $this = $(this);
@@ -16,4 +16,4 @@
 	}
 	// just add a class of "floatLabel to the input field!"
 	floatLabel(".floatLabel");
-})(jQuery);
+});
