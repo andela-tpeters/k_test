@@ -1,0 +1,188 @@
+<section id="home-slider">
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="main-slider">
+                    <div class="col-md-5 col-sm-12">
+                        <% if signed_in? %>
+                            <div class="bottom">
+                                <h2>Recent Bookings</h2>
+                                <p>You currently have no bookings</p>
+                            </div>
+                        <% else %>
+                            <div class="slide-text">
+                                <h1>Let's Fly, Fly Away</h1>
+                                <p>Don't think about the journey... We have it all figured out!</p>
+                                <a href="#" class="btn btn-common" data-toggle="modal" data-target="#loginModal">SIGN IN</a>
+                            </div>
+                        <% end %>
+                    </div>
+                    <div class="col-md-7 col-sm-12">
+                        <%= render 'application/booking_form' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="preloader"><i class="fa fa-sun-o fa-spin"></i></div>
+    </section>
+    <div class="cd-overlay"></div>
+</main>
+
+<div class="cd-member-bio member-1">
+<div class="cd-bio-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="js_date_selection" class="horizontal-scrollable-tabs">
+            <div class="scroller arrow-left"><i class="fa fa-chevron-left"></i></div>
+            <div class="scroller arrow-right"><i class="fa fa-chevron-right"></i></div>
+            <div class="horizontal-tabs">
+              <ul role="tablist" class="nav nav-tabs nav-tabs-horizontal">
+                <li role="presentation" class="active">
+                  <a href="#image01" data-toggle="tab">
+                    <span class="day">Saturday<hr></span>
+                    Jan 16
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image02" data-toggle="tab">
+                    <span class="day">Sunday<hr></span>
+                    Jan 17
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image03" data-toggle="tab">
+                    <span class="day">Monday<hr></span>
+                    Jan 18
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image01" data-toggle="tab">
+                    <span class="day">Tuesday<hr></span>
+                    Jan 19
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image03" data-toggle="tab">
+                    <span class="day">Wednesday<hr></span>
+                    Jan 20
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image03" data-toggle="tab">
+                    <span class="day">Thursday<hr></span>
+                    Jan 21
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image03" data-toggle="tab">
+                    <span class="day">Friday<hr></span>
+                    Jan 22
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image03" data-toggle="tab">
+                    <span class="day">Saturday<hr></span>
+                    Jan 23
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#image03" data-toggle="tab">
+                    <span class="day">Sunday<hr></span>
+                    Jan 24
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tab-content flight-content">
+            <div id="image01" role="tabpanel" class="tab-pane fade in active">
+              <h2>January 16th, 2014</h2>
+              <table class="table">
+                <thead>
+                    <tr class="">
+                        <th>Flight</th>
+                        <th>Booking</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <body>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                    <tr>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                        <td>Hey</td>
+                    </tr>
+                </body>
+            </table>
+            </div>
+            <div id="image02" role="tabpanel" class="tab-pane fade">Hey</div>
+            <div id="image03" role="tabpanel" class="tab-pane fade">Hey You</div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div> <!-- cd-bio-content -->
+</div> 
+
+<a href="#0" class="cd-member-bio-close fa fa-remove"></a>

@@ -1,0 +1,34 @@
+<section class="col-md-4 col-sm-12 fixed-form">
+    <div class="form-group button-form-group">
+        <div class="controls">
+          <button class="collapsed-button" data-toggle="collapse" data-target="#demo">
+            <i class="fa fa-phone"></i>
+          </button>
+        </div>
+    </div>
+    <div id="demo" class="collapse">
+        <div class="contact-form bottom">
+        <div>
+            <h3 class="pull-left">Contact Us</h3>
+            <a href="javascript: $('.collapsed-button').trigger('click');"><i class="fa fa-remove pull-right"></i></a>
+        </div>
+        
+            <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
+                </div>
+                <div class="form-group">
+                    <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your text here"></textarea>
+                </div>                        
+                <div class="form-group button-form-group">
+                    <div class="controls">
+                        <button>Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

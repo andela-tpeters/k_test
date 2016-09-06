@@ -1,0 +1,23 @@
+<a class="dropdown-toggle" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= image_tag @decorated_user.get_picture("avatar.jpg"), alt: "Avatar", class: "img-circle",  height: "30", width: "30" %>
+</a>
+<ul class="dropdown-menu" aria-labelledby="profile-menu">
+    <li>
+      <div class="media-left">
+        <%= image_tag @decorated_user.get_picture("avatar.jpg"), alt: "Avatar", class: "img-circle",  height: "50", width: "50" %>
+      </div>
+      <div class="media-body">
+        <h5 class="media-heading">
+            <%= @decorated_user.full_name %>
+        </h5>
+        <h6>
+            <%= @decorated_user.email %>
+        </h6>
+      </div>
+    </li>
+    <li class="divider"></li>
+    <li><a href="#">View Profile</a></li>
+    <li><a href="#">Bookings</a></li>
+    <li><a href="#">Settings</a></li>
+    <li><%= link_to "Logout", logout_path, method: :delete %></li>
+</ul>
