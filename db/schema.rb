@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902185248) do
+ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "aircrafts", force: :cascade do |t|
     t.string   "craft_no"
     t.integer  "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "airfares", force: :cascade do |t|
+    t.integer  "route_id"
+    t.decimal  "service_charge"
+    t.string   "tax"
+    t.integer  "class_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["class_id"], name: "index_airfares_on_class_id"
+    t.index ["route_id"], name: "index_airfares_on_route_id"
   end
 
   create_table "airports", force: :cascade do |t|
@@ -29,13 +40,13 @@ ActiveRecord::Schema.define(version: 20160902185248) do
 
   create_table "bookings", force: :cascade do |t|
     t.string   "booking_ref"
-    t.integer  "passenger_id"
+    t.integer  "user_id"
     t.integer  "flight_id"
     t.boolean  "checked_in"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
-    t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -59,12 +70,15 @@ ActiveRecord::Schema.define(version: 20160902185248) do
   end
 
   create_table "passengers", force: :cascade do |t|
-    t.string   "picture_url", limit: 40
+    t.string   "first_name",  limit: 30
+    t.string   "last_name",   limit: 30
     t.string   "phone",       limit: 16
     t.string   "passport_no", limit: 15
     t.integer  "user_id"
+    t.integer  "booking_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
     t.index ["user_id"], name: "index_passengers_on_user_id"
   end
 
@@ -85,6 +99,20 @@ ActiveRecord::Schema.define(version: 20160902185248) do
     t.index ["country_id"], name: "index_states_on_country_id"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "flight_id"
+    t.integer  "passenger_id"
+    t.datetime "booking_date"
+    t.integer  "airfare_id"
+    t.string   "transaction_ref"
+    t.integer  "status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["airfare_id"], name: "index_transactions_on_airfare_id"
+    t.index ["flight_id"], name: "index_transactions_on_flight_id"
+    t.index ["passenger_id"], name: "index_transactions_on_passenger_id"
+  end
+
   create_table "travel_classes", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -92,13 +120,14 @@ ActiveRecord::Schema.define(version: 20160902185248) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name",      limit: 30
+    t.string "last_name",       limit: 30
     t.string "email"
+    t.string "picture_url",     limit: 40
     t.string "password_digest"
-    t.string "remember_token"
+    t.string "remember_digest"
     t.index ["email"], name: "index_users_on_email"
-    t.index ["remember_token"], name: "index_users_on_remember_token"
+    t.index ["remember_digest"], name: "index_users_on_remember_digest"
   end
 
 end

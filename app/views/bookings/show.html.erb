@@ -26,6 +26,11 @@
 <%= link_to 'Edit', edit_booking_path(@booking) %> |
 <%= link_to 'Back', bookings_path %>
 
+<%= content_for :heading do %>
+    Booking Information
+<% end %>
+<p id="notice"><%= notice %></p>
+
 <section>
   <div class="container">
     <div class="stepwizard">
@@ -45,6 +50,39 @@
       </div>
     </div>
     <form role="form">
+      <div class="row table-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>You requested:</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h6>From</h6>
+                <h5>ABV</h5>
+              </td>
+              <td>
+                <h6>To</h6>
+                <h5>ENU</h5>
+              </td>
+              <td>
+                <h6>Date</h6>
+                <h5>31/05/2017</h5>
+              </td>
+              <td>
+                <h6>Passengers</h6>
+                <h5>1</h5>
+              </td>
+              <td>
+                <h6>Class</h6>
+                <h5>Economy</h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="row setup-content" id="step-1">
         <div class="col-md-12">
           <h3> Step 1</h3>

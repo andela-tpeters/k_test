@@ -8,8 +8,4 @@ class Auth
   def self.valid?(password, encrypted_password)
     password.eql? BCrypt::Password.new(encrypted_password)
   end
-
-  def matches?(request)
-    request.session['user_id'].present?
-  end
 end

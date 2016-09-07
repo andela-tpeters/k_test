@@ -3,14 +3,10 @@ Rails.application.routes.draw do
   resources :bookings
   resources :sessions
 
-  constraints(Auth.new) do
-    root 'users#index', as: :user_home
-  end
-
-  root 'home#index'
-
+  root 'users#index'
+  get 'users/index', to: 'users#index', as: 'user_home'
+  get 'home/index', to: 'home#index', as: 'home'
   post 'login', to: 'sessions#create'
   post 'signup', to: 'users#create'
-  post 'logout', to: 'sessions#destroy'
-  get 'book', to: 'bookings#book'
+  get 'logout', to: 'sessions#destroy'
 end

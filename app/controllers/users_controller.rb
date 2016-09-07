@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout 'user'
   def show
       
   end
@@ -7,8 +6,10 @@ class UsersController < ApplicationController
   def index
     @user = User.new
     if current_user
-      @decorated_user = UserDecorator.new(current_user)
+      @user = UserDecorator.new(current_user)
+      render user_home_path
     end
+    render home_path unless current_user
   end
 
   def new
@@ -16,11 +17,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       sign_in @user
-      redirect_to 'back'
-      render :json => {:success => true}
+      redirect_to root_url
     else
       errors = @user.errors.full_messages.join('<br>')
       render :json => {:success => false, :errors => errors}

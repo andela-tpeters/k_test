@@ -1,4 +1,2 @@
-<%= content_for :heading do %>
-    Book a Flight
-<% end %>
+<%= render partial: "users/page_heading", locals: {heading: 'Book a Flight'} %>
 <%= render 'booking_search' %>

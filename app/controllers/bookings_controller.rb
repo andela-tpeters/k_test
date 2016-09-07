@@ -7,6 +7,10 @@ class BookingsController < ApplicationController
   # GET /bookings.json
   def index
     @bookings = Booking.all
+    if current_user
+      @user = UserDecorator.new(current_user)
+    end
+    redirect_to home_path unless current_user
   end
 
   # GET /bookings/1
