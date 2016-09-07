@@ -4,7 +4,7 @@
         <title>500 Error | Kuruka</title>
         <%= favicon_link_tag 'ico/k-logo.png', rel: 'apple-touch-icon' %>
         <%= favicon_link_tag 'ico/k-logo.png', rel: 'shortcut icon' %>
-        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'error', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
 
@@ -38,7 +38,7 @@
                                 <h2>INTERNAL SERVER ERROR</h2>
                                 <p>We're sorry, but something went wrong.</p>
                                 <p>If you are the application owner check the logs for more information.</p>
-                                <a href="index.html" class="btn btn-error">RETURN TO THE HOMEPAGE</a>
+                                <a href="/" class="btn btn-error">RETURN TO THE HOMEPAGE</a>
                             </div>
                         </div>
                     </div>

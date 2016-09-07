@@ -9,3 +9,4 @@
 //= require dailyscroll
 //= require step-form
 //= require modal
+//= require notify

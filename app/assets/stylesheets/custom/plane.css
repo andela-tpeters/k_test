@@ -338,6 +338,4 @@
 	right:-450px;
 	color:#eee;
 	background:#eee;
-	-webkit-transform:rotate(-180deg) rotateX(-180deg) scale(1.4);
-	        transform:rotate(-180deg) rotateX(-180deg) scale(1.4);
 }

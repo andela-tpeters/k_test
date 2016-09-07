@@ -1,4 +1,4 @@
-jQuery(function($) {'use strict';
+$(function() {
 
 	//Responsive Nav
 	$('li.dropdown').find('.fa-angle-down').each(function(){
@@ -10,45 +10,21 @@ jQuery(function($) {'use strict';
 		});
 	});
 
-	//Fit Vids
-	if( $('#video-container').length ) {
-		$("#video-container").fitVids();
-	}
+	//Add active class to links on current URL
+	$(function() {
+    var path = window.location.pathname;
+    $(".nav .nav-link").each(function(){
+      if($(this).find('a').attr("href") == path || $(this).find('a').attr("href") == '' )
+      $(this).addClass("active");
+    });
+	});
 
-	//Initiat WOW JS
+	//Initiate WOW JS
 	new WOW().init();
 
-	// portfolio filter
-	$(window).load(function(){
-
-		$('.main-slider').addClass('animate-in');
-		$('.preloader').remove();
-		//End Preloader
-
-		if( $('.masonery_area').length ) {
-			$('.masonery_area').masonry();//Masonry
-		}
-
-		var $portfolio_selectors = $('.portfolio-filter >li>a');
-		
-		if($portfolio_selectors.length) {
-			
-			var $portfolio = $('.portfolio-items');
-			$portfolio.isotope({
-				itemSelector : '.portfolio-item',
-				layoutMode : 'fitRows'
-			});
-			
-			$portfolio_selectors.on('click', function(){
-				$portfolio_selectors.removeClass('active');
-				$(this).addClass('active');
-				var selector = $(this).attr('data-filter');
-				$portfolio.isotope({ filter: selector });
-				return false;
-			});
-		}
-
-	});
+	window.onload = function() {
+	  $('.main-slider').addClass('animate-in');
+	};
 
 
 	$('.timer').each(count);
@@ -74,7 +50,7 @@ jQuery(function($) {'use strict';
 				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
 			}
 		}).done(function(data){
-			form_status.html('<p class="text-success">Thank you for contact us. As early as possible  we will contact you</p>').delay(3000).fadeOut();
+			form_status.html('<p class="text-success">Thank you for contacting us. As early as possible  we will contact you</p>').delay(3000).fadeOut();
 		});
 	});
 
@@ -82,32 +58,4 @@ jQuery(function($) {'use strict';
 	$.each($('div.progress-bar'),function(){
 		$(this).css('width', $(this).attr('data-transition')+'%');
 	});
-
-	if( $('#gmap').length ) {
-		var map;
-
-		map = new GMaps({
-			el: '#gmap',
-			lat: 43.04446,
-			lng: -76.130791,
-			scrollwheel:false,
-			zoom: 16,
-			zoomControl : false,
-			panControl : false,
-			streetViewControl : false,
-			mapTypeControl: false,
-			overviewMapControl: false,
-			clickable: false
-		});
-
-		map.addMarker({
-			lat: 43.04446,
-			lng: -76.130791,
-			animation: google.maps.Animation.DROP,
-			verticalAlign: 'bottom',
-			horizontalAlign: 'center',
-			backgroundColor: '#3e8bff',
-		});
-	}
-
 });
