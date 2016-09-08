@@ -1,8 +1,10 @@
 class CreateAircrafts < ActiveRecord::Migration[5.0]
   def change
     create_table :aircrafts do |t|
-      t.string :craft_no
-      t.integer :capacity
+      t.string :tail_number
+      t.integer :economy_capacity
+      t.integer :business_capacity
+      t.integer :first_capacity
 
       t.timestamps
     end
