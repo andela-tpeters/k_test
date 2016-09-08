@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 20160906093907) do
   end
 
   create_table "airfares", force: :cascade do |t|
-    t.decimal  "service_charge"
-    t.string   "tax"
+    t.decimal  "dollar_service_charge"
+    t.string   "dollar_tax"
     t.integer  "class_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.index ["class_id"], name: "index_airfares_on_class_id"
   end
 
@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(version: 20160906093907) do
     t.string   "name"
     t.string   "iso_code"
     t.string   "country_code"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "currency"
+    t.string   "exchange_rate"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "flights", force: :cascade do |t|
@@ -103,6 +105,8 @@ ActiveRecord::Schema.define(version: 20160906093907) do
     t.integer  "arrival_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["arrival_id"], name: "index_routes_on_arrival_id"
+    t.index ["departure_id"], name: "index_routes_on_departure_id"
   end
 
   create_table "states", force: :cascade do |t|

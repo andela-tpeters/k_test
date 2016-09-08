@@ -5,8 +5,8 @@ class_list = [
 ]
 
 country_list = [
-  [ "Nigeria", "NG", 234 ],
-  [ "Kenya", "KE", 254 ]
+  [ "Nigeria", "NG", 234, "Naira", 315 ],
+  [ "Kenya", "KE", 254, "Shilling", 101 ]
 ]
 
 state_list = [
@@ -101,8 +101,12 @@ airport_list = [
   [ "Nanyuki Airport", "Nanyuki", "NYK", 37 ],
   [ "Nyeri Airport", "Nyeri", "NYE", 38 ],
   [ "Samburu Airport", "Samburu", "UAS", 39 ],
-  [ "Wajir Airport", "Wajir", "WJR", 40]
+  [ "Wajir Airport", "Wajir", "WJR", 40 ]
 ]
+
+class_list.each do |class|
+  TravelClass.create( name: :class )
+end
 
 country_list.each do |country|
   Country.create( name: :country[0], iso_code: :country[1], country_code: :country[2] )
@@ -114,4 +118,8 @@ end
 
 airport_list.each do |airport|
   Airport.create( name: :airport[0], city: :airport[1], iso_code: :airport[2], state: :airport[3] )
+end
+
+100.times do
+  Airport
 end
