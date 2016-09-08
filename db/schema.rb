@@ -20,18 +20,18 @@ ActiveRecord::Schema.define(version: 20160906093907) do
   end
 
   create_table "airfares", force: :cascade do |t|
-    t.integer  "route_id"
     t.decimal  "service_charge"
     t.string   "tax"
     t.integer  "class_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["class_id"], name: "index_airfares_on_class_id"
-    t.index ["route_id"], name: "index_airfares_on_route_id"
   end
 
   create_table "airports", force: :cascade do |t|
     t.string   "name"
+    t.string   "city"
+    t.string   "iata_code"
     t.integer  "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -51,9 +51,10 @@ ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
-    t.string   "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "iso_code"
+    t.string   "country_code"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "flights", force: :cascade do |t|
@@ -82,35 +83,34 @@ ActiveRecord::Schema.define(version: 20160906093907) do
     t.index ["user_id"], name: "index_passengers_on_user_id"
   end
 
-  create_table "routes", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "airport_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["airport_id"], name: "index_routes_on_airport_id"
-  end
-
-  create_table "states", force: :cascade do |t|
-    t.string   "name"
-    t.string   "iata_code"
-    t.integer  "country_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["country_id"], name: "index_states_on_country_id"
-  end
-
-  create_table "transactions", force: :cascade do |t|
+  create_table "payments", force: :cascade do |t|
     t.integer  "flight_id"
-    t.integer  "passenger_id"
-    t.datetime "booking_date"
+    t.integer  "booking_id"
+    t.datetime "payment_date"
     t.integer  "airfare_id"
     t.string   "transaction_ref"
     t.integer  "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["airfare_id"], name: "index_transactions_on_airfare_id"
-    t.index ["flight_id"], name: "index_transactions_on_flight_id"
-    t.index ["passenger_id"], name: "index_transactions_on_passenger_id"
+    t.index ["airfare_id"], name: "index_payments_on_airfare_id"
+    t.index ["booking_id"], name: "index_payments_on_booking_id"
+    t.index ["flight_id"], name: "index_payments_on_flight_id"
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "departure_id"
+    t.integer  "arrival_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_states_on_country_id"
   end
 
   create_table "travel_classes", force: :cascade do |t|
