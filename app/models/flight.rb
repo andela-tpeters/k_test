@@ -3,5 +3,5 @@ class Flight < ApplicationRecord
   belongs_to :airfare
   belongs_to :route
   has_many :bookings
-  has_many :transactions
+  has_many :payments
 end

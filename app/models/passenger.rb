@@ -1,6 +1,6 @@
 class Passenger < ApplicationRecord
   belongs_to :user, optional: true
-  has_one :transaction
+  belongs_to :booking
 
   validates :first_name,
             :last_name,
