@@ -15,6 +15,7 @@ gem "font-awesome-rails"
 gem "error_page_assets", "~> 0.4"
 gem "activemodel-serializers-xml", git: "https://github.com/rails/activemodel-serializers-xml"
 gem "draper", git: "https://github.com/drapergem/draper"
+gem "faker"
 
 group :development, :test do
   gem "pry-rails"
