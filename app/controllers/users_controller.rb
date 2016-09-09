@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-  def show 
+  before_action :set_user, :set_flights
+
+  def show
+
   end
 
   def index
-    @user = User.new
-    if current_user
-      @user = UserDecorator.new(current_user)
+    if @user
       render user_home_path
     end
     render home_path unless current_user
@@ -13,6 +14,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+  end
+
+  def schedule
+
   end
 
   def create
@@ -24,6 +29,17 @@ class UsersController < ApplicationController
       errors = @user.errors.full_messages.join('<br>')
       render :json => {:success => false, :errors => errors}
     end
+  end
+
+  def set_user
+    @user = User.new
+    if current_user
+      @user = UserDecorator.new(current_user)
+    end
+  end
+
+  def set_flights
+    @flight = Flight.all
   end
 
   private
