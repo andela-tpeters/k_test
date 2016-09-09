@@ -13,19 +13,22 @@
 ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "aircrafts", force: :cascade do |t|
-    t.string   "craft_no"
-    t.integer  "capacity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "tail_number"
+    t.integer  "economy_capacity"
+    t.integer  "business_capacity"
+    t.integer  "first_capacity"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "airfares", force: :cascade do |t|
-    t.decimal  "dollar_service_charge"
-    t.string   "dollar_tax"
-    t.integer  "class_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.index ["class_id"], name: "index_airfares_on_class_id"
+    t.decimal  "service_charge_in_dollar"
+    t.integer  "route_id"
+    t.integer  "travel_class_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["route_id"], name: "index_airfares_on_route_id"
+    t.index ["travel_class_id"], name: "index_airfares_on_travel_class_id"
   end
 
   create_table "airports", force: :cascade do |t|
@@ -61,14 +64,12 @@ ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "flights", force: :cascade do |t|
     t.datetime "departure_date"
-    t.time     "arrival_time"
+    t.datetime "arrival_date"
     t.integer  "aircraft_id"
-    t.integer  "airfare_id"
     t.integer  "route_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["aircraft_id"], name: "index_flights_on_aircraft_id"
-    t.index ["airfare_id"], name: "index_flights_on_airfare_id"
     t.index ["route_id"], name: "index_flights_on_route_id"
   end
 
@@ -119,8 +120,9 @@ ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "travel_classes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.decimal  "tax_percent"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
