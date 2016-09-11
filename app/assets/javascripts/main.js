@@ -1,5 +1,8 @@
 $(function() {
 
+	$('#datetimepicker').datetimepicker({
+		format: "YYYY-MM-DD"
+	});
 	//Responsive Nav
 	$('li.dropdown').find('.fa-angle-down').each(function(){
 		$(this).on('click', function(){
@@ -25,19 +28,6 @@ $(function() {
 	window.onload = function() {
 	  $('.main-slider').addClass('animate-in');
 	};
-
-
-	$('.timer').each(count);
-	function count(options) {
-		var $this = $(this);
-		options = $.extend({}, options || {}, $this.data('countToOptions') || {});
-		$this.countTo(options);
-	}
-		
-	// Search
-	$('.fa-search').on('click', function() {
-		$('.field-toggle').slideToggle(300);
-	});
 
 	// Contact form
 	var form = $('#main-contact-form');

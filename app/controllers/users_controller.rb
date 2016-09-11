@@ -5,11 +5,16 @@ class UsersController < ApplicationController
 
   end
 
-  def index
-    if @user
+  def get_root
+    if current_user
       render user_home_path
     end
     render home_path unless current_user
+  end
+
+  def update
+    params = update_params.reject! {|key, value| value.blank}
+    @user = User.update(params)
   end
 
   def new
@@ -39,12 +44,29 @@ class UsersController < ApplicationController
   end
 
   def set_flights
-    @flight = Flight.all
+    @flights = Flight.all.includes(
+      route: [:departure_airport, :arrival_airport, airfares: [:travel_class]]
+    )
+  end
+
+  def require_login
+    unless signed_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to root_url
+    end
   end
 
   private
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(
+        :first_name, :last_name, :email, :password, :password_confirmation, :avatar
+      )
+    end
+
+    def update_params
+      params.require(:update).permit(
+        :first_name, :last_name, :email, :password, :avatar
+      )
     end
 end

@@ -57,7 +57,7 @@ function get_f() {
                     arr[<%= index %>] = {
                         id: <%= index %>,
                         name: '<%= flight.route.name %>',
-                        location: '<%= "#{flight.route.departure.city} - #{flight.route.arrival.city}" %>',
+                        location: '<%= "#{flight.route.departure_airport.city} - #{flight.route.arrival_airport.city}" %>',
                         startDate: new Date("<%= flight.departure_date %>"),
                         endDate: new Date("<%= flight.arrival_date %>")
                     }

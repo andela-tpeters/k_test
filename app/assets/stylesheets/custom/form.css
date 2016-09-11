@@ -65,6 +65,7 @@ h2.heading {
 .controls input[type="tel"],
 .controls input[type="date"],
 .controls input[type="number"],
+.controls input[type="submit"],
 .controls textarea,
 .controls button,
 .controls select {
@@ -105,6 +106,8 @@ input:-webkit-autofill {
 .controls input[type="date"]:hover,
 .controls input[type="number"]:focus,
 .controls input[type="number"]:hover,
+.controls input[type="submit"]:hover,
+.controls input[type="submit"]:hover,
 .controls textarea:focus,
 .controls textarea:hover,
 .controls button:focus,
@@ -136,6 +139,8 @@ input:-webkit-autofill {
 .controls input[type="tel"]:hover + label,
 .controls input[type="number"]:focus + label,
 .controls input[type="number"]:hover + label,
+.controls input[type="submit"]:hover + label,
+.controls input[type="submit"]:hover + label,
 .controls textarea:focus + label,
 .controls textarea:hover + label,
 .controls button:focus + label,
@@ -246,7 +251,8 @@ button[data-toggle="collapse"],
   resize: none;
   height: 200px;
 }
-.controls button {
+.controls button,
+.controls input[type="submit"] {
   cursor: pointer;
   background-color: #07B3A1;
   border: none;
@@ -255,4 +261,10 @@ button[data-toggle="collapse"],
 }
 .controls button:hover {
   background-color: #08ccb7;
+}
+.image-upload > input[type="file"] {
+  display: none;
+}
+.image-upload img {
+  cursor: pointer;
 }

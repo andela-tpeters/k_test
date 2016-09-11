@@ -2,29 +2,35 @@ class FlightsController < ApplicationController
   respond_to :html, :js
 
   def show
-    @flights = Flight.all
+    
   end
 
   def search
-    binding.pry
-    @flight = Flight.search(search_params)
+    @flights = Flight.search(reject_empty!(search_params))
+
+    respond_to do |format|
+        format.html { render partial: 'flights/search_results', locals: { flights: @flights} }
+        format.js
+      end
   end
 
-  private
-
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  def reject_empty!(value_params)
+    value_params.delete_if {|key, value| value.blank? }
+    value_params.values.each do |v|
+      reject_empty!(v) if v.is_a?(ActionController::Parameters)
     end
+    value_params.delete_if {|key, value| value.blank? }
+  end
 
   private
     
-  def search_params
-    params.require(:route).permit(
-      [
+    def search_params
+      params.require(:flight_search).permit(
         :departure_date,
-        arrival: [:id],
-        departure: [:id]
-      ]
-    )
-  end
+        routes: [
+          :departure_airport_id,
+          :arrival_airport_id
+        ]
+      )
+    end
 end

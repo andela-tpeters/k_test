@@ -2,38 +2,37 @@
     <% unless signed_in? %>
       <h2>Book a Flight</h2>
     <% end %>
-    <%= form_for(:route, :html => {:id => "flight_form"},
+    <%= form_for(:flight_search, :html => {:id => "flight_form"},
                      :format => :json,
                      :url => search_path,
                      :remote => true ) do |form| %>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <div class="form-group">
+        <%= form.fields_for :routes do |form_field| %>
+        <% airports = Airport.select(:id, :city, :iata_code) %>
           <div class="controls">
             <i class="fa fa-sort"></i>
-            <%= form.fields_for :departure do |form_field| %>
-              <%= form_field.collection_select :id, Airport.all, :id, :iata_name, {include_blank: true}, class: 'floatLabel' %>
+              <%= form_field.collection_select :departure_airport_id, airports, :id, :iata_name, {include_blank: true}, class: 'floatLabel' %>
               <%= form.label 'Departure City' %>
-            <% end %>
           </div>
           <div class="controls">
             <i class="fa fa-sort"></i>
-            <%= form.fields_for :arrival do |form_field| %>
-              <%= form_field.collection_select :id, Airport.all, :id, :iata_name, {include_blank: true}, class: 'floatLabel' %>
-              <%= form.label 'Destination' %>
-            <% end %>
+            <%= form_field.collection_select :arrival_airport_id, airports, :id, :iata_name, {include_blank: true}, class: 'floatLabel' %>
+            <%= form.label 'Destination' %>
           </div>
+        <% end %>
         <div class="controls">
           <i class="fa fa-sort"></i>
-          <%= form.select :passenger_count, options_for_select((1..9).to_a.map{|s| ["#{s}", s]}), {include_blank: true}, class: 'floatLabel' %>
+          <%= select_tag :passenger_count, options_for_select((1..9).to_a.map{|number| ["#{number}", number]}), {include_blank: true, class: 'floatLabel'} %>
           <%= form.label 'Number of Passengers' %>
         </div>
         <div class="controls">
-            <%= form.text_field :departure_date, class: 'floatLabel', onfocus: '(this.type="date")', onblur: '(this.type="text")' %>
+            <%= form.text_field :departure_date, class: 'floatLabel', id: 'datetimepicker' %>
             <%= form.label 'Departure Date' %>
         </div>
         <div class="form-group">
             <div class="controls">
-                <%= form.submit 'Search', class: 'search-button', data: {type: 'member-1'}%>
+                <%= form.submit 'Search', class: 'search-button', data: {type: 'view-flights'}%>
             </div>
         </div>
     <% end %>

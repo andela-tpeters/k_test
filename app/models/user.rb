@@ -6,6 +6,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :passenger
   before_save :downcase_email
   before_save :generate_remember_token
+  has_attached_file :avatar, 
+                    styles: { :medium => "300x300>", :thumb => "100x100#" },
+                    default_url: "/images/:style/avatar.jpg"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   validates :first_name,
             :last_name,

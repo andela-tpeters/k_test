@@ -2,11 +2,14 @@
 //= require wow.min
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-year-calendar
+//= require moment
+//= require bootstrap-datetimepicker
 //= require custom-form
 //= require main
-//= require result-page
+//= require search_flight
 //= require login-register
 //= require dailyscroll
 //= require step-form
-//= require modal
+//= require sign_in
 //= require notify

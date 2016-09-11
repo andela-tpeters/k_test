@@ -5,8 +5,9 @@ class_list = [
 ]
 
 country_list = [
-  ["Nigeria", "NG", 234, "Naira", 315],
-  ["Kenya", "KE", 254, "Shilling", 101]
+  ["Nigeria", "NG", 234, "Naira", "\\20A6", 315],
+  ["Kenya", "KE", 254, "Shilling", "Ksh", 101],
+  ["United States", "US", 1, "Dollar", "\\0024", 1]
 ]
 
 state_list = [
@@ -107,11 +108,12 @@ class_list.each do |name, tax_percent|
   TravelClass.create(name: name, tax_percent: tax_percent)
 end
 
-country_list.each do |name, iso, code, currency, exchange_rate|
+country_list.each do |name, iso, code, currency, symbol, exchange_rate|
   Country.create(name: name,
                  iso_code: iso,
                  country_code: code,
                  currency: currency,
+                 currency_symbol: symbol,
                  exchange_rate: exchange_rate)
 end
 
@@ -192,7 +194,8 @@ def seed_flight(min, max, min_time, max_time)
   (1..100).each do |number|
     fdate = Faker::Time.between(Date.today, 40.days.from_now, :all)
     farrival = Faker::Time.between(fdate + min_time, (fdate + max_time), :all)
-    Flight.create(departure_date: fdate,
+    Flight.create(departure_time: fdate,
+                  departure_date: fdate,
                   arrival_date: farrival,
                   aircraft: Aircraft.find(Faker::Number.between(1, 100)),
                   route: Route.find(Faker::Number.between(min, max)))

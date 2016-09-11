@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
-
   def create
     user = User.find_by_email(params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       sign_in user
+      flash[:success] = log_in_message
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to root_url
     elsif user.nil?
@@ -15,11 +15,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if signed_in?
-    flash[:success] = "You have logged out successfully!"
+    flash[:success] = log_out_message
     redirect_to root_url
   end
-
-  private
-
-
 end

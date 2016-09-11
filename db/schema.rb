@@ -57,13 +57,15 @@ ActiveRecord::Schema.define(version: 20160906093907) do
     t.string   "iso_code"
     t.string   "country_code"
     t.string   "currency"
+    t.string   "currency_symbol"
     t.string   "exchange_rate"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "flights", force: :cascade do |t|
-    t.datetime "departure_date"
+    t.date     "departure_date"
+    t.time     "departure_time"
     t.datetime "arrival_date"
     t.integer  "aircraft_id"
     t.integer  "route_id"
@@ -102,12 +104,12 @@ ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "routes", force: :cascade do |t|
     t.string   "name"
-    t.integer  "departure_id"
-    t.integer  "arrival_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["arrival_id"], name: "index_routes_on_arrival_id"
-    t.index ["departure_id"], name: "index_routes_on_departure_id"
+    t.integer  "departure_airport_id"
+    t.integer  "arrival_airport_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["arrival_airport_id"], name: "index_routes_on_arrival_airport_id"
+    t.index ["departure_airport_id"], name: "index_routes_on_departure_airport_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -126,12 +128,15 @@ ActiveRecord::Schema.define(version: 20160906093907) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name",      limit: 30
-    t.string "last_name",       limit: 30
-    t.string "email"
-    t.string "picture_url",     limit: 40
-    t.string "password_digest"
-    t.string "remember_digest"
+    t.string   "first_name",          limit: 30
+    t.string   "last_name",           limit: 30
+    t.string   "email"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "password_digest"
+    t.string   "remember_digest"
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_digest"], name: "index_users_on_remember_digest"
   end

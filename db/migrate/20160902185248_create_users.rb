@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :first_name, limit: 30
       t.string :last_name, limit: 30
       t.string :email, uniqueness: true
-      t.string :picture_url, limit: 40
+      t.attachment :avatar
       t.string :password_digest
       t.string :remember_digest
     end

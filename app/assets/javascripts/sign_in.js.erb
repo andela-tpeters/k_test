@@ -9,12 +9,9 @@ function shakeModal(message) {
 
 function callAjax(form, event) {
     event.preventDefault();
-    console.log(form.serialize());
     $.post( form.prop('action'), form.serialize(), function( data ) {
-        if(data.success) {
-            alert("Success!");           
-        } else {
-            shakeModal(data.errors); 
+        if(data.errors) {
+            shakeModal(data.errors);        
         }
     });    
 }

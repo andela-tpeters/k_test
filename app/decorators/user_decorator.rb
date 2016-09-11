@@ -1,9 +1,9 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
-  def get_picture(picture_url)
-    if picture_url
-      picture_url
+  def get_picture
+    if object.picture_url
+      object.picture_url
     else
       'avatar.jpg'
     end

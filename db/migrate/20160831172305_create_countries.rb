@@ -5,6 +5,7 @@ class CreateCountries < ActiveRecord::Migration[5.0]
       t.string :iso_code
       t.string :country_code
       t.string :currency
+      t.string :currency_symbol
       t.string :exchange_rate
 
       t.timestamps

@@ -1,5 +1,5 @@
 body.overflow-hidden {
-  /* when author bio is visible, the out-of-focus content won't scroll */
+  /* when flight is visible, the out-of-focus content won't scroll */
   overflow: hidden;
 }
 
@@ -19,7 +19,7 @@ main {
   transition-duration: 0.3s;
 }
 main.slide-out {
-  /* the main element slides to the left when the author bio is visible */
+  /* the main element slides to the left when the flight is visible */
   -webkit-transform: translateX(100%);
   -moz-transform: translateX(100%);
   -ms-transform: translateX(100%);
@@ -27,14 +27,14 @@ main.slide-out {
   transform: translateX(100%);
 }
 main.slide-out .cd-overlay {
-  /* the overlay layer gets visible when the author bio slides in */
+  /* the overlay layer gets visible when the flight slides in */
   display: block;
   -webkit-animation: cd-fade-in 0.3s;
   -moz-animation: cd-fade-in 0.3s;
   animation: cd-fade-in 0.3s;
 }
 
-.cd-member-bio {
+.cd-flight {
   position: fixed;
   top: 0;
   right: 0;
@@ -45,7 +45,7 @@ main.slide-out .cd-overlay {
   -webkit-overflow-scrolling: touch;
   background: #fff;
   z-index: 1;
-  /* this how we move the author bio section off the canvas */
+  /* this how we move the flight section off the canvas */
   -webkit-transform: translateX(100%);
   -moz-transform: translateX(100%);
   -ms-transform: translateX(100%);
@@ -58,8 +58,8 @@ main.slide-out .cd-overlay {
   -moz-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-.cd-member-bio.slide-in {
-  /* the author bio section slides in when the user clicks on the team member picture */
+.cd-flight.slide-in {
+  /* the flight section slides in when the user clicks on the team member picture */
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
   -ms-transform: translateX(0);
@@ -67,10 +67,10 @@ main.slide-out .cd-overlay {
   transform: translateX(0);
   box-shadow: rgba(0, 0, 0, 0.137255) 0px 16px 24px 2px, rgba(0, 0, 0, 0.117647) 0px 6px 30px 5px, rgba(0, 0, 0, 0.2) 0px 8px 10px -5px
 }
-.cd-member-bio .cd-member-bio-pict {
+.cd-flight .cd-flight-pict {
   position: relative;
 }
-.cd-member-bio .cd-member-bio-pict::after {
+.cd-flight .cd-flight-pict::after {
   /* gradient at the bottom of the image - same color of the background of the section */
   content: '';
   position: absolute;
@@ -81,18 +81,18 @@ main.slide-out .cd-overlay {
   background: -webkit-linear-gradient( bottom , #5c4b51, rgba(92, 75, 81, 0));
   background: linear-gradient(to top, #5c4b51, rgba(92, 75, 81, 0));
 }
-.no-cssgradients .cd-member-bio .cd-member-bio-pict::after {
+.no-cssgradients .cd-flight .cd-flight-pict::after {
   display: none;
 }
-.cd-member-bio img {
+.cd-flight img {
   width: 100%;
   display: block;
 }
-.cd-member-bio .cd-bio-content {
+.cd-flight .cd-flight-content {
   padding: 1.05em;
   color: #686868;
 }
-.cd-member-bio .cd-bio-content h1 {
+.cd-flight .cd-flight-content h1 {
   font-family: "Droid Sans", sans-serif;
   font-weight: bold;
   text-transform: uppercase;
@@ -100,7 +100,7 @@ main.slide-out .cd-overlay {
   font-size: 20px;
   font-size: 1.25rem;
 }
-.cd-member-bio .cd-bio-content p {
+.cd-flight .cd-flight-content p {
   font-size: 14px;
   font-size: 0.875rem;
   margin: 1em 0 2em;
@@ -108,26 +108,26 @@ main.slide-out .cd-overlay {
   color: #d7cfd2;
 }
 @media only screen and (min-width: 768px) {
-  .cd-member-bio .cd-bio-content {
+  .cd-flight .cd-flight-content {
     padding: 2.1em;
   }
-  .cd-member-bio .cd-bio-content p {
+  .cd-flight .cd-flight-content p {
     line-height: 1.6;
     margin: 2em 0;
   }
 }
 @media only screen and (min-width: 1200px) {
-  .cd-member-bio .cd-member-bio-pict::after {
+  .cd-flight .cd-flight-pict::after {
     height: 150px;
   }
-  .cd-member-bio .cd-bio-content h1 {
+  .cd-flight .cd-flight-content h1 {
     font-size: 40px;
     font-size: 2.5rem;
   }
-  .cd-member-bio .cd-bio-content p {
+  .cd-flight .cd-flight-content p {
     font-size: 16px;
   }
-  .no-cssgradients .cd-member-bio .cd-bio-content {
+  .no-cssgradients .cd-flight .cd-flight-content {
     -webkit-transform: translateY(0);
     -moz-transform: translateY(0);
     -ms-transform: translateY(0);
@@ -136,7 +136,7 @@ main.slide-out .cd-overlay {
   }
 }
 
-.cd-member-bio-close {
+.cd-flight-close {
   position: fixed;
   font-size: 30px;
   top: 10px;
@@ -147,14 +147,14 @@ main.slide-out .cd-overlay {
   display: none;
   color: #dfdfdf;
 }
-.cd-member-bio-close.is-visible {
+.cd-flight-close.is-visible {
   display: block;
   -webkit-animation: cd-move-in 0.8s;
   -moz-animation: cd-move-in 0.8s;
   animation: cd-move-in 0.8s;
 }
 @media only screen and (min-width: 1200px) {
-  .cd-member-bio-close {
+  .cd-flight-close {
     right: 20px;
     top: 20px;
   }

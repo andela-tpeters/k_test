@@ -14,6 +14,8 @@ Rails.application.config.action_controller.forgery_protection_origin_check = tru
 # Previous versions had false.
 ActiveSupport.to_time_preserves_timezone = true
 
+Rails.application.config.active_record.time_zone_aware_types = [:datetime]
+
 # Require `belongs_to` associations by default. Previous versions had false.
 Rails.application.config.active_record.belongs_to_required_by_default = true
 
