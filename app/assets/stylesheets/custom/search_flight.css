@@ -3,11 +3,6 @@ body.overflow-hidden {
   overflow: hidden;
 }
 
-/* -------------------------------- 
-
-Main components 
-
--------------------------------- */
 main {
   position: relative;
   z-index: 2;
@@ -67,27 +62,6 @@ main.slide-out .cd-overlay {
   transform: translateX(0);
   box-shadow: rgba(0, 0, 0, 0.137255) 0px 16px 24px 2px, rgba(0, 0, 0, 0.117647) 0px 6px 30px 5px, rgba(0, 0, 0, 0.2) 0px 8px 10px -5px
 }
-.cd-flight .cd-flight-pict {
-  position: relative;
-}
-.cd-flight .cd-flight-pict::after {
-  /* gradient at the bottom of the image - same color of the background of the section */
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: -webkit-linear-gradient( bottom , #5c4b51, rgba(92, 75, 81, 0));
-  background: linear-gradient(to top, #5c4b51, rgba(92, 75, 81, 0));
-}
-.no-cssgradients .cd-flight .cd-flight-pict::after {
-  display: none;
-}
-.cd-flight img {
-  width: 100%;
-  display: block;
-}
 .cd-flight .cd-flight-content {
   padding: 1.05em;
   color: #686868;
@@ -100,13 +74,6 @@ main.slide-out .cd-overlay {
   font-size: 20px;
   font-size: 1.25rem;
 }
-.cd-flight .cd-flight-content p {
-  font-size: 14px;
-  font-size: 0.875rem;
-  margin: 1em 0 2em;
-  line-height: 1.4;
-  color: #d7cfd2;
-}
 @media only screen and (min-width: 768px) {
   .cd-flight .cd-flight-content {
     padding: 2.1em;
@@ -117,9 +84,6 @@ main.slide-out .cd-overlay {
   }
 }
 @media only screen and (min-width: 1200px) {
-  .cd-flight .cd-flight-pict::after {
-    height: 150px;
-  }
   .cd-flight .cd-flight-content h1 {
     font-size: 40px;
     font-size: 2.5rem;

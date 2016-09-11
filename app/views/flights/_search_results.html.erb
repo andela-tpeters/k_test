@@ -7,7 +7,7 @@
             <div class="scroller arrow-right"><i class="fa fa-chevron-right"></i></div>
             <div class="horizontal-tabs">
               <ul role="tablist" class="nav nav-tabs nav-tabs-horizontal">
-                <% date_range_from_now(30).each do |date| %>
+                <% flights.departure_date_range.each do |date| %>
                 <% if date == Date.today %>
                     <li role="presentation" class="active">
                 <% else %>
@@ -31,8 +31,9 @@
             <div class="search-div">
                 <button class="btn btn-primary">Search</button>
             </div>
-            <% flights_by_day = nil %> 
-            <% date_range_from_now(30).each do |date| %>
+            <% flights_by_day = nil %>
+            <% ordered_flight_dates = flights.departure_order_asc %>
+            <% flights.departure_date_range.each do |date| %>
                 <% if date == Date.today %>
                     <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade in active">
                 <% else %>
@@ -42,11 +43,15 @@
                     <% flights_by_day = flights.by_day(date) %>
                     <% if flights_by_day.blank? %>
                         <span class="message"><%= no_flights_message %></span>
-                        <span>This flight is only available on:</span>
-                        <div>
-                            <% flights.
-                            <span></span>
-                        </div>
+                        <ul class="available-dates">
+                            <% ordered_flight_dates.each do |flight_date| %>
+                                <li>
+                                    <a class="date-link" data-tab="<%= pack(flight_date) %>" href="javascript:viewDate();">
+                                        <%= full_date(flight_date) %>
+                                    </a>
+                                </li>
+                            <% end %>
+                        </ul>
                     <% else %>
                     <div class="table-responsive">
                     <table class="table">

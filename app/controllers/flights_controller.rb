@@ -7,9 +7,12 @@ class FlightsController < ApplicationController
 
   def search
     @flights = Flight.search(reject_empty!(search_params))
-
     respond_to do |format|
-        format.html { render partial: 'flights/search_results', locals: { flights: @flights} }
+        format.html { 
+          render partial: 'flights/search_results', locals: { 
+            flights: FlightDecorator.new(@flights)
+          } 
+        }
         format.js
       end
   end

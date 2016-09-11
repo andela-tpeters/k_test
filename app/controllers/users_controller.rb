@@ -47,6 +47,7 @@ class UsersController < ApplicationController
     @flights = Flight.all.includes(
       route: [:departure_airport, :arrival_airport, airfares: [:travel_class]]
     )
+    @flights = FlightDecorator.new(@flights)
   end
 
   def require_login

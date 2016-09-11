@@ -28,15 +28,19 @@ class Flight < ApplicationRecord
   end
 
   def self.recent
-    self.order(:departure_date).first(8)
+    order(:departure_date).first(8)
+  end
+
+  def self.departure_order_asc
+    order(:departure_date).pluck(:departure_date).uniq
   end
 
   def self.last
-    self.order(:departure_date).last
+    order(:departure_date).last
   end
 
   def self.include_flight
-    self.all.includes(
+    all.includes(
       route: [:departure_airport, :arrival_airport, airfares: [:travel_class]]
     )
   end
