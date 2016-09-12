@@ -1,7 +1,7 @@
 <script type="text/JavaScript">
 
   function viewDate() {
-    $('.date-link').bind('click', function(event){
+    $(document).on('click', '.date-link', function(event){
       var href = $(this).data('tab');
       $('a[href="#' + href + '"]').trigger('click');
       event.preventDefault();
@@ -10,10 +10,6 @@
 
   $(document).ready(function(){
     var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
-
-    $(".control-indicator").click(function(){
-      $(".search-div .btn").attr("disabled", false);
-    });
 
     //open flight list
     $('#flight_form').submit(function(event) {
@@ -36,6 +32,10 @@
         $('body').addClass('overflow-hidden');
       }
 
+    });
+
+    $(document).on('change', 'input:radio[name="flight_radio"]', function(){
+       $(".search-div .btn").attr("disabled", false);
     });
 
     //close flight list

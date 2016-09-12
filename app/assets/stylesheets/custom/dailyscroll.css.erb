@@ -202,15 +202,25 @@ ul.available-dates {
   text-align: center;
   li {
     padding: 15px;
-    a {
+    button {
       text-decoration: none;
       padding: .2em 1em;
       background-color: #f0f8ff;
+      outline: none;
+      border: none;
     }
-    a:hover {
+    button:hover {
       background-color: #f0ffff;
     }
   }
+}
+
+.fade {
+  display: none;
+}
+
+.fade.in.active {
+  display: block;
 }
 
 @media only screen and (max-width : 768px) {

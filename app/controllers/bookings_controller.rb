@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @booking.flight = Flight.find(params[:flight_radio])
     respond_to do |format|
-      format.html { render :edit }
+      format.html { redirect_to new_booking_path(@booking), no: 12 }
     end
   end
 

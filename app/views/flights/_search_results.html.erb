@@ -43,16 +43,18 @@
                     <h2><%= full_date(date) %></h2>
                     <% flights_by_day = flights.by_day(date) %>
                     <% if flights_by_day.blank? %>
-                        <span class="message"><%= no_flights_message %></span>
+                        <span class="message"><%= no_flights_for_day_message %></span>
                         <ul class="available-dates">
                             <% flights.uniq_departure_dates.each do |flight_date| %>
                                 <li>
-                                    <a class="date-link" data-tab="<%= pack(date_without_time(flight_date)) %>" href="javascript:viewDate();">
-                                        <%= full_date(flight_date) %>
-                                    </a>
+                                    <button class="date-link" data-tab="<%= pack(flight_date) %>" onclick="viewDate();">
+                                        <%= full_date(parse_date(flight_date)) %>
+                                    </button>
                                 </li>
                             <% end %>
                         </ul>
+                    <% elsif flights.blank? %>
+                        <span class="message"><%= no_flights_message %></span>
                     <% else %>
                     <div class="table-responsive">
                     <table class="table">

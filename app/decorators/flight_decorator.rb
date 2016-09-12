@@ -14,6 +14,9 @@ class FlightDecorator < Draper::Decorator
   end
 
   def uniq_departure_dates
-    object.order(:departure_date).pluck(:departure_date).uniq
+    dates = object.order(:departure_date).pluck(:departure_date).map do |date|
+      date.strftime("%Y-%m-%d")
+    end
+    dates.uniq
   end
 end
