@@ -457,7 +457,8 @@
     width:50%;
   }
 
-  .row.setup-content {
+  .row.setup-content,
+  .row.table-content {
     margin: 50px 30px;
     padding: 10px;
   }

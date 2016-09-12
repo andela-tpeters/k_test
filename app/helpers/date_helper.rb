@@ -27,6 +27,10 @@ module DateHelper
     date.strftime("%I:%M%p  %B %e, %Y")
   end
 
+  def short_date_time(date)
+    date.strftime("%I:%M%p  %d-%m-%Y")
+  end
+
   def time(date)
     date.strftime("%I:%M%p")
   end

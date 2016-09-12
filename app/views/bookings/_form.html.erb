@@ -1,37 +1,13 @@
-<%= form_for(booking) do |f| %>
-  <% if booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
-
-      <ul>
-      <% booking.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= form_for @booking, :html => {:id => "booking_form"} do |form| %>
+  <%= form.hidden_field(:flight_id)%>
+  <%= form.hidden_field(:passenger_count, value: @passenger_count) %>
+  <%= form.fields_for :passengers do |passenger| %>
+    <%= render 'passenger_fields', :f => passenger %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :booking_ref %>
-    <%= f.text_field :booking_ref %>
+  <br>
+  <div class="links">
+    <%= link_to_add_association content_tag(:span, 'Add Passenger', class: "add_passenger"), form, :passengers, :class => 'btn btn-primary' %> 
   </div>
-
-  <div class="field">
-    <%= f.label :passenger_id %>
-    <%= f.text_field :passenger_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :flight_id %>
-    <%= f.text_field :flight_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :checked_in %>
-    <%= f.check_box :checked_in %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= link_to "Book Now", "#", :onclick => "$('#booking_form').submit()", class: "btn btn-primary book"  %>
+  <a class = "btn btn-link pull-right"><%= notice %></a>
 <% end %>

@@ -86,9 +86,9 @@ class BookingsController < ApplicationController
       @booking = Booking.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:booking_ref, :passenger_id, :flight_id, :checked_in)
+      params.require(:booking).permit(:flight_id, :user_id, 
+        passengers_attributes:[:id, :first_name, :last_name, :phone, :_destroy])
     end
 
     def flight_params

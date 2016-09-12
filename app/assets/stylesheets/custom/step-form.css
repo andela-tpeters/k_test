@@ -77,3 +77,9 @@
   line-height: 1.428571429;
   border-radius: 15px;
 }
+
+.btn.btn-primary.book {
+  display: block;
+  margin-top: 30px;
+  outline: none;
+}

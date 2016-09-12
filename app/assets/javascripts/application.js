@@ -13,3 +13,4 @@
 //= require step-form
 //= require sign_in
 //= require notify
+//= require add-passenger
