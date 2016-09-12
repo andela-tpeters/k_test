@@ -1,3 +1,4 @@
+<% depart_date = depart_date.blank?? Date.today.to_s : depart_date %>
 <div class="cd-flight-content">
     <div class="container">
       <div class="row">
@@ -8,7 +9,7 @@
             <div class="horizontal-tabs">
               <ul role="tablist" class="nav nav-tabs nav-tabs-horizontal">
                 <% flights.departure_date_range.each do |date| %>
-                <% if date == Date.today %>
+                <% if date.to_s == depart_date %>
                     <li role="presentation" class="active">
                 <% else %>
                     <li role="presentation">
@@ -28,13 +29,13 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="tab-content flight-content">
+          <%= form_for(:flight_select, :url => select_path ) do |form| %>
             <div class="search-div">
-                <button class="btn btn-primary">Search</button>
+                <%= form.submit 'Select Flight', class: 'btn btn-primary', disabled: true %>
             </div>
             <% flights_by_day = nil %>
-            <% ordered_flight_dates = flights.departure_order_asc %>
             <% flights.departure_date_range.each do |date| %>
-                <% if date == Date.today %>
+                <% if date.to_s == depart_date %>
                     <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade in active">
                 <% else %>
                     <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade">
@@ -44,9 +45,9 @@
                     <% if flights_by_day.blank? %>
                         <span class="message"><%= no_flights_message %></span>
                         <ul class="available-dates">
-                            <% ordered_flight_dates.each do |flight_date| %>
+                            <% flights.uniq_departure_dates.each do |flight_date| %>
                                 <li>
-                                    <a class="date-link" data-tab="<%= pack(flight_date) %>" href="javascript:viewDate();">
+                                    <a class="date-link" data-tab="<%= pack(date_without_time(flight_date)) %>" href="javascript:viewDate();">
                                         <%= full_date(flight_date) %>
                                     </a>
                                 </li>
@@ -69,7 +70,7 @@
                                     <tr>
                                         <td>
                                             <label class="control control-radio">
-                                                <input type="radio" name="radio"/>
+                                                <%= radio_button_tag :flight_radio, flight.id %>
                                                 <div class="control-indicator"></div>
                                             </label>
                                         </td>
@@ -100,6 +101,7 @@
                 </div>
             <% end %>
           </div>
+          <% end %>
         </div>
       </div>
   </div>

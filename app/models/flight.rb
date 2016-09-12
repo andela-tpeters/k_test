@@ -5,10 +5,6 @@ class Flight < ApplicationRecord
   has_many :payments
   accepts_nested_attributes_for :route
 
-  def self.by_day(date)
-    where(departure_date: date)
-  end
-
   def self.search(params)
     if params.blank?
       search_by_current

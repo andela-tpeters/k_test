@@ -1,6 +1,6 @@
 .notify {
   position: fixed;
-  top: 30px;
+  top: 40px;
   left: 10px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -9,6 +9,7 @@
 
 .alert {
   border: none;
+  padding: 10px;
 }
 
 /* Positions
@@ -51,4 +52,21 @@
 .notify .alert-default {
   background: #fff;
   border: 1px solid #e5e5e5;
+}
+
+.notify-message.alert.alert-info {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+.notify-message.alert.alert-success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.notify-message.alert.alert-warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+.notify-message.alert.alert-error {
+    color: #D8000C;
+    background-color: #FFBABA;
 }

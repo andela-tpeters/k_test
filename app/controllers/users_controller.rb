@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  respond_to :html, :js
   before_action :set_user, :set_flights
 
   def show
@@ -13,8 +14,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    params = update_params.reject! {|key, value| value.blank}
-    @user = User.update(params)
+    params = user_params.reject! {|key, value| value.blank?}
+    if @user.update(params)
+      flash[:success] = "Your profile avatar has been updated successfully"
+      redirect_to root_url
+    else
+      flash[:error] = "An error occurred while uploading your avatar"
+      redirect_to root_url
+    end
   end
 
   def new
@@ -61,13 +68,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(
-        :first_name, :last_name, :email, :password, :password_confirmation, :avatar
-      )
-    end
-
-    def update_params
-      params.require(:update).permit(
-        :first_name, :last_name, :email, :password, :avatar
+        :id, :first_name, :last_name, :email, :password, :password_confirmation, :avatar
       )
     end
 end

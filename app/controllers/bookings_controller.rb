@@ -16,11 +16,19 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+
+  end
+
+  def select
+    @booking = Booking.new
+    @booking.flight = Flight.find(params[:flight_radio])
+    respond_to do |format|
+      format.html { render :edit }
+    end
   end
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
   end
 
   # GET /bookings/1/edit
@@ -78,10 +86,14 @@ class BookingsController < ApplicationController
       params.require(:booking).permit(:booking_ref, :passenger_id, :flight_id, :checked_in)
     end
 
+    def flight_params
+      params.require(:flight_select).permit(:flight_radio)
+    end
+
     def set_user
       @user = User.new
       if current_user
-        @decorated_user = UserDecorator.new(current_user)
+        @user = UserDecorator.new(current_user)
       end
     end
 end

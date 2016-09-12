@@ -18,7 +18,7 @@ gem "draper", git: "https://github.com/drapergem/draper"
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
 gem "faker"
 gem "responders"
-gem "paperclip", "~> 4.1"
+gem "paperclip", "~> 5.0.0.beta1"
 gem "momentjs-rails", ">= 2.9.0"
 gem "bootstrap3-datetimepicker-rails", "~> 4.17.42"
 

@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20160906093907) do
   end
 
   create_table "flights", force: :cascade do |t|
-    t.date     "departure_date"
-    t.time     "departure_time"
+    t.datetime "departure_date"
+    t.datetime "departure_time"
     t.datetime "arrival_date"
     t.integer  "aircraft_id"
     t.integer  "route_id"

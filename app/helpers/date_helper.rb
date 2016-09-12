@@ -27,7 +27,15 @@ module DateHelper
     date.strftime("%I:%M%p  %B %e, %Y")
   end
 
+  def time(date)
+    date.strftime("%I:%M%p")
+  end
+
   def parse_date(date)
     DateTime.parse(date)
+  end
+
+  def date_without_time(datetime)
+    datetime.strftime("%Y-%m-%d")
   end
 end

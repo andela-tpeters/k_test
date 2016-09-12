@@ -27,6 +27,7 @@
                         content += '<div class="event-tooltip-content">'
                                         + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
                                         + '<div class="event-location">' + e.events[i].location + '</div>'
+                                        + '<div class="event-startDate">' + e.events[i].startDate + '</div>'
                                     + '</div><br>';
                     }
                 
@@ -48,10 +49,10 @@
             dayContextMenu: function(e) {
                 $(e.element).popover('hide');
             },
-            dataSource: get_f()
+            dataSource: getEvents()
         });
 
-function get_f() {
+        function getEvents() {
         var arr = new Array();
                 <% Flight.all.each_with_index do |flight, index| %>
                     arr[<%= index %>] = {

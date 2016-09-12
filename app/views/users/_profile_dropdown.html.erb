@@ -4,17 +4,16 @@
 <ul class="dropdown-menu" aria-labelledby="profile-menu">
     <li>
       <div class="media-left">
-            <%= form_for(:update, :html => {:multipart => true},
-                     :format => :json,
-                     :url => update_user_path(@user),
-                     :remote => true ) do |form| %>
+            <%= form_for(@user, html: {id: "avatar_form" },
+                     format: :json,
+                     remote: true ) do |form| %>
               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                <div class="image-upload">
-                  <label for="file-input">
-                      <%= image_tag current_user.avatar.url(:medium), alt: "Avatar", class: "img-circle",  height: "50", width: "50" %>
-                  </label>
-                  <%= form.file_field :avatar, id: "file-input", onchange: "this.form.submit()" %>
-                </div>
+              <div class="image-upload">
+                <label for="file-input">
+                    <%= image_tag @user.avatar.url(:medium), alt: "Avatar", class: "img-circle",  height: "50", width: "50" %>
+                </label>
+                <%= form.file_field :avatar, id: "file-input", onchange: "this.form.submit()" %>
+              </div>
             <% end %>
       </div>
       <div class="media-body">

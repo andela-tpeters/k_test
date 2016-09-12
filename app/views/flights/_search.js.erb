@@ -1,4 +1,5 @@
-<script>
+<script type="text/JavaScript">
+
   function viewDate() {
     $('.date-link').bind('click', function(event){
       var href = $(this).data('tab');
@@ -7,15 +8,20 @@
     });
   }
 
-  $(document).ready(function($){
+  $(document).ready(function(){
     var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+
+    $(".control-indicator").click(function(){
+      $(".search-div .btn").attr("disabled", false);
+    });
 
     //open flight list
     $('#flight_form').submit(function(event) {
       event.preventDefault();
       $.post( $(this).prop('action'), $(this).serialize(), function( data ) {
-          $(".view-flights").html(data); 
+          $(".view-flights").html(data);
       });
+      
       var selected_page = $(this).find('.search-button').data('type');
       $('.cd-flight.'+selected_page+'').addClass('slide-in');
       $('.cd-flight-close').addClass('is-visible');
@@ -31,8 +37,6 @@
       }
 
     });
-
-
 
     //close flight list
     $(document).on('click', '.cd-overlay, .cd-flight-close', function(event){

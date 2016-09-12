@@ -10,12 +10,14 @@
   </head>
 
   <body>
-    <%= render "application/nav"%>
+    <div class="loader"></div>
+    <%= render "application/nav" %>
     <%= yield %>
-    <%= render "application/contact_form"%>
-    <%= render "application/footer"%>
-    <%= render "application/login_modal"%>
+    <%= render "application/contact_form" %>
+    <%= render "application/footer" %>
+    <%= render "application/login_modal" %>
   </body>
+  <%= render partial: "application/application", formats: [:js] %>
 
   <% if flash %>
   <script>
