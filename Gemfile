@@ -21,6 +21,7 @@ gem "responders"
 gem "paperclip", "~> 5.0.0.beta1"
 gem "momentjs-rails", ">= 2.9.0"
 gem "bootstrap3-datetimepicker-rails", "~> 4.17.42"
+gem "cocoon"
 
 group :development, :test do
   gem "pry-rails"
