@@ -28,7 +28,7 @@
 </main>
 
 <div class="cd-flight view-flights">
-    <%= render partial: 'flights/search_results', locals: { flights: @flights, depart_date: Date.today.to_s} %>
+    <%= render partial: 'flights/search_results', locals: { flights: @flights, depart_date: Date.today.to_s, passenger_count: 1 } %>
 </div>
 <a href="#0" class="cd-flight-close fa fa-remove"></a>
 <%= render partial: 'flights/search', formats: [:js] %>

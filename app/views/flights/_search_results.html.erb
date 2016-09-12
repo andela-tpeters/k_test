@@ -30,6 +30,7 @@
         <div class="col-xs-12">
           <div class="tab-content flight-content">
           <%= form_for(:flight_select, :url => select_path ) do |form| %>
+            <%= form.hidden_field :passenger_count, value: passenger_count %>
             <div class="search-div">
                 <%= form.submit 'Select Flight', class: 'btn btn-primary', disabled: true %>
             </div>

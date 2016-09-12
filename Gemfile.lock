@@ -292,7 +292,7 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails (~> 4.17.42)
   byebug
   capybara
-  cocoon
+  cocoon (>= 1.2.0)
   codeclimate-test-reporter
   coffee-rails (~> 4.2)
   database_cleaner

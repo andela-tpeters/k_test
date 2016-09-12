@@ -20,15 +20,20 @@ class BookingsController < ApplicationController
   end
 
   def select
-    @booking = Booking.new
-    @booking.flight = Flight.find(params[:flight_radio])
+    flight = Flight.find(params[:flight_radio])
     respond_to do |format|
-      format.html { redirect_to new_booking_path(@booking), no: 12 }
+      format.html { 
+        redirect_to new_booking_path(flight: flight, passengers: flight_params[:passenger_count])
+      }
     end
   end
 
   # GET /bookings/new
   def new
+    @booking = Booking.new
+    @booking.flight = Flight.find(params[:flight])
+    @booking.user = current_user if current_user
+    @passenger_count = params[:passengers]
   end
 
   # GET /bookings/1/edit
@@ -87,7 +92,7 @@ class BookingsController < ApplicationController
     end
 
     def flight_params
-      params.require(:flight_select).permit(:flight_radio)
+      params.require(:flight_select).permit(:passenger_count)
     end
 
     def set_user
