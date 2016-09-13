@@ -370,3 +370,30 @@ button[data-toggle="collapse"],
     height: 30px;
   }
 }
+
+.form-inline .input-group {
+    display: inline-flex;
+    width: 100%;
+}
+
+.form-inline .form-group {
+    display: inline-flex;
+    width: 100%
+}
+
+@media (min-width: 768px) {
+  .form-inline .form-group {
+    width: auto;
+  }
+}
+
+.input-group-addon.country-code {
+  width: 50px;
+  font-weight: 300;
+  padding: 7px;
+  background: white;
+  border: #eee solid 1px;
+  border-right: none;
+  outline: none;
+  -webkit-appearance: inherit;
+}

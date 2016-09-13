@@ -3,8 +3,13 @@ class Passenger < ApplicationRecord
   belongs_to :booking
   belongs_to :airfare
 
+  validates :phone,
+            length: { minimum: 10 },
+            on: :create
+
   validates :first_name,
             :last_name,
+            :airfare,
             presence: true,
             allow_nil: false
 end

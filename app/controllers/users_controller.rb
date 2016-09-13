@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     else
       flash[:error] = updated_avatar_error_message
     end
-    redirect_to :back
+    redirect_back(fallback_location: root_url)
   end
 
   def new

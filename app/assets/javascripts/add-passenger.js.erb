@@ -1,5 +1,5 @@
 $(function(){
-    var passenger_count = $('#booking_passenger_count').val();
+    var passenger_count = $('#passenger_count').val();
     for(var i = 0; i < passenger_count; i++) {
         $('.add_passenger').trigger('click');
     }
@@ -9,7 +9,7 @@ $(function(){
       $('.travel-class').each(function(){
         var current_price = $(this).data('charge');
         $(this).html(current_price * rate);
-        $('.currency').text($("select option:selected").text());
+        $('.currency').text($("select.currency-select option:selected").text());
         $('input:radio.class-radio:checked').trigger('change');
       });
     });

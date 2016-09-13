@@ -1,6 +1,7 @@
 <%= form_for @booking, :html => {:id => "booking_form"} do |form| %>
-  <%= form.hidden_field(:flight_id)%>
-  <%= form.hidden_field(:passenger_count, value: @passenger_count) %>
+  <%= form.hidden_field :flight_id %>
+  <%= hidden_field_tag :passenger_count, @passenger_count %>
+  <%= form.hidden_field :user_id, value: current_user %>
   <%= form.fields_for :passengers do |passenger| %>
     <%= render 'passenger_fields', :f => passenger %>
   <% end %>
@@ -8,6 +9,5 @@
   <div class="links">
     <%= link_to_add_association content_tag(:span, 'Add Passenger', class: "add_passenger"), form, :passengers, :class => 'btn btn-primary' %> 
   </div>
-  <%= link_to "Book Now", "", :onclick => "javascript: $('#booking_form').submit();", class: "btn btn-primary book"  %>
-  <a class = "btn btn-link pull-right"><%= notice %></a>
+  <%= form.submit "Book Now", class: "btn btn-primary book"  %>
 <% end %>

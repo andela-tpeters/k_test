@@ -5,9 +5,9 @@ class_list = [
 ]
 
 country_list = [
-  ["Nigeria", "NGN", 234, "Naira", 315],
-  ["Kenya", "KES", 254, "Shillings", 101],
-  ["United States", "USD", 1, "Dollars", 1]
+  ["Nigeria", "NGN", "+234", "Naira", 315],
+  ["Kenya", "KES", "+254", "Shillings", 101],
+  ["United States", "USD", "+1", "Dollars", 1]
 ]
 
 state_list = [

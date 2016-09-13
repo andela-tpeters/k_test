@@ -42,16 +42,24 @@ class BookingsController < ApplicationController
   def edit
   end
 
+  def confirmation
+    @booking = Booking.find(params[:id])
+  end
+
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(booking_params)
-    respond_to do |format|
-      if booking_params[:passengers_attributes].nil?
-        format.html { redirect_to :back,  notice: 'You must have at least one passenger'}
-      elsif @booking.save
-        mail_user(@booking) 
-        format.html { redirect_to booking_confirmed_path(@booking.id), notice: 'Flight Booked Successfuly.' }
+    if booking_params[:passengers_attributes].nil?
+      flash[:error] = "You must fill in the information of at least one passenger"
+      redirect_back(fallback_location: new_booking_path)
+    else
+      @booking = Booking.new(booking_params)
+      if @booking.save
+        # mail_user(@booking) 
+        redirect_to booking_confirmation_path(@booking), notice: 'Flight Booked Successfuly.'
+      else
+        flash[:error] = @booking.errors.full_messages
+        redirect_back(fallback_location: new_booking_path)
       end
     end
   end
@@ -87,8 +95,12 @@ class BookingsController < ApplicationController
     end
 
     def booking_params
-      params.require(:booking).permit(:flight_id, :user_id, 
-        passengers_attributes:[:id, :first_name, :last_name, :phone, :_destroy])
+      params.require(:booking).permit(
+        :flight_id, :user_id,
+        passengers_attributes:[
+          :id, :first_name, :last_name, :phone, :_destroy, :airfare_id
+        ]
+      )
     end
 
     def flight_params

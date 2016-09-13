@@ -71,7 +71,7 @@
           <% end %>
           <span id="convert">
             Convert to:
-            <%= select_tag :country, options_for_select((Country.all).map{|country| ["#{country.iso_currency}", country.exchange_rate]}), {include_blank: true, class: 'form-control'} %>
+            <%= select_tag :country, options_for_select((Country.all).map{|country| ["#{country.iso_currency}", country.exchange_rate]}), {include_blank: true, class: 'currency-select form-control'} %>
           </span>
         </div>
         

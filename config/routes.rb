@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'schedule', to: 'users#schedule', as: 'schedule'
   post 'search', to: 'flights#search', as: 'search'
   post 'select', to: 'bookings#select', as: 'select'
+  post 'confirmed/:id', to: 'bookings#confirmation', as: 'booking_confirmation'
   post 'login', to: 'sessions#create'
   post 'signup', to: 'users#create'
   get 'logout', to: 'sessions#destroy'
