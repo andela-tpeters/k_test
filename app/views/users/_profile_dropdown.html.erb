@@ -29,8 +29,7 @@
       </div>
     </li>
     <li class="divider"></li>
-    <li><a href="#">View Profile</a></li>
-    <li><a href="#">Bookings</a></li>
-    <li><a href="#">Settings</a></li>
+    <li><%= link_to "Profile", user_profile_path %></li>
+    <li><a href="#">Manage Bookings</a></li>
     <li><%= link_to "Logout", logout_path, method: :delete %></li>
 </ul>

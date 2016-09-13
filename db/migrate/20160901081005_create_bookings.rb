@@ -4,7 +4,6 @@ class CreateBookings < ActiveRecord::Migration[5.0]
       t.string :booking_ref
       t.references :user, foreign_key: true
       t.references :flight, foreign_key: true
-      t.boolean :checked_in
 
       t.timestamps
     end

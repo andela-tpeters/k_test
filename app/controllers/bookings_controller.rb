@@ -44,19 +44,22 @@ class BookingsController < ApplicationController
 
   def confirmation
     @booking = Booking.find(params[:id])
+    @passengers = @booking.passengers.map do |passenger|
+      PassengerDecorator.new(passenger)
+    end
   end
 
   # POST /bookings
   # POST /bookings.json
   def create
     if booking_params[:passengers_attributes].nil?
-      flash[:error] = "You must fill in the information of at least one passenger"
+      flash[:error] = require_passenger_message
       redirect_back(fallback_location: new_booking_path)
     else
       @booking = Booking.new(booking_params)
       if @booking.save
         # mail_user(@booking) 
-        redirect_to booking_confirmation_path(@booking), notice: 'Flight Booked Successfuly.'
+        redirect_to booking_confirmation_path(@booking)
       else
         flash[:error] = @booking.errors.full_messages
         redirect_back(fallback_location: new_booking_path)

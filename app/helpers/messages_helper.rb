@@ -26,4 +26,12 @@ module MessagesHelper
   def require_login_message
     "You must be logged in to access this section"
   end
+
+  def require_passenger_message
+    "You must fill in the information of at least one passenger"
+  end
+
+  def confirmed_booking_message
+    "Your details are shown below. This has also been sent to your email"
+  end
 end
