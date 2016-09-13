@@ -126,28 +126,6 @@
     width: 30%;
 }
 
-.control {
-  position: relative;
-  margin-bottom: 30px;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.control input {
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-}
-
-.control-indicator {
-  position: absolute;
-  top: 2px;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  background: #e6e6e6;
-}
-
 .content-price td {
   margin-bottom: 30px;
 }
@@ -159,38 +137,6 @@
     font-size: 18px;
     font-weight: 300;
   }
-}
-
-/* Checked state */
-.control input:checked ~ .control-indicator {
-  background: #0f93db;
-}
-
-/* Hover state whilst checked */
-.control:hover input:not([disabled]):checked ~ .control-indicator,
-.control input:checked:focus ~ .control-indicator {
-  background: #0f93db;
-}
-
-/* Check mark */
-.control-indicator:after {
-  position: absolute;
-  display: none;
-  content: '';
-}
-
-/* Show check mark */
-.control input:checked ~ .control-indicator:after {
-  display: block;
-}
-
-/* Radio button inner circle */
-.control-radio .control-indicator:after {
-  top: 7px;
-  left: 7px;
-  width: 6px;
-  height: 6px;
-  background: #fff;
 }
 
 ul.available-dates {

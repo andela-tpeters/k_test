@@ -1,9 +1,3 @@
-<!-- <h1>New Booking</h1>
-
-<%#= render 'form', booking: @booking %>
-
-<%#= link_to 'Back', bookings_path %> -->
-
 <% flight = @booking.flight %>
 <section>
   <div class="container">
@@ -23,104 +17,66 @@
         </div>
       </div>
     </div>
-    <form role="form">
-      <div class="row table-content">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <td>You requested:</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <h6>From</h6>
-                  <h5><%= flight.route.departure_airport.iata_code %></h5>
-                </td>
-                <td>
-                  <h6>To</h6>
-                  <h5><%= flight.route.arrival_airport.iata_code %></h5>
-                </td>
-                <td>
-                  <h6>Flight Number</h6>
-                  <h5><%= flight.aircraft.tail_number %></h5>
-                </td>
-                <td>
-                  <h6>Date</h6>
-                  <h5><%= short_date_time(flight.departure_date) %></h5>
-                </td>
-                <td>
-                  <h6>Passengers</h6>
-                  <h5><%= @passenger_count %></h5>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="row table-content">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>You requested:</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h6>From</h6>
+                <h5><%= flight.route.departure_airport.iata_code %></h5>
+              </td>
+              <td>
+                <h6>To</h6>
+                <h5><%= flight.route.arrival_airport.iata_code %></h5>
+              </td>
+              <td>
+                <h6>Flight Number</h6>
+                <h5><%= flight.aircraft.tail_number %></h5>
+              </td>
+              <td>
+                <h6>Date</h6>
+                <h5><%= short_date_time(flight.departure_date) %></h5>
+              </td>
+              <td>
+                <h6>Passengers</h6>
+                <h5><%= @passenger_count %></h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="row setup-content" id="step-1">
+    </div>
+    
+    <div class="row setup-content" id="step-1">
         <div class="col-md-12">
-          <h3> Please add the details of the passengers.</h3>
-          <%= render "form"%>
-        </div>
-        <div class="row setup-content" id="step-2">
-          <div class="col-md-12">
-            <h3> Step 2</h3>
-            <div class="form-group">
-              <label class="control-label">Company Name</label>
-              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-            </div>
-            <div class="form-group">
-              <label class="control-label">Company Address</label>
-              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-            </div>
-            <button class="btn btn-default prevBtn pull-left" type="button" >Prev</button>
-            <button class="btn btn-primary nextBtn pull-right" type="button" >Next</button>
-          </div>
-        </div>
-        <div class="row setup-content" id="step-3">
-          <div class="col-md-12">
-            <h3> Step 3</h3>
-            <button class="btn btn-default prevBtn pull-left" type="button" >Prev</button>
-            <button class="btn btn-success pull-right" type="submit">Finish!</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <section class="col-md-4 col-sm-12 fixed-form">
-    <div class="form-group button-form-group">
-        <div class="controls">
-          <button class="collapsed-button" data-toggle="collapse" data-target="#demo">
-            <i class="fa fa-phone"></i>
-          </button>
-        </div>
-    </div>
-    <div id="demo" class="collapse">
-        <div class="contact-form bottom">
-        <div>
-            <h3 class="pull-left">Contact Us</h3>
-            <a href="javascript: $('.collapsed-button').trigger('click');"><i class="fa fa-remove pull-right"></i></a>
+        <h3> Please add the details of the passengers.</h3>
+        <div class="travel-class-demo">
+          Choose class of travel:
+          <% flight.route.airfares.each do |airfare| %>
+            <div></div>
+            <%= airfare.travel_class.name %> (
+            <span class="travel<%= airfare.travel_class.id %>">
+              <span class="currency">USD</span>
+              <span class="travel-class" data-tax="<%= airfare.travel_class.tax_percent %>" data-charge="<%= airfare.service_charge_in_dollar %>">
+                <%= airfare.service_charge_in_dollar %>
+              </span>
+            </span>
+            )
+          <% end %>
+          <span id="convert">
+            Convert to:
+            <%= select_tag :country, options_for_select((Country.all).map{|country| ["#{country.iso_currency}", country.exchange_rate]}), {include_blank: true, class: 'form-control'} %>
+          </span>
         </div>
         
-            <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
-                <div class="form-group">
-                    <input type="text" name="name" class="form-control" required="required" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
-                </div>
-                <div class="form-group">
-                    <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your text here"></textarea>
-                </div>                        
-                <div class="form-group button-form-group">
-                  <div class="controls">
-                    <button>Submit</button>
-                  </div>
-                </div>
-            </form>
-        </div>
+        <%= render "form"%>
+      </div>
     </div>
+  </div>
 </section>

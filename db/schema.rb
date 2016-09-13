@@ -54,13 +54,12 @@ ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
-    t.string   "iso_code"
     t.string   "country_code"
     t.string   "currency"
-    t.string   "currency_symbol"
+    t.string   "iso_currency"
     t.string   "exchange_rate"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "flights", force: :cascade do |t|
@@ -81,9 +80,11 @@ ActiveRecord::Schema.define(version: 20160906093907) do
     t.string   "phone",       limit: 16
     t.string   "passport_no", limit: 15
     t.integer  "user_id"
+    t.integer  "airfare_id"
     t.integer  "booking_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["airfare_id"], name: "index_passengers_on_airfare_id"
     t.index ["booking_id"], name: "index_passengers_on_booking_id"
     t.index ["user_id"], name: "index_passengers_on_user_id"
   end

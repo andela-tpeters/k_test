@@ -6,7 +6,7 @@ class CreatePassengers < ActiveRecord::Migration[5.0]
       t.string :phone, limit: 16
       t.string :passport_no, limit: 15
       t.references :user, foreign_key: true
-      t.references :travel_class, foreign_key: true
+      t.references :airfare, foreign_key: true
       t.references :booking, foreign_key: true
 
       t.timestamps

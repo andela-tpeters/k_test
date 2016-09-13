@@ -8,6 +8,6 @@
   <div class="links">
     <%= link_to_add_association content_tag(:span, 'Add Passenger', class: "add_passenger"), form, :passengers, :class => 'btn btn-primary' %> 
   </div>
-  <%= link_to "Book Now", "#", :onclick => "$('#booking_form').submit()", class: "btn btn-primary book"  %>
+  <%= link_to "Book Now", "", :onclick => "javascript: $('#booking_form').submit();", class: "btn btn-primary book"  %>
   <a class = "btn btn-link pull-right"><%= notice %></a>
 <% end %>

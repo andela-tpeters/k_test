@@ -1,0 +1,24 @@
+$(function(){
+    var passenger_count = $('#booking_passenger_count').val();
+    for(var i = 0; i < passenger_count; i++) {
+        $('.add_passenger').trigger('click');
+    }
+
+    $(document).on('change', '#convert select', function(){
+      var rate = $(this).val();
+      $('.travel-class').each(function(){
+        var current_price = $(this).data('charge');
+        $(this).html(current_price * rate);
+        $('.currency').text($("select option:selected").text());
+        $('input:radio.class-radio:checked').trigger('change');
+      });
+    });
+
+    $(document).on('change', 'input:radio.class-radio', function(){
+      var currency = $('.travel' + $(this).val() + ' .currency').text();
+      var price = $('.travel' + $(this).val() + ' .travel-class').text();
+      var tax = $('.travel' + $(this).val() + ' .travel-class').data('tax');
+      var total = price * tax;
+      $(this).parents('.form-group').find('.selected-fare').text(currency + " " + total.toFixed(2) + " (tax inclusive)");
+    });
+});

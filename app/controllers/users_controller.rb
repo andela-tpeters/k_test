@@ -16,12 +16,11 @@ class UsersController < ApplicationController
   def update
     params = user_params.reject! {|key, value| value.blank?}
     if @user.update(params)
-      flash[:success] = "Your profile avatar has been updated successfully"
-      redirect_to root_url
+      flash[:success] = updated_avatar_message
     else
-      flash[:error] = "An error occurred while uploading your avatar"
-      redirect_to root_url
+      flash[:error] = updated_avatar_error_message
     end
+    redirect_to :back
   end
 
   def new
@@ -45,9 +44,8 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.new
-    if current_user
-      @user = UserDecorator.new(current_user)
-    end
+    @user = current_user if current_user
+    @user = UserDecorator.new(@user)
   end
 
   def set_flights
@@ -59,7 +57,7 @@ class UsersController < ApplicationController
 
   def require_login
     unless signed_in?
-      flash[:error] = "You must be logged in to access this section"
+      flash[:error] = require_login_message
       redirect_to root_url
     end
   end

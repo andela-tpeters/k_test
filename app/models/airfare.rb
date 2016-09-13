@@ -2,6 +2,7 @@ class Airfare < ApplicationRecord
   belongs_to :travel_class
   belongs_to :route
   has_many :payments
+  has_many :passengers
 
   def service_charge_in_currency(country)
     service_charge_in_dollar * country.exchange_rate

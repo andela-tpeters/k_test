@@ -7,7 +7,6 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require custom-form
-//= require search_flight
 //= require login-register
 //= require dailyscroll
 //= require step-form

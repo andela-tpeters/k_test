@@ -23,7 +23,9 @@ class BookingsController < ApplicationController
     flight = Flight.find(params[:flight_radio])
     respond_to do |format|
       format.html { 
-        redirect_to new_booking_path(flight: flight, passengers: flight_params[:passenger_count])
+        redirect_to new_booking_path(
+          flight: flight, passengers: flight_params[:passenger_count]
+        )
       }
     end
   end
@@ -44,14 +46,12 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-
     respond_to do |format|
-      if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
+      if booking_params[:passengers_attributes].nil?
+        format.html { redirect_to :back,  notice: 'You must have at least one passenger'}
+      elsif @booking.save
+        mail_user(@booking) 
+        format.html { redirect_to booking_confirmed_path(@booking.id), notice: 'Flight Booked Successfuly.' }
       end
     end
   end
@@ -97,8 +97,7 @@ class BookingsController < ApplicationController
 
     def set_user
       @user = User.new
-      if current_user
-        @user = UserDecorator.new(current_user)
-      end
+      @user = current_user if current_user
+      @user = UserDecorator.new(@user)
     end
 end

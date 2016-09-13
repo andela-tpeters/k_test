@@ -1,13 +1,13 @@
 class_list = [
-  ["First Class", 10],
-  ["Business Class", 6],
-  ["Economy", 3]
+  ["First Class", 1.1],
+  ["Business Class", 1.06],
+  ["Economy", 1.03]
 ]
 
 country_list = [
-  ["Nigeria", "NG", 234, "Naira", "\\20A6", 315],
-  ["Kenya", "KE", 254, "Shilling", "Ksh", 101],
-  ["United States", "US", 1, "Dollar", "\\0024", 1]
+  ["Nigeria", "NGN", 234, "Naira", 315],
+  ["Kenya", "KES", 254, "Shillings", 101],
+  ["United States", "USD", 1, "Dollars", 1]
 ]
 
 state_list = [
@@ -108,12 +108,11 @@ class_list.each do |name, tax_percent|
   TravelClass.create(name: name, tax_percent: tax_percent)
 end
 
-country_list.each do |name, iso, code, currency, symbol, exchange_rate|
+country_list.each do |name, iso, code, currency, exchange_rate|
   Country.create(name: name,
-                 iso_code: iso,
                  country_code: code,
                  currency: currency,
-                 currency_symbol: symbol,
+                 iso_currency: iso,
                  exchange_rate: exchange_rate)
 end
 

@@ -8,10 +8,24 @@
   <div class="form-group">
     <%= f.text_field :phone, :class => "form-control", placeholder: "Phone" %>
   </div>
-  <label class="control control-radio">
-      <%= radio_button_tag :travel_class, '23' %>
-      <div class="control-indicator"></div>
-  </label>
+  <%= f.fields_for :travel_class do |ff| %>
+    <div class="form-group">
+      <label class="control control-radio">
+        <%= ff.radio_button :id, 1, class: 'class-radio' %>
+        <div class="control-indicator first-class"></div>
+      </label>
+      <label class="control control-radio">
+        <%= ff.radio_button :id, 2, class: 'class-radio' %>
+        <div class="control-indicator business"></div>
+      </label>
+      <label class="control control-radio">
+        <%= ff.radio_button :id, 3, class: 'class-radio' %>
+        <div class="control-indicator economy"></div>
+      </label>
+      <small class="selected-fare"></small>
+    </div>
+  <% end %>
+  
   <div class="links pull-right">
     <%= link_to_remove_association "Delete", f, class: "btn btn-danger",:confirm => "Are you sure?" %>
   </div>
