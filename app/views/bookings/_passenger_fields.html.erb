@@ -8,7 +8,8 @@
   <div class="form-group">
       <div class="input-group"> 
         <%= select_tag :country_code, options_for_select((Country.all).map{|country| ["#{country.country_code} ▾", country.country_code]}), {include_blank: false, class: 'input-group-addon country-code'} %>
-          <%= f.text_field :phone, class: "form-control", pattern: "[1-9]{1}[0-9]{6,9}", placeholder: "Phone" %>
+          <%#= f.text_field :phone, class: "form-control", pattern: "[1-9]{1}[0-9]{6,9}", placeholder: "Phone" %>
+          <%= f.text_field :phone, class: "form-control", placeholder: "Phone" %>
       </div>
   </div>
   <div class="form-group">

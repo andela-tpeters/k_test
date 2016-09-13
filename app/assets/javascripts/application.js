@@ -9,7 +9,8 @@
 //= require custom-form
 //= require login-register
 //= require dailyscroll
-//= require step-form
 //= require sign_in
 //= require notify
 //= require add-passenger
+//= require booking-ticket
+//= require qrcode.min

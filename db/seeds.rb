@@ -104,6 +104,15 @@ airport_list = [
   ["Wajir Airport", "Wajir", "WJR", 40]
 ]
 
+user_data = {
+  first_name: "Chineze",
+  last_name: "Nwosu",
+  email: 'afridiva@yahoo.com',
+  password: "password",
+  password_confirmation: "password"
+}
+User.create(user_data)
+
 class_list.each do |name, tax_percent|
   TravelClass.create(name: name, tax_percent: tax_percent)
 end
