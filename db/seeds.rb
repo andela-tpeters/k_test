@@ -203,7 +203,6 @@ def seed_flight(min, max, min_time, max_time)
     fdate = Faker::Time.between(Date.today, 40.days.from_now, :all)
     farrival = Faker::Time.between(fdate + min_time, (fdate + max_time), :all)
     Flight.create(departure_date: fdate,
-                  departure_time: fdate,
                   arrival_date: farrival,
                   aircraft: Aircraft.find(Faker::Number.between(1, 100)),
                   route: Route.find(Faker::Number.between(min, max)))

@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20160906093907) do
     t.string   "booking_ref"
     t.integer  "user_id"
     t.integer  "flight_id"
-    t.boolean  "checked_in"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
@@ -64,7 +63,6 @@ ActiveRecord::Schema.define(version: 20160906093907) do
 
   create_table "flights", force: :cascade do |t|
     t.datetime "departure_date"
-    t.datetime "departure_time"
     t.datetime "arrival_date"
     t.integer  "aircraft_id"
     t.integer  "route_id"
@@ -79,11 +77,12 @@ ActiveRecord::Schema.define(version: 20160906093907) do
     t.string   "last_name",   limit: 30
     t.string   "phone",       limit: 16
     t.string   "passport_no", limit: 15
+    t.boolean  "checked_in",             default: false
     t.integer  "user_id"
     t.integer  "airfare_id"
     t.integer  "booking_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["airfare_id"], name: "index_passengers_on_airfare_id"
     t.index ["booking_id"], name: "index_passengers_on_booking_id"
     t.index ["user_id"], name: "index_passengers_on_user_id"

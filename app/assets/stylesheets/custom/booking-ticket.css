@@ -132,20 +132,20 @@ svg#plane {
   }
 }
 
-.nav > li > a {
+.ticket-tab.nav > li > a {
   border: none;
   border-bottom: solid 3px transparent;
 }
 
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus {
+.ticket-tab.nav-tabs > li.active > a,
+.ticket-tab.nav-tabs > li.active > a:hover,
+.ticket-tab.nav-tabs > li.active > a:focus {
     border: none;
     border-bottom: solid 3px #00aeef;
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
+.ticket-tab.nav > li > a:hover,
+.ticket-tab.nav > li > a:focus {
   background: none;
   border: none;
   border-bottom: solid 3px #c9f0ff;

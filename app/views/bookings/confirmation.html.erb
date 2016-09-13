@@ -9,7 +9,7 @@
       <h3 class="heading-caption"><%= confirmed_booking_message %></h3>
     </div>
     <div class="col-md-12">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs ticket-tab">
           <% @passengers.each_with_index do |passenger, index| %>
             <li class="<%= index == 0 ? 'active' : '' %>">
               <a href="#passenger<%= index %>" data-toggle="tab"><%= passenger.full_name %></a>
@@ -33,7 +33,7 @@
                         <div class="left">
                           <div class="ticket-label">Departing</div>
                           <div class="airport"><%= flight.route.departure_airport.iata_code %></div>
-                          <div class="city"><%= flight.route.departure_airport.name %></div>
+                          <div class="city"><%= flight.route.departure_airport.city %></div>
                         </div>
 
                         <svg id="plane" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve">
@@ -45,7 +45,7 @@
                         <div class="right">
                           <div class="ticket-label">Arriving</div>
                           <div class="airport"><%= flight.route.arrival_airport.iata_code %></div>
-                          <div class="city"><%= flight.route.arrival_airport.name %></div>
+                          <div class="city"><%= flight.route.arrival_airport.city %></div>
                         </div>
                       </div>
                       <div class="row normRow">
@@ -53,9 +53,9 @@
                           <div class="ticket-label">Passenger</div>
                           <div class="col"><%= passenger.full_name %></div>
                         </div>
-                        <div class="col-md-5 col">
+                        <div class="col-md-5 col right">
                           <div class="ticket-label">Status</div>
-                          <div><%= @booking.che %></div>
+                          <div><%= passenger.checked_in? ? 'Checked in' : 'Paid' %></div>
                         </div>
                       </div>
                       <div class="row normRow">
@@ -63,18 +63,17 @@
                           <div class="ticket-label">Departs in</div>
                           <div class="countdown" data-countdown="<%= flight.departure_date %>">---</div>
                         </div>
-                        <div class="col-md-5 col">
+                        <div class="col-md-5 col right">
                           <div class="ticket-label">Booking Reference</div>
                           <div><%= @booking.booking_ref %></div>
                         </div>
                       </div>
                       <div class="row normRow">
-                      
                         <div class="col-md-7 col">
                           <div class="ticket-label">Departs at</div>
                           <div><%= time(flight.departure_date) %></div>
                         </div>
-                        <div class="col-md-5 col">
+                        <div class="col-md-5 col right">
                           <div class="ticket-label">Arrives at</div>
                           <div><%= time(flight.arrival_date) %></div>
                         </div>

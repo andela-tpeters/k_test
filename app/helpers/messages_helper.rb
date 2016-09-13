@@ -12,26 +12,26 @@ module MessagesHelper
   end
 
   def no_flights_message
-    "There are currently no flights scheduled for the year. Please check back later"
+    "There are currently no flights scheduled for the year. Please check back later."
   end
 
   def updated_avatar_message
-    "Your profile avatar has been updated successfully"
+    "Your profile avatar has been updated successfully."
   end
 
   def updated_avatar_error_message
-    "An error occurred while uploading your avatar"
+    "An error occurred while uploading your avatar."
   end
 
   def require_login_message
-    "You must be logged in to access this section"
+    "You must be logged in to access this section."
   end
 
   def require_passenger_message
-    "You must fill in the information of at least one passenger"
+    "You must fill in the information of at least one passenger."
   end
 
   def confirmed_booking_message
-    "Your details are shown below. This has also been sent to your email"
+    "Your details are shown below. This has also been sent to your email."
   end
 end
