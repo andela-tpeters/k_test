@@ -12,4 +12,4 @@
 //= require sign_in
 //= require notify
 //= require add-passenger
-//= require qrcode.min
+//= require booking-ticket

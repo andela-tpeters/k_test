@@ -11,7 +11,7 @@
   margin: 20px auto;
 }
 
-@media only screen and (max-width : 992px) {
+@media only screen and (max-width : 768px) {
   #ticket {
     width: auto;
     height: auto;
@@ -78,12 +78,12 @@
   text-transform: uppercase;
 }
 
-.right {
+.ticket-right {
   float: right;
   text-align: right;
 }
 
-.left {
+.ticket-left {
   float: left;
   text-align: left;
 }
@@ -149,4 +149,5 @@ svg#plane {
   background: none;
   border: none;
   border-bottom: solid 3px #c9f0ff;
+  color: #333;
 }

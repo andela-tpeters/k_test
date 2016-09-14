@@ -1,5 +1,3 @@
-//= require booking-ticket
-
 $(function() {
   var currentTime = moment().unix(); // Example (Timestamp) - Mon, 12 Sep 2016 13:00:00 GMT
   var eventTime = moment($('.countdown').data('countdown')).unix();
@@ -18,14 +16,4 @@ $(function() {
     text = text + duration.hours() + ":" + duration.minutes() + ":" + duration.seconds();
     $('.countdown').text(text);
   }, interval);
-
-  var qrcode = new QRCode("qrcode");
-
-  function makeCode () {    
-    var code = $('#qrcode').data('qrcode');
-    qrcode.makeCode(code);
-  }
-
-  makeCode();
-
 });
