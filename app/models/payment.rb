@@ -14,7 +14,8 @@ class Payment < ApplicationRecord
         amount: booking.cost_in_dollar,
         item_name: "Flight from #{booking.departure} to #{booking.arrival}",
         item_number: booking.booking_ref,
-        quantity: '1'
+        quantity: '1',
+        notify_url: "#{ENV['app_host']}/hook"
     }
     "#{ENV['paypal_host']}/cgi-bin/webscr?" + values.to_query
   end

@@ -13,13 +13,9 @@ class BookingsController < ApplicationController
 
   def select
     flight = Flight.find(params[:flight_radio])
-    respond_to do |format|
-      format.html { 
-        redirect_to new_booking_path(
-          flight: flight, passengers: session[:passenger_count]
-        )
-      }
-    end
+    respond(new_booking_path(flight: flight,
+      passengers: session[:passenger_count])
+    )
   end
 
   def new
@@ -33,37 +29,23 @@ class BookingsController < ApplicationController
   end
 
   def retrieve
-    @booking = Booking.where(booking_ref: params[:booking_ref])
-    respond_to do |format|
-      format.html { 
-        render partial: 'bookings/retrieved', locals: { 
-          booking: @booking
-        } 
-      }
-      format.js
-    end
+    @booking = Booking.find_by(search_params)
+    respond('bookings/booking_details', {booking: @booking})
   end
 
   def confirmation
     @booking = Booking.find(params[:id])
-    @passengers = @booking.passengers.map do |passenger|
-      PassengerDecorator.new(passenger)
-    end
   end
 
   def create
-    if booking_params[:passengers_attributes].nil?
-      flash[:error] = require_passenger_message
-      redirect_back(fallback_location: new_booking_path)
+    @booking = Booking.new(booking_params)
+    if @booking.save
+      session[:passenger_count] = nil
+      redirect_to booking_confirmation_path(@booking)
+      # redirect_to Payment.paypal_url(@booking, booking_confirmation_path(@booking))
     else
-      @booking = Booking.new(booking_params)
-      if @booking.save
-        session[:passenger_count] = nil
-        redirect_to Payment.paypal_url(@booking, booking_confirmation_path(@booking))
-      else
-        flash[:error] = @booking.errors.full_messages
-        redirect_back(fallback_location: new_booking_path)
-      end
+      flash[:error] = @booking.errors.full_messages
+      redirect_back(fallback_location: new_booking_path)
     end
   end
 
@@ -96,11 +78,15 @@ class BookingsController < ApplicationController
 
     def booking_params
       params.require(:booking).permit(
-        :flight_id, :user_id, :cost_in_dollar,
+        :flight_id, :user_id, :cost_in_dollar, :passenger_email,
         passengers_attributes:[
           :id, :first_name, :last_name, :phone, :_destroy, :airfare_id
         ]
       )
+    end
+
+    def search_params
+      params.require(:booking).permit(:booking_ref)
     end
 
     def set_user

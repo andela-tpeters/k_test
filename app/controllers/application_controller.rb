@@ -8,5 +8,6 @@ class ApplicationController < ActionController::Base
   # unless %w(development test).include? Rails.env
   include SessionsHelper
   include MessagesHelper
+  include ResponseHelper
 
 end

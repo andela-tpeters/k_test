@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   scope path: "/bookings", controller: :bookings do
     post 'select', to: 'bookings#select', as: 'select'
-    get 'confirmed/:id', to: 'bookings#confirmation', as: 'booking_confirmation'
+    get ':id/confirmed', to: 'bookings#confirmation', as: 'booking_confirmation'
     get 'manage', to: 'bookings#manage', as: 'manage_bookings'
     post 'retrieve', to: 'bookings#retrieve', as: 'retrieve_booking'
   end

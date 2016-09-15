@@ -13,6 +13,7 @@
                    :format => :json,
                    :url => retrieve_booking_path,
                    :remote => true ) do |form| %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <div class="form-group">
           <div class="controls">
             <%= form.text_field :booking_ref, class: "floatLabel", required: true %>

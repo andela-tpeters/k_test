@@ -19,4 +19,11 @@ class Booking < ApplicationRecord
   def arrival
     flight.route.arrival_airport.city
   end
+
+  def decorated_passengers
+    passengers = self.passengers.map do |passenger|
+      PassengerDecorator.new(passenger)
+    end
+    passengers
+  end
 end
