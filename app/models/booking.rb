@@ -9,8 +9,14 @@ class Booking < ApplicationRecord
                                 allow_destroy: true
 
   def set_booking_ref
-    fake_ref = Faker::Internet.password(5, 5).upcase
-    fake_num = Faker::Number.between(3, 3)
-    self.booking_ref = "#{fake_ref}#{fake_num}"
+    self.booking_ref = SecureRandom.hex(4).upcase
+  end
+
+  def departure
+    flight.route.departure_airport.city
+  end
+
+  def arrival
+    flight.route.arrival_airport.city
   end
 end

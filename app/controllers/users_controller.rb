@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html, :js
-  before_action :set_user, :set_flights
+  before_action :set_user
+  before_action :set_flights, only: [:get_root, :schedule]
 
   def show
 

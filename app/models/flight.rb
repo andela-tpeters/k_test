@@ -2,7 +2,6 @@ class Flight < ApplicationRecord
   belongs_to :aircraft
   belongs_to :route
   has_many :bookings
-  has_many :payments
   accepts_nested_attributes_for :route
 
   def self.search(params)

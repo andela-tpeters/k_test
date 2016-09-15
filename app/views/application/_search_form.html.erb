@@ -12,12 +12,12 @@
         <% airports = Airport.select(:id, :city, :iata_code) %>
           <div class="controls">
             <i class="fa fa-sort"></i>
-              <%= form_field.collection_select :departure_airport_id, airports, :id, :iata_name, {include_blank: true}, class: 'floatLabel' %>
+              <%= form_field.collection_select :departure_airport_id, airports, :id, :iata_name, {include_blank: true}, class: 'floatLabel departure-select' %>
               <%= form.label 'Departure City' %>
           </div>
           <div class="controls">
             <i class="fa fa-sort"></i>
-            <%= form_field.collection_select :arrival_airport_id, airports, :id, :iata_name, {include_blank: true}, class: 'floatLabel' %>
+            <%= form_field.collection_select :arrival_airport_id, airports, :id, :iata_name, {include_blank: true}, class: 'floatLabel arrival-select' %>
             <%= form.label 'Destination' %>
           </div>
         <% end %>

@@ -19,8 +19,26 @@ $(function(){
       var price = $('.travel' + $(this).val() + ' .travel-class').text();
       var tax = $('.travel' + $(this).val() + ' .travel-class').data('tax');
       var total = price * tax;
+      var total_in_dollar = getTotalInDollar($(this).val());
+      if ($('#convert select').val() == 0) {
+        $('#convert select').val(1);
+      }
+      var total_in_currency = $('#convert select').val() * total_in_dollar;
+      $('.total-cost input').val(total_in_dollar.toFixed(2));
+      $('.dollar-total').text(total_in_dollar.toFixed(2));
+      $('.currency-total').text(' ' + currency + ' ' + total_in_currency.toFixed(2));
       $(this).parents('.form-group').find('.selected-fare').text(currency + " " + total.toFixed(2) + " (tax inclusive)");
     });
+
+    function getTotalInDollar() {
+      var total_in_dollar = 0;
+      $('.nested-fields').each(function(){
+        var price_in_dollar = $('.travel' + $(this).find('.class-radio:checked').val() + ' .travel-class').data('charge');
+        var price_tax = $('.travel' + $(this).find('.class-radio:checked').val() + ' .travel-class').data('tax');
+        total_in_dollar += price_in_dollar * price_tax;
+      });
+      return total_in_dollar;
+    }
 
     $(document).on('submit', '#booking_form', function(){
       $('.phone-input').each(function(){

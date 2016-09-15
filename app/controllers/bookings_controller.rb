@@ -1,10 +1,8 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:edit, :update, :destroy]
   before_action :set_user
   # before_action :require_login, only: [:new]
 
-  # GET /bookings
-  # GET /bookings.json
   def index
     @bookings = Booking.all
     if current_user
@@ -13,9 +11,7 @@ class BookingsController < ApplicationController
     redirect_to home_path unless current_user
   end
 
-  # GET /bookings/1
-  # GET /bookings/1.json
-  def show
+  def manage
 
   end
 
@@ -24,13 +20,12 @@ class BookingsController < ApplicationController
     respond_to do |format|
       format.html { 
         redirect_to new_booking_path(
-          flight: flight, passengers: flight_params[:passenger_count]
+          flight: flight, passengers: session[:passenger_count]
         )
       }
     end
   end
 
-  # GET /bookings/new
   def new
     @booking = Booking.new
     @booking.flight = Flight.find(params[:flight])
@@ -38,7 +33,6 @@ class BookingsController < ApplicationController
     @passenger_count = params[:passengers]
   end
 
-  # GET /bookings/1/edit
   def edit
   end
 
@@ -49,8 +43,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  # POST /bookings
-  # POST /bookings.json
   def create
     if booking_params[:passengers_attributes].nil?
       flash[:error] = require_passenger_message
@@ -58,8 +50,8 @@ class BookingsController < ApplicationController
     else
       @booking = Booking.new(booking_params)
       if @booking.save
-        # mail_user(@booking) 
-        redirect_to booking_confirmation_path(@booking)
+        session[:passenger_count] = nil
+        redirect_to Payment.paypal_url(@booking, booking_confirmation_path(@booking))
       else
         flash[:error] = @booking.errors.full_messages
         redirect_back(fallback_location: new_booking_path)
@@ -81,8 +73,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  # DELETE /bookings/1
-  # DELETE /bookings/1.json
   def destroy
     @booking.destroy
     respond_to do |format|
@@ -92,22 +82,17 @@ class BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
     end
 
     def booking_params
       params.require(:booking).permit(
-        :flight_id, :user_id,
+        :flight_id, :user_id, :cost_in_dollar,
         passengers_attributes:[
           :id, :first_name, :last_name, :phone, :_destroy, :airfare_id
         ]
       )
-    end
-
-    def flight_params
-      params.require(:flight_select).permit(:passenger_count)
     end
 
     def set_user

@@ -8,12 +8,12 @@ class FlightsController < ApplicationController
   def search
     @flights = Flight.search(reject_empty!(search_params.slice(:routes)))
     passenger_count = params[:passenger_count]
+    session[:passenger_count] = passenger_count.blank? ? 1 : passenger_count
     respond_to do |format|
       format.html { 
         render partial: 'flights/search_results', locals: { 
           flights: FlightDecorator.new(@flights),
-          depart_date: search_params[:departure_date],
-          passenger_count: passenger_count.blank? ? 1 : passenger_count
+          depart_date: search_params[:departure_date]
         } 
       }
       format.js

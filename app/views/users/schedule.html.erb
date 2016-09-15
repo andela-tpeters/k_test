@@ -54,7 +54,7 @@
 
         function getEvents() {
         var arr = new Array();
-                <% Flight.all.each_with_index do |flight, index| %>
+                <% @flights.each_with_index do |flight, index| %>
                     arr[<%= index %>] = {
                         id: <%= index %>,
                         name: '<%= flight.route.name %>',

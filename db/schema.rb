@@ -43,10 +43,12 @@ ActiveRecord::Schema.define(version: 20160931172519) do
 
   create_table "bookings", force: :cascade do |t|
     t.string   "booking_ref"
+    t.decimal  "cost_in_dollar"
+    t.string   "passenger_email"
     t.integer  "user_id"
     t.integer  "flight_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -89,17 +91,13 @@ ActiveRecord::Schema.define(version: 20160931172519) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.integer  "flight_id"
     t.integer  "booking_id"
     t.datetime "payment_date"
-    t.integer  "airfare_id"
     t.string   "transaction_ref"
     t.integer  "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["airfare_id"], name: "index_payments_on_airfare_id"
     t.index ["booking_id"], name: "index_payments_on_booking_id"
-    t.index ["flight_id"], name: "index_payments_on_flight_id"
   end
 
   create_table "routes", force: :cascade do |t|

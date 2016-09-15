@@ -14,22 +14,26 @@
     //open flight list
     $('#flight_form').submit(function(event) {
       event.preventDefault();
-      $.post( $(this).prop('action'), $(this).serialize(), function( data ) {
-          $(".view-flights").html(data);
-      });
-      
-      var selected_page = $(this).find('.search-button').data('type');
-      $('.cd-flight.'+selected_page+'').addClass('slide-in');
-      $('.cd-flight-close').addClass('is-visible');
-
-      // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
-      if( is_firefox ) {
-        $('main').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-          $('body').addClass('overflow-hidden');
-        });
+      if ($('.departure-select').val() == $('.arrival-select').val() && $('.departure-select').val() != "") {
+        $.notify('You cannot select the same departure and destination', 'error');
       } else {
-        $('main').addClass('slide-out');
-        $('body').addClass('overflow-hidden');
+        $.post( $(this).prop('action'), $(this).serialize(), function( data ) {
+            $(".view-flights").html(data);
+        });
+        
+        var selected_page = $(this).find('.search-button').data('type');
+        $('.cd-flight.'+selected_page+'').addClass('slide-in');
+        $('.cd-flight-close').addClass('is-visible');
+
+        // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
+        if( is_firefox ) {
+          $('main').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+            $('body').addClass('overflow-hidden');
+          });
+        } else {
+          $('main').addClass('slide-out');
+          $('body').addClass('overflow-hidden');
+        }
       }
 
     });

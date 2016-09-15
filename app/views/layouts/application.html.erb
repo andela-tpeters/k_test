@@ -18,14 +18,4 @@
     <%= render "application/login_modal" %>
   </body>
   <%= render partial: "application/application", formats: [:js] %>
-
-  <% if flash %>
-  <script>
-    $(function(){
-      <% flash.each do |key, value| %>
-        $.notify('<%= value %>', '<%= key %>');
-      <% end %>
-    });
-  </script>
-  <% end %>
 </html>

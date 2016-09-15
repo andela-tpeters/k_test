@@ -6,8 +6,13 @@
     <%= render 'passenger_fields', :f => passenger %>
   <% end %>
   <br>
-  <div class="links">
+  <div class="links pull-left">
     <%= link_to_add_association content_tag(:span, 'Add Passenger', class: "add_passenger"), form, :passengers, :class => 'btn btn-primary' %> 
+  </div>
+  <div class="total-cost pull-right">
+    Total (USD <span class="dollar-total">0.00</span>):
+    <span class="currency-total"> 0.00</span> 
+    <%= form.hidden_field :cost_in_dollar %>
   </div>
   <%= form.submit "Book Now", class: "btn btn-primary book"  %>
 <% end %>
