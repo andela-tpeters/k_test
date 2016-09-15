@@ -5,14 +5,25 @@
 
 <div class="container">
   <div class="col-md-12">
+    <h3 class="heading-caption">Use the booking reference number on your ticket to retrieve bookings here.</h3>
+  </div>
+  <div class="col-md-12">
     <div class="row table-content">
-      <div class="table-responsive">
-        <h3>Use the booking reference number on your ticket to retrive bookings here.</h3>
-      </div>
+      <%= form_for(:booking, :html => {:id => "manage_booking_form"},
+                   :format => :json,
+                   :url => retrieve_booking_path,
+                   :remote => true ) do |form| %>
+        <div class="form-group">
+          <div class="controls">
+            <%= form.text_field :booking_ref, class: "floatLabel", required: true %>
+            <%= form.label 'Booking Reference Number' %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="col-md-12">
-      
+      <div class="retrieved-booking"></div>
   </div>
 </div>
-
+<%= render partial: 'manage_bookings', formats: [:js] %>

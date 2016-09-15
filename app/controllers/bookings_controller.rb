@@ -11,10 +11,6 @@ class BookingsController < ApplicationController
     redirect_to home_path unless current_user
   end
 
-  def manage
-
-  end
-
   def select
     flight = Flight.find(params[:flight_radio])
     respond_to do |format|
@@ -34,6 +30,18 @@ class BookingsController < ApplicationController
   end
 
   def edit
+  end
+
+  def retrieve
+    @booking = Booking.where(booking_ref: params[:booking_ref])
+    respond_to do |format|
+      format.html { 
+        render partial: 'bookings/retrieved', locals: { 
+          booking: @booking
+        } 
+      }
+      format.js
+    end
   end
 
   def confirmation
