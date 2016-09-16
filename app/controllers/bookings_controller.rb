@@ -30,7 +30,13 @@ class BookingsController < ApplicationController
 
   def retrieve
     @booking = Booking.find_by(search_params)
-    respond('bookings/booking_details', {booking: @booking})
+    respond_partial('bookings/booking_details', booking: @booking) if @booking
+    respond_message("danger", no_booking_found_message(search_params)) unless @booking
+    # if current_user
+    #   redirect_to edit_booking_path(@booking)
+    # else
+    #   respond_with_partial('bookings/booking_details', {booking: @booking})
+    # end
   end
 
   def confirmation

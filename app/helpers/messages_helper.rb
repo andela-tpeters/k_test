@@ -34,4 +34,8 @@ module MessagesHelper
   def booking_mail_subject_message
     "Kuruka Booking Confirmed!"
   end
+
+  def no_booking_found_message(booking_param)
+    "No booking with reference number #{booking_param[:booking_ref]} was found"
+  end
 end

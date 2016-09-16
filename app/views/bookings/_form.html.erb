@@ -14,10 +14,13 @@
     <span class="currency-total"> 0.00</span> 
     <%= form.hidden_field :cost_in_dollar %>
   </div>
-  <div class="row"></div>
-  <div class="form-group">
-    <p>Please enter a valid email to receive notifications</p>
-    <%= form.email_field :passenger_email, class: "form-control", placeholder: "* Passenger Email", required: true %>
-  </div>
+  <% unless current_user %>
+    <div class="row">
+      <div class="form-group">
+        <p>Please enter a valid email to receive notifications</p>
+        <%= form.email_field :passenger_email, class: "form-control", placeholder: "* Passenger Email", required: true %>
+      </div>
+    </div>
+  <% end %>
   <%= form.submit "Book Now", class: "btn btn-primary book"  %>
 <% end %>

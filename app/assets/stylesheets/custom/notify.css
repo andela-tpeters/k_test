@@ -55,20 +55,20 @@
 }
 
 .notify-message.alert.alert-info {
-    color: #00529B;
-    background-color: #BDE5F8;
+    color: #ffffff;
+    background-color: #2fa9f6;
 }
 .notify-message.alert.alert-success {
-    color: #4F8A10;
-    background-color: #DFF2BF;
+    color: #ffffff;
+    background-color: #7EB62E;
 }
 .notify-message.alert.alert-warning {
-    color: #9F6000;
-    background-color: #FEEFB3;
+    color: #ffffff;
+    background-color: #f6ca2f;
 }
 .notify-message.alert.alert-error {
-    color: #D8000C;
-    background-color: #FFBABA;
+    color: #ffffff;
+    background-color: #f64b2f;
 }
 .notify-arrow {
     text-align: center;
