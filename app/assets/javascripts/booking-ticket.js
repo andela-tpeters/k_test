@@ -5,15 +5,19 @@ $(function() {
   var duration = moment.duration(diffTime * 1000, 'milliseconds');
   var interval = 1000;
 
-  setInterval(function() {
-    duration = moment.duration(duration - interval, 'milliseconds');
-    var text = '';
-    if (duration.days() > 0) {
-      var text = text + duration.days() + ' days ';
-    } else if (duration.days() == 1) {
-      var text = text + '1 day';
-    }
-    text = text + duration.hours() + ":" + duration.minutes() + ":" + duration.seconds();
-    $('.countdown').text(text);
-  }, interval);
+  if (duration._milliseconds > 0) {
+    setInterval(function() {
+      duration = moment.duration(duration - interval, 'milliseconds');
+      var text = '';
+      if (duration.days() > 0) {
+        var text = text + duration.days() + ' days ';
+      } else if (duration.days() == 1) {
+        var text = text + '1 day';
+      }
+      text = text + duration.hours() + ":" + duration.minutes() + ":" + duration.seconds();
+      $('.countdown').text(text);
+    }, interval);
+  } else {
+    $('.countdown').text("Flight departed");
+  }
 });
