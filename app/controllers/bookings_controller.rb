@@ -35,6 +35,7 @@ class BookingsController < ApplicationController
 
   def confirmation
     @booking = Booking.find(params[:id])
+    send_booking_mail(@booking)
   end
 
   def create
@@ -72,7 +73,7 @@ class BookingsController < ApplicationController
   end
 
   def send_booking_mail(booking)
-    KurukaMailer.deliver_booking_email(booking)
+    KurukaMailer.booking_email(booking).deliver
   end
 
   private

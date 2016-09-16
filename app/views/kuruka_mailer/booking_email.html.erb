@@ -7,7 +7,7 @@
       <tr>
           <td style="margin: 0; padding: 30px 35px;" bgcolor="white">
 
-              <h2 style="font-size: 28px; line-height: 1.25; margin: 0 0 20px; padding: 0;">Hi <%= @booking.user_first_name %>,</h2>
+              <h2 style="font-size: 22px; font-weight: 600; line-height: 1.25; margin: 0 0 20px; padding: 0;">Hi <%= @booking.user_first_name %>,</h2>
               
               <p style="font-size: 16px; margin: 0 0 20px; padding: 0;">
                   You have successfully made reservation for <span style="font-weight: 500"><%= @booking.decorated_passengers.map(&:full_name).join(", ") %></span> for a flight from <%= @booking.departure %> to <%= @booking.arrival %>. Your flight cost was $ <%= @booking.cost_in_dollar %>.

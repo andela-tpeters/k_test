@@ -27,6 +27,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
+  gem 'letter_opener'
 end
 
 group :production do
