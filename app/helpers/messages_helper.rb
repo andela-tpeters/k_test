@@ -30,4 +30,8 @@ module MessagesHelper
   def confirmed_booking_message
     "Your details are shown below. This has also been sent to your email."
   end
+
+  def booking_mail_subject_message
+    "Kuruka Booking Confirmed!"
+  end
 end

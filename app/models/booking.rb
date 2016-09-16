@@ -21,9 +21,16 @@ class Booking < ApplicationRecord
   end
 
   def decorated_passengers
-    passengers = self.passengers.map do |passenger|
+    self.passengers.map do |passenger|
       PassengerDecorator.new(passenger)
     end
-    passengers
+  end
+
+  def user_email
+    user ? user.email : passenger_email
+  end
+
+  def user_first_name
+    user ? user.first_name : user_email[/[^@]+/]
   end
 end

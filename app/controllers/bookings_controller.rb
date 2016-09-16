@@ -71,6 +71,10 @@ class BookingsController < ApplicationController
     end
   end
 
+  def send_booking_mail(booking)
+    KurukaMailer.deliver_booking_email(booking)
+  end
+
   private
     def set_booking
       @booking = Booking.find(params[:id])
