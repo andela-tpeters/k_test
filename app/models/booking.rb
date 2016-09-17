@@ -13,17 +13,25 @@ class Booking < ApplicationRecord
   end
 
   def departure
-    flight.route.departure_airport.city
+    flight.departure
   end
 
   def arrival
-    flight.route.arrival_airport.city
+    flight.arrival
+  end
+
+  def route_name
+    flight.route_name
   end
 
   def decorated_passengers
     self.passengers.map do |passenger|
       PassengerDecorator.new(passenger)
     end
+  end
+
+  def decorated_flight
+    FlightDecorator.new(flight)
   end
 
   def user_email

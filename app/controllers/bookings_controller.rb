@@ -1,14 +1,10 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:edit, :update, :destroy]
   before_action :set_user
-  # before_action :require_login, only: [:new]
+  before_action :require_login, only: [:edit, :update, :index]
 
   def index
-    @bookings = Booking.all
-    if current_user
-      @user = UserDecorator.new(current_user)
-    end
-    redirect_to home_path unless current_user
+    @bookings = current_user.bookings if current_user
   end
 
   def select
@@ -25,18 +21,10 @@ class BookingsController < ApplicationController
     @passenger_count = params[:passengers]
   end
 
-  def edit
-  end
-
   def retrieve
     @booking = Booking.find_by(search_params)
     respond_partial('bookings/booking_details', booking: @booking) if @booking
-    respond_message("danger", no_booking_found_message(search_params)) unless @booking
-    # if current_user
-    #   redirect_to edit_booking_path(@booking)
-    # else
-    #   respond_with_partial('bookings/booking_details', {booking: @booking})
-    # end
+    respond_message("danger", booking_not_found_message(search_params)) unless @booking
   end
 
   def confirmation
@@ -56,26 +44,18 @@ class BookingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /bookings/1
-  # PATCH/PUT /bookings/1.json
   def update
-    respond_to do |format|
-      if @booking.update(booking_params)
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
-        format.json { render :show, status: :ok, location: @booking }
-      else
-        format.html { render :edit }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.update(booking_params)
+      flash[:success] = booking_update_success_message
+    else
+      flash[:error] = full_message(@booking)
     end
+    redirect_back(fallback_location: edit_booking_path)
   end
 
   def destroy
     @booking.destroy
-    respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_back(fallback_location: bookings_path)
   end
 
   def send_booking_mail(booking)
@@ -98,11 +78,5 @@ class BookingsController < ApplicationController
 
     def search_params
       params.require(:booking).permit(:booking_ref)
-    end
-
-    def set_user
-      @user = User.new
-      @user = current_user if current_user
-      @user = UserDecorator.new(@user)
     end
 end

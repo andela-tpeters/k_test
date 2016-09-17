@@ -5,11 +5,7 @@ class Flight < ApplicationRecord
   accepts_nested_attributes_for :route
 
   def self.search(params)
-    if params.blank?
-      search_by_current
-    else
-      search_by_params(params)
-    end
+    params.blank? ? search_by_current : search_by_params(params)
   end
 
   def self.search_by_current
@@ -23,7 +19,15 @@ class Flight < ApplicationRecord
   end
 
   def self.recent
-    order(:departure_date).first(8)
+    order(:departure_date).where("departure_date > ?", Time.now)
+  end
+
+  def self.top_recent
+    recent.first(4)
+  end
+
+  def self.next_recent
+    recent.offset(4).first(4)
   end
 
   def self.departure_order_asc
@@ -38,5 +42,29 @@ class Flight < ApplicationRecord
     all.includes(
       route: [:departure_airport, :arrival_airport, airfares: [:travel_class]]
     )
+  end
+
+  def departed?
+    departure_date < Time.now
+  end
+
+  def name
+    aircraft.tail_number
+  end
+
+  def departure
+    route.departure_airport.city
+  end
+
+  def arrival
+    route.arrival_airport.city
+  end
+
+  def route_name
+    "#{departure} to #{arrival}"
+  end
+
+  def route_airports
+    "#{route.departure_airport.name} to #{route.arrival_airport.name}"
   end
 end

@@ -59,26 +59,7 @@
     <div class="row setup-content" id="step-1">
         <div class="col-md-12">
         <h3> Please add the details of the passengers.</h3>
-        <div class="travel-class-demo">
-          Choose class of travel:
-          <% flight.route.airfares.each do |airfare| %>
-            <div></div>
-            <%= airfare.travel_class.name %> (
-            <span class="travel<%= airfare.travel_class.id %>">
-              <span class="currency">USD</span>
-              <span class="travel-class" data-tax="<%= airfare.travel_class.tax_percent %>" data-charge="<%= airfare.service_charge_in_dollar %>">
-                <%= airfare.service_charge_in_dollar %>
-              </span>
-            </span>
-            )
-          <% end %>
-          <span id="convert">
-            Convert to:
-            <%= select_tag :country, options_for_select((Country.all).map{|country| ["#{country.iso_currency}", country.exchange_rate]}), {include_blank: true, class: 'currency-select form-control'} %>
-          </span>
-        </div>
-        
-        <%= render "form"%>
+        <%= render "form", flight: flight %>
       </div>
     </div>
   </div>

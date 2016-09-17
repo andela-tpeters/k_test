@@ -42,6 +42,9 @@
     //Initiate WOW JS
     new WOW().init();
 
+    //Initialize popover
+    $('[data-toggle="tooltip"]').tooltip();
+
     window.onload = function() {
       $('.main-slider').addClass('animate-in');
     };
@@ -64,6 +67,38 @@
     // Progress Bar
     $.each($('div.progress-bar'),function(){
       $(this).css('width', $(this).attr('data-transition')+'%');
+    });
+
+    function floatLabel(inputType){
+      $(inputType).each(function(){
+        var $this = $(this);
+        // on focus add cladd active to label
+        $this.focus(function(){
+          $this.next().addClass("active");
+        });
+        //on blur check field and remove class if needed
+        $this.blur(function(){
+          if($this.val() === '' || $this.val() === 'blank'){
+            $this.next().removeClass();
+          }
+        });
+      });
+    }
+    floatLabel(".floatLabel");
+
+    // Geolocation
+    var requestUrl = "http://ip-api.com/json";
+
+    $.ajax({
+      url: requestUrl,
+      type: 'GET',
+      success: function(location) {
+        var city = location.city ? location.city : location.regionName;
+        $('.location').html("How is " + city + ", " + location.country + " today? Want to go somewhere else?");
+      },
+      error: function(err) {
+        $('.location').html("How's your day? Want to go somewhere fun today?");
+      }
     });
   });
 </script>

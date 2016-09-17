@@ -76,10 +76,6 @@
 }
 
 .tab-content.flight-content {
-  padding: 20px 30px;
-  h2 {
-    padding: 10px 10px 40px;
-  }
   .message {
     padding: 0 10px;
     font-size: 16px;
@@ -96,19 +92,7 @@
   }
 }
 
-.flight-content .table > thead > tr > th,
-.flight-content .table > tbody > tr > td {
-    background: #f0ffff;
-    padding: 15px;
-    border: #fff solid 10px;
-    border-top: transparent;
-}
-
-.flight-content .table > thead > tr > th {
-    background: #f0f8ff;
-}
-
-.price-content td {
+.content-content td {
     padding: 0 10px 30px;
 }
 /* As it has a mobile focus the scrollbar is removed */
@@ -126,17 +110,20 @@
     width: 30%;
 }
 
-.content-price td {
+.content-price td,
+.passenger-content td {
   margin-bottom: 30px;
 }
 
-.content-price {
+.content-price,
+.passenger-content {
   margin-bottom: 20px;
   width: 100%;
-  td:last-child {
-    font-size: 18px;
-    font-weight: 300;
-  }
+}
+
+.content-price td:last-child {
+  font-size: 18px;
+  font-weight: 300;
 }
 
 ul.available-dates {

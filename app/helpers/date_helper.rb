@@ -42,4 +42,8 @@ module DateHelper
   def date_without_time(datetime)
     datetime.strftime("%Y-%m-%d")
   end
+
+  def date_human_format(datetime)
+    datetime.strftime("%d-%m-%Y")
+  end
 end

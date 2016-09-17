@@ -5,9 +5,9 @@
                 <div class="main-slider">
                     <div class="col-md-5 col-sm-12">
                         <% if signed_in? %>
-                            <div class="bottom">
-                                <h2>Recent Bookings</h2>
-                                <p>You currently have no bookings</p>
+                            <div class="location-div">
+                                <h1>Hi, <%= @user.first_name %></h1>
+                                <h3 class="location"></h3>
                             </div>
                         <% else %>
                             <div class="slide-text">

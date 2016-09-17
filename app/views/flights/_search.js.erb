@@ -8,6 +8,16 @@
     });
   }
 
+  $(document).on('click', '.tour-button a', function(event){
+    $('.search-button').trigger('click');
+    event.preventDefault();
+  });
+
+  $(document).on('click', '.book-now', function(event){
+    $('#select-form').trigger('submit');
+    event.preventDefault();
+  });
+
   $(document).ready(function(){
     var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
 

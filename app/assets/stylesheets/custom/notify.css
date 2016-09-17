@@ -60,13 +60,13 @@
 }
 .notify-message.alert.alert-success {
     color: #ffffff;
-    background-color: #7EB62E;
+    background-color: #07B3A1;
 }
 .notify-message.alert.alert-warning {
     color: #ffffff;
     background-color: #f6ca2f;
 }
-.notify-message.alert.alert-error {
+.notify-message.alert.alert-danger {
     color: #ffffff;
     background-color: #f64b2f;
 }

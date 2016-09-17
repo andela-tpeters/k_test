@@ -2,18 +2,14 @@
   Home
 <% end %>
 <div class="stars">
-    <span class="star a"></span>
-    <span class="star b"></span>
-    <span class="star c"></span>
-    <span class="star d"></span>
+    <% ("a".."d").each do |letter| %>
+        <span class="star <%= letter %>"></span>
+    <% end %>
 </div>
 <div class="birds">
-    <span class="bird a"></span>
-    <span class="bird b"></span>
-    <span class="bird c"></span>
-    <span class="bird d"></span>
-    <span class="bird e"></span>
-    <span class="bird f"></span>
+    <% ("a".."f").each do |letter| %>
+        <span class="bird <%= letter %>"></span>
+    <% end %>
 </div>
 <div class="plane">
     <div class="wings">
@@ -24,15 +20,17 @@
         </div>
     </div>
     <div class="wheels">
-        <div class="stand"><span class="wheel"></span></div>
-        <div class="stand"><span class="wheel"></span></div>
-        <div class="stand"><span class="wheel"></span></div>
+        <% (1..3).each do |letter| %>
+            <div class="stand"><span class="wheel"></span></div>
+        <% end %>
     </div>
 </div>
 <div class="landed-plane">
-    <div class="plane-small a"><div class="tail"></div><div class="wing"></div><div class="wheel"></div></div>
-    <div class="plane-small b"><div class="tail"></div><div class="wing"></div><div class="wheel"></div></div>
-    <div class="plane-small c"><div class="tail"></div><div class="wing"></div><div class="wheel"></div></div>
+    <% ("a".."c").each do |letter| %>
+        <div class="plane-small <%= letter %>"><div class="tail"></div><div class="wing"></div>
+        <div class="wheel"></div></div>
+        <span class="bird <%= letter %>"></span>
+    <% end %>
 </div>
                     
 <%= render 'application/booking_search' %>
@@ -46,173 +44,66 @@
                 </div>
                 <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
                     <div class="tour-button">
-                        <a href="#" class="btn btn-common">VIEW ALL FLIGHTS</a>
+                        <%= link_to 'VIEW ALL FLIGHTS', '#', class: 'btn btn-common' %>
                      </div>
                 </div>
             </div>
             <div id="team-carousel" class="carousel slide wow fadeIn" data-ride="carousel" data-wow-duration="400ms" data-wow-delay="400ms">
-                <!-- Indicators -->
                 <ol class="carousel-indicators visible-xs">
                     <li data-target="#team-carousel" data-slide-to="0" class="active"></li>
                     <li data-target="#team-carousel" data-slide-to="1"></li>
                 </ol>
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="blogdetails.html">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
+                        <% Flight.top_recent.each do |flight| %>
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="team-single-wrapper">
+                                    <div class="team-single">
+                                        <div class="person-thumb">
+                                            <div class="post-content overflow">
+                                                <h2 class="post-title"><%= flight.name %></h2>
+                                                <h3 class="post-author"><%= flight.route_name %></h3>
+                                                <p>Flight from <%= flight.route_airports %></p>
+                                                <%= full_date_time(flight.departure_date) %>
+                                                <div class="post-bottom overflow">
+                                                    <ul class="post-nav">
+                                                        <li>
+                                                        <%= form_for(:flight_select, :url => select_path, html: { id: 'select-form'} ) do |form| %>
+                                                        <%= link_to '<i class="fa fa-ticket"></i>Book flight'.html_safe, '#', class: 'book-now' %>
+                                                        <%= hidden_field_tag 'flight_radio', flight.id%>
+                                                        <% end %>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="blogdetails.html">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="blogdetails.html">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="blogdetails.html">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <% end %>
                     </div>
                     <div class="item">
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="blogdetails.html">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
+                        <% Flight.next_recent.each do |flight| %>
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="team-single-wrapper">
+                                    <div class="team-single">
+                                        <div class="person-thumb">
+                                            <div class="post-content overflow">
+                                                <h2 class="post-title"><%= flight.name %></h2>
+                                                <h3 class="post-author"><%= flight.route_name %></h3>
+                                                <p>Flight from <%= flight.route_airports %></p>
+                                                <%= full_date_time(flight.departure_date) %>
+                                                <div class="post-bottom overflow">
+                                                    <ul class="post-nav">
+                                                        <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="blogdetails.html">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="blogdetails.html">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="#"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="team-single-wrapper">
-                                <div class="team-single">
-                                    <div class="person-thumb">
-                                        <div class="post-content overflow">
-                                            <h2 class="post-title bold"><a href="#">Boeling 300</a></h2>
-                                            <h3 class="post-author"><a href="#">Lagos - Abuja</a></h3>
-                                            <p>Duis autem vel eum iriure dolor in hendrerit in</p>
-                                            <a href="#" class="read-more">24th October, 2016</a>
-                                            <div class="post-bottom overflow">
-                                                <ul class="nav navbar-nav post-nav">
-                                                    <li><a href="blogdetails.html"><i class="fa fa-ticket"></i>Book flight</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <% end %>
                     </div>
                 </div>
 

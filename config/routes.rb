@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :bookings
-  resources :sessions
+  resources :bookings, only: [:edit, :new, :index, :destroy, :update, :show]
+  resources :sessions, only: [:create, :destroy]
 end

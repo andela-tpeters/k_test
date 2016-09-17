@@ -193,24 +193,24 @@ input[type="radio"],
 .fixed-form {
   position: fixed;
   bottom: 30px;
-  left: 20px;
+  left: 40px;
   z-index: 1000;
 }
 @media (min-width:768px) {
   .fixed-form {
-    left: calc(50% - 750px/2)
+    left: calc(50% - 710px/2)
   }
 }
 
 @media (min-width:992px) {
   .fixed-form {
-    left: calc(50% - 970px/2)
+    left: calc(50% - 940px/2)
   }
 }
 
 @media (min-width:1200px) {
   .fixed-form {
-    left: calc(50% - 1170px/2)
+    left: calc(50% - 1140px/2)
   }
 }
 .fixed-form .contact-form {

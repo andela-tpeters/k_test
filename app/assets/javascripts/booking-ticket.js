@@ -5,7 +5,6 @@ $(function() {
   var duration = moment.duration(diffTime * 1000, 'milliseconds');
   var interval = 1000;
 
-  if (duration._milliseconds > 0) {
     setInterval(function() {
       duration = moment.duration(duration - interval, 'milliseconds');
       var text = '';
@@ -17,7 +16,4 @@ $(function() {
       text = text + duration.hours() + ":" + duration.minutes() + ":" + duration.seconds();
       $('.countdown').text(text);
     }, interval);
-  } else {
-    $('.countdown').text("Flight departed");
-  }
 });

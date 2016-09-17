@@ -38,4 +38,16 @@ module MessagesHelper
   def no_booking_found_message(booking_param)
     "No booking with reference number #{booking_param[:booking_ref]} was found"
   end
+
+  def booking_update_success_message
+    "Your reservation was successfully updated."
+  end
+
+  def full_message(model)
+    model.errors.full_messages.join('<br>')
+  end
+
+  def flight_departed_message
+    "This action cannot be done because the flight has already departed"
+  end
 end

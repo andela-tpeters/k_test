@@ -29,6 +29,10 @@ module SessionsHelper
     end
   end
 
+  def decorated_user
+    UserDecorator.new(current_user) if current_user
+  end
+
   def forget(user)
     user.forget
     cookies.delete(:user_id)
@@ -39,5 +43,16 @@ module SessionsHelper
     forget(current_user)
     session.delete(:user_id)
     @current_user = nil
+  end
+
+  def require_login
+    unless signed_in?
+      flash[:error] = require_login_message
+      redirect_to root_url
+    end
+  end
+
+  def set_user
+    @user = decorated_user || UserDecorator.new(User.new)
   end
 end

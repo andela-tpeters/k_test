@@ -45,10 +45,5 @@ $(function(){
         event.preventDefault();
         $.notify('You must fill in the information of at least one passenger.', 'error');
       }
-      $('.phone-input').each(function(){
-        var country_code = $(this).prev().val();
-        var phone = $(this).val();
-        $(this).val(country_code + phone);
-      });
     });
 });

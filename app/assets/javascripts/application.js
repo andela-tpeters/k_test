@@ -1,4 +1,5 @@
 //= require jquery
+//= require jquery_ujs
 //= require wow.min
 //= require turbolinks
 //= require bootstrap-sprockets
@@ -6,7 +7,6 @@
 //= require cocoon
 //= require moment
 //= require bootstrap-datetimepicker
-//= require custom-form
 //= require login-register
 //= require dailyscroll
 //= require sign_in

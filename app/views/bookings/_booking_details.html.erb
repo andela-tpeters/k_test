@@ -1,11 +1,5 @@
-<% flight = booking.flight %>
+<% flight = booking.decorated_flight %>
 <% passengers = booking.decorated_passengers %>
-hheyyeye
-<% if current_user %>
-  <div class="pull-right bold">
-    <%= link_to "Edit Reservation", edit_booking_path(booking) %>
-  </div>
-<% end %>
 <ul class="nav nav-tabs ticket-tab">
   <% passengers.each_with_index do |passenger, index| %>
     <li class="<%= index == 0 ? 'active' : '' %>">
@@ -14,6 +8,13 @@ hheyyeye
   <% end %>
 </ul>
 <div class="tab-content">
+  <div class="top-20 text-right">
+    <% if current_user %>
+      <%= link_to "Edit Reservation", edit_booking_path(booking) %>
+    <% else %>
+      <span class="opaque">You need to log in to edit this reservation</span>
+    <% end %>
+  </div>
   <% passengers.each_with_index do |passenger, index| %>
     <div class="tab-pane fade <%= index == 0 ? 'active in' : '' %>" id="passenger<%= index %>">
         <div class="row">
@@ -57,8 +58,8 @@ hheyyeye
               </div>
               <div class="row normRow">
                 <div class="col-md-7 col">
-                  <div class="ticket-label">Departs in</div>
-                  <div class="countdown" data-countdown="<%= flight.departure_date %>">---</div>
+                  <div class="ticket-label"><%= flight.pastize("Depart") %> in</div>
+                  <div class="<%= flight.departed? ? '' : 'countdown' %>" data-countdown="<%= flight.departure_date %>"><%= date_human_format(flight.departure_date) %></div>
                 </div>
                 <div class="col-md-5 col ticket-right">
                   <div class="ticket-label">Booking Reference</div>
@@ -67,11 +68,11 @@ hheyyeye
               </div>
               <div class="row normRow">
                 <div class="col-md-7 col">
-                  <div class="ticket-label">Departs at</div>
+                  <div class="ticket-label depart-label"><%= flight.pastize("Depart") %> at</div>
                   <div><%= time(flight.departure_date) %></div>
                 </div>
                 <div class="col-md-5 col ticket-right">
-                  <div class="ticket-label">Arrives at</div>
+                  <div class="ticket-label arrive-label"><%= flight.pastize("Arrive") %> at</div>
                   <div><%= time(flight.arrival_date) %></div>
                 </div>
               </div>

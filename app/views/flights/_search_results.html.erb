@@ -9,11 +9,7 @@
             <div class="horizontal-tabs">
               <ul role="tablist" class="nav nav-tabs nav-tabs-horizontal">
                 <% flights.departure_date_range.each do |date| %>
-                <% if date.to_s == depart_date %>
-                    <li role="presentation" class="active">
-                <% else %>
-                    <li role="presentation">
-                <% end %>
+                <li role="presentation" class="<%= date.to_s == depart_date ? 'active' : '' %>">
                   <a href="#<%= pack(date) %>" data-toggle="tab">
                     <span class="day"><%= day(date) %><hr></span>
                     <%= short_month_day(date) %>
@@ -28,18 +24,14 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <div class="tab-content flight-content">
+          <div class="tab-content single-table-content flight-content">
           <%= form_for(:flight_select, :url => select_path ) do |form| %>
             <div class="search-div">
                 <%= form.submit 'Select Flight', class: 'btn btn-primary', disabled: true %>
             </div>
             <% flights_by_day = nil %>
             <% flights.departure_date_range.each do |date| %>
-                <% if date.to_s == depart_date %>
-                    <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade in active">
-                <% else %>
-                    <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade">
-                <% end %>
+                <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade <%= date.to_s == depart_date ? 'in active' : '' %>">
                     <h2><%= full_date(date) %></h2>
                     <% flights_by_day = flights.by_day(date) %>
                     <% if flights_by_day.blank? %>
@@ -57,47 +49,47 @@
                         <span class="message"><%= no_flights_message %></span>
                     <% else %>
                     <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr class="">
-                                <th>Select</th>
-                                <th>Departure Address</th>
-                                <th>Destination</th>
-                                <th>Departure Date</th>
-                                <th>Class</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% flights_by_day.find_each do |flight|%>
-                                    <tr>
-                                        <td>
-                                            <label class="control control-radio">
-                                                <%= radio_button_tag :flight_radio, flight.id %>
-                                                <div class="control-indicator"></div>
-                                            </label>
-                                        </td>
-                                        <td><%= flight.route.departure_airport.name %></td>
-                                        <td><%= flight.route.arrival_airport.name %></td>
-                                        <td><%= full_date_time(flight.departure_date) %></td>
-                                        <td>
-                                            <% flight.route.airfares.each do |airfare| %>
-                                                <table class="content-price">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><%= airfare.travel_class.name %></td>
-                                                            <td>
-                                                                <span class="currency" data-content="$"></span>
-                                                                <%= airfare.service_charge_in_dollar %>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            <% end %>
-                                        </td>
-                                    </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
+                        <table class="table">
+                            <thead>
+                                <tr class="">
+                                    <th>Select</th>
+                                    <th>Departure Address</th>
+                                    <th>Destination</th>
+                                    <th>Departure Date</th>
+                                    <th>Class</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% flights_by_day.find_each do |flight|%>
+                                        <tr>
+                                            <td>
+                                                <label class="control control-radio">
+                                                    <%= radio_button_tag :flight_radio, flight.id %>
+                                                    <div class="control-indicator"></div>
+                                                </label>
+                                            </td>
+                                            <td><%= flight.route.departure_airport.name %></td>
+                                            <td><%= flight.route.arrival_airport.name %></td>
+                                            <td><%= full_date_time(flight.departure_date) %></td>
+                                            <td>
+                                                <% flight.route.airfares.each do |airfare| %>
+                                                    <table class="content-price">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><%= airfare.travel_class.name %></td>
+                                                                <td>
+                                                                    <span class="currency" data-content="$"></span>
+                                                                    <%= airfare.service_charge_in_dollar %>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
                     </div>
                     <% end %>
                 </div>

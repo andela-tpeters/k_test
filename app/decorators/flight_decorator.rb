@@ -2,7 +2,9 @@ class FlightDecorator < Draper::Decorator
   delegate_all
 
   def by_day(date)
-    object.where("departure_date between ? and ?", date.beginning_of_day, date.end_of_day)
+    object.where("departure_date between ? and ?",
+      date.beginning_of_day, date.end_of_day
+    )
   end
 
   def departure_date_range
@@ -18,5 +20,9 @@ class FlightDecorator < Draper::Decorator
       date.strftime("%Y-%m-%d")
     end
     dates.uniq
+  end
+
+  def pastize(word)
+    object.departed? ? (word[-1] == "e" ? "#{word}d" : "#{word}ed") : "#{word}s"
   end
 end

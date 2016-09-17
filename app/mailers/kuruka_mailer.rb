@@ -5,6 +5,6 @@ class KurukaMailer < ActionMailer::Base
 
   def booking_email(booking)
     @booking = booking
-    mail(to: booking.passenger_email, subject: booking_mail_subject_message)
+    mail(to: booking.user_email, subject: booking_mail_subject_message)
   end
 end
