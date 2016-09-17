@@ -5,8 +5,8 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <% if !@bookings %>
-        <h2><
+      <% unless @bookings %>
+        <%= render partial: 'application/no_results_panel', locals: { message: no_bookings_message } %></h3>
       <% else %>
         <div class="table-responsive single-table-content">
           <table class="table">

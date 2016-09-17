@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
   def retrieve
     @booking = Booking.find_by(search_params)
     respond_partial('bookings/booking_details', booking: @booking) if @booking
-    respond_message("danger", booking_not_found_message(search_params)) unless @booking
+    respond_message("danger", no_booking_found_message(search_params)) unless @booking
   end
 
   def confirmation

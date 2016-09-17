@@ -8,11 +8,13 @@ module MessagesHelper
   end
 
   def no_flights_for_day_message
-    "There are currently no flights for this date. This flight is only available on:"
+    "There are currently no flights for this date. "\
+    "This flight is only available on:"
   end
 
   def no_flights_message
-    "There are currently no flights scheduled for the year. Please check back later."
+    "There are currently no flights scheduled for the year. "\
+    "Please check back later."
   end
 
   def updated_user_message
@@ -32,7 +34,7 @@ module MessagesHelper
   end
 
   def no_booking_found_message(booking_param)
-    "No booking with reference number #{booking_param[:booking_ref]} was found"
+    "There is no booking with reference number '#{booking_param[:booking_ref]}'"
   end
 
   def booking_update_success_message
@@ -45,5 +47,10 @@ module MessagesHelper
 
   def flight_departed_message
     "This action cannot be done because the flight has already departed"
+  end
+
+  def no_bookings_message
+    "You do not have any past bookings. "\
+    "Please visit your home page to make a reservation."
   end
 end
