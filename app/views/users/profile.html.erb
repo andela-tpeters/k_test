@@ -5,41 +5,40 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-4">
-            <div class="sidebar portfolio-sidebar">
-                <div class="sidebar-item categories">
-                    <h3>Profile</h3>
-                    <ul class="nav navbar-stacked">
-                        <li><a href="#">Edit Account</a></li>
-                        <li class="active"><a href="#">View Bookings<span class="pull-right">(8)</span></a></li>
-                        <li><a href="#">Manage Bookings</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9 col-sm-8">
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-4 portfolio-item branded logos">
-                    <div class="portfolio-wrapper">
-                        
+        <div class="col-md-12 col-sm-12">
+          <div class="row">
+           <div class="form">
+              <%= form_for(@user, :html => {:id => "sign_up_user"},
+                                   :format => :json,
+                                   :remote => true ) do |form| %>
+
+            <div class="testimonial">
+                <div class="media">
+                    <div class="pull-left profile-div">
+                      <div class="image-div">
+                        <%= image_tag @user.avatar.url(:medium), alt: "Avatar", id: "profile-image" %>
+                      </div>
+                      <div class="image-upload">
+                        <label for="file-input">
+                          <%= button_tag "Change Picture", class: 'btn btn-default btn-register change-btn', onclick: "$('#file-input').trigger('click'); return false;" %>
+                        </label>
+                        <%= form.file_field :avatar, id: "file-input" %>
+                      </div>
+                    </div>
+                    <div class="media-body">
+                        <blockquote>
+                          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                          <%= form.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
+                          <%= form.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+                          <%= form.email_field :email, class: 'form-control', placeholder: 'Email' %>
+                          <%= form.submit "Update Account", class: 'btn btn-default btn-register' %>
+                        </blockquote>
                     </div>
                 </div>
-                <!-- <div>
-                    <ul class="pagination">
-                      <li><a href="#">left</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li class="active"><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li><a href="#">6</a></li>
-                      <li><a href="#">7</a></li>
-                      <li><a href="#">8</a></li>
-                      <li><a href="#">9</a></li>
-                      <li><a href="#">right</a></li>
-                    </ul>
-                </div> -->
             </div>
+          <% end %>
+          </div>
         </div>
     </div>
+</div>
 </div>

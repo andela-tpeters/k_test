@@ -93,6 +93,10 @@ h2.heading {
   pointer-events: none;
 }
 
+.form-control {
+  margin-bottom: 10px;
+}
+
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
@@ -190,26 +194,34 @@ input[type="radio"],
     position: relative;
     margin-left: 0;
 }
-.fixed-form {
+.fixed-form,
+.collapsed-button {
   position: fixed;
   bottom: 30px;
   left: 40px;
   z-index: 1000;
 }
+.controls .collapsed-button {
+  width: 50px;
+  margin: 0 15px;
+}
 @media (min-width:768px) {
-  .fixed-form {
+  .fixed-form,
+  .collapsed-button {
     left: calc(50% - 710px/2)
   }
 }
 
 @media (min-width:992px) {
-  .fixed-form {
+  .fixed-form,
+  .collapsed-button {
     left: calc(50% - 940px/2)
   }
 }
 
 @media (min-width:1200px) {
-  .fixed-form {
+  .fixed-form,
+  .collapsed-button {
     left: calc(50% - 1140px/2)
   }
 }
@@ -218,33 +230,15 @@ input[type="radio"],
   padding: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,.5);
 }
-.fixed-form .fa-phone {
+.collapsed-button .fa-phone {
   font-size: 22px;
 }
 .fixed-form .fa-remove {
   color: #686868;
 }
-.fixed-form .collapsed-button[aria-expanded="true"] .fa-phone {
-  font: normal normal normal 14px/1 'Lato', 'sans-serif';
-}
 button[data-toggle="collapse"],
 .fixed-form .button-form-group {
   margin-bottom: 0
-}
-.fixed-form .collapsed-button[aria-expanded="true"] {
-  display: none;
-}
-.fixed-form .collapsed-button[aria-expanded="false"],
-.fixed-form .collapsed-button {
-    width: 50px;
-}
-.fixed-form .collapsed-button[aria-expanded="true"]:after {
-    font-family: 'Glyphicons Halflings';
-    font-weight: 900;
-    content: "\00d7";
-    padding-right: 20px;
-    float: right; 
-    color: #07B3A1;
 }
 .col
 .controls textarea {
@@ -396,4 +390,18 @@ button[data-toggle="collapse"],
   border-right: none;
   outline: none;
   -webkit-appearance: inherit;
+}
+
+.image-upload .change-btn {
+  width: 139px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  outline: none;
+}
+
+.image-div {
+  height: 160px;
+  #profile-image {
+    width: 139px;
+  }
 }

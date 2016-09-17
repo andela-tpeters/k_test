@@ -10,9 +10,9 @@ class UsersController < ApplicationController
   def update
     params = user_params.reject! {|key, value| value.blank?}
     if @user.update(params)
-      flash[:success] = updated_avatar_message
+      flash[:success] = updated_user_message
     else
-      flash[:error] = updated_avatar_error_message
+      flash[:error] = full_message(@user)
     end
     redirect_back(fallback_location: root_url)
   end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'hook', to: 'payments#hook', as: 'hook'
   post 'login', to: 'sessions#create'
   post 'signup', to: 'users#create'
-  get 'logout', to: 'sessions#destroy'
+  delete 'logout', to: 'sessions#destroy'
 
   scope path: "/bookings", controller: :bookings do
     post 'select', to: 'bookings#select', as: 'select'

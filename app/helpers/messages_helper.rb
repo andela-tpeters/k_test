@@ -15,12 +15,8 @@ module MessagesHelper
     "There are currently no flights scheduled for the year. Please check back later."
   end
 
-  def updated_avatar_message
-    "Your profile avatar has been updated successfully."
-  end
-
-  def updated_avatar_error_message
-    "An error occurred while uploading your avatar."
+  def updated_user_message
+    "Your profile has been updated successfully."
   end
 
   def require_login_message

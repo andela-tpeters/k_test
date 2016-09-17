@@ -20,6 +20,10 @@ class Booking < ApplicationRecord
     flight.arrival
   end
 
+  def departure_date
+    flight.departure_date
+  end
+
   def route_name
     flight.route_name
   end
