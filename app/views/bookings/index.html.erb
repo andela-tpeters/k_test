@@ -5,55 +5,59 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <div class="table-responsive single-table-content">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Location</th>
-              <th>Booking ref</th>
-              <th>Flight No.</th>
-              <th>Passengers</th>
-              <th colspan="2">Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @bookings.each do |booking| %>
+      <% if !@bookings %>
+        <h2><
+      <% else %>
+        <div class="table-responsive single-table-content">
+          <table class="table">
+            <thead>
               <tr>
-                <td><%= booking.route_name %></td>
-                <td><%= booking.booking_ref %></td>
-                <td><%= booking.flight.name %></td>
-                <td>
-                  <% booking.decorated_passengers.each do |passenger| %>
-                    <table class="passenger-content">
-                        <tbody>
-                            <tr>
-                                <td><%= passenger.full_name %></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                  <% end %>
-                </td>
-                <% if booking.flight.departed? %>
-                  <td>
-                    <span class="opaque" data-toggle="tooltip" data-placement="top" title="<%= flight_departed_message %>">Edit</span>
-                  </td>
-                  <td>
-                    <span class="opaque" data-toggle="tooltip" data-placement="top" title="<%= flight_departed_message %>">Cancel</span>
-                  </td>
-                <% else %>
-                  <td>
-                    <%= link_to 'Edit', edit_booking_path %>
-                  </td>
-                  <td>
-                    <%= link_to 'Cancel', booking, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  </td>
-                <% end %>
+                <th>Location</th>
+                <th>Booking ref</th>
+                <th>Flight No.</th>
+                <th>Passengers</th>
+                <th colspan="2">Actions</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+            </thead>
+
+            <tbody>
+              <% @bookings.each do |booking| %>
+                <tr>
+                  <td><%= booking.route_name %></td>
+                  <td><%= booking.booking_ref %></td>
+                  <td><%= booking.flight.name %></td>
+                  <td>
+                    <% booking.decorated_passengers.each do |passenger| %>
+                      <table class="passenger-content">
+                          <tbody>
+                              <tr>
+                                  <td><%= passenger.full_name %></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    <% end %>
+                  </td>
+                  <% if booking.flight.departed? %>
+                    <td>
+                      <span class="opaque" data-toggle="tooltip" data-placement="top" title="<%= flight_departed_message %>">Edit</span>
+                    </td>
+                    <td>
+                      <span class="opaque" data-toggle="tooltip" data-placement="top" title="<%= flight_departed_message %>">Cancel</span>
+                    </td>
+                  <% else %>
+                    <td>
+                      <%= link_to 'Edit', edit_booking_path %>
+                    </td>
+                    <td>
+                      <%= link_to 'Cancel', booking, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
       <!-- <div>
                 <ul class="pagination">
                   <li><a href="#">left</a></li>
