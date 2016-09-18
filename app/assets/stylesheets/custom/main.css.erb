@@ -129,15 +129,15 @@ h6{
   margin-bottom: 35px;
 }
 
-   .carousel-indicators.visible-xs {
-    height: 20px;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: -35px;
-    width: 100%;
-    left: 0;
-  }
+.carousel-indicators.visible-xs {
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -35px;
+  width: 100%;
+  left: 0;
+}
 
 .carousel-indicators.visible-xs li {
   border-color: #D29948;
@@ -775,6 +775,11 @@ ul.elements li > i{
   margin-bottom: 26px;
 }
 
+.pagination {
+  display: block;
+  text-align: center;
+}
+
 .pagination li{
   display: inline-block;
   margin: 0 10px;
@@ -785,6 +790,10 @@ ul.elements li > i{
   padding: 5px 10px;
   border-radius: 5px;
   border: 1px solid #fff;
+}
+
+.pagination .disabled {
+  pointer-events: none;
 }
 
 .pagination li:first-child a{

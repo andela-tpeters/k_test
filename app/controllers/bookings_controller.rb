@@ -4,7 +4,9 @@ class BookingsController < ApplicationController
   before_action :require_login, only: [:edit, :update, :index]
 
   def index
-    @bookings = current_user.bookings.order(created_at: :desc) if current_user
+    @bookings = current_user.bookings.
+    paginate(page: params[:page], per_page: 10).
+    order(created_at: :desc) if current_user
   end
 
   def select
@@ -32,7 +34,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.cost_in_dollar = booking_cost(@booking)
+    set_booking_cost(@booking)
     @booking.save ? process_booking(@booking) : throw_booking_error(@booking)
   end
 
@@ -53,11 +55,12 @@ class BookingsController < ApplicationController
   end
 
   def update
+    set_booking_cost(@booking)
     @booking.update(booking_params) ? process_update(@booking) : throw_update_error(@booking)
     redirect_back(fallback_location: edit_booking_path)
   end
 
-  def process_booking_update(booking)
+  def process_update(booking)
     flash_message(:success, booking_update_success_message)
     send_booking_update_mail(booking)
   end
@@ -84,10 +87,10 @@ class BookingsController < ApplicationController
       @booking = Booking.find(params[:id])
     end
 
-    def booking_cost(booking)
+    def set_booking_cost(booking)
       cost = 0
       booking.decorated_passengers.each { |passenger| cost += passenger.fare }
-      "%.2f" % cost
+      booking.cost_in_dollar = "%.2f" % cost
     end
 
     def booking_params

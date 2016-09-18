@@ -6,7 +6,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <% unless @bookings %>
+      <% if @bookings.count.zero? %>
         <%= render partial: 'application/no_results_panel', locals: { message: no_bookings_message } %></h3>
       <% else %>
         <div class="table-responsive single-table-content">
@@ -63,21 +63,7 @@
           </table>
         </div>
       <% end %>
-      <!-- <div>
-                <ul class="pagination">
-                  <li><a href="#">left</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li class="active"><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">6</a></li>
-                  <li><a href="#">7</a></li>
-                  <li><a href="#">8</a></li>
-                  <li><a href="#">9</a></li>
-                  <li><a href="#">right</a></li>
-                </ul>
-            </div> -->
+      <%= will_paginate @bookings %>
     </div>
   </div>
 </div>
