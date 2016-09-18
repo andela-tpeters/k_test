@@ -29,15 +29,16 @@ class BookingsController < ApplicationController
 
   def confirmation
     @booking = Booking.find(params[:id])
-    send_booking_mail(@booking)
   end
 
   def create
     @booking = Booking.new(booking_params)
+    @booking.cost_in_dollar = booking_cost(@booking)
     if @booking.save
       session[:passenger_count] = nil
       redirect_to booking_confirmation_path(@booking)
       # redirect_to Payment.paypal_url(@booking, booking_confirmation_path(@booking))
+      send_booking_mail(@booking)
     else
       flash[:error] = @booking.errors.full_messages
       redirect_back(fallback_location: new_booking_path)
@@ -47,6 +48,7 @@ class BookingsController < ApplicationController
   def update
     if @booking.update(booking_params)
       flash[:success] = booking_update_success_message
+      send_booking_update_mail(@booking)
     else
       flash[:error] = full_message(@booking)
     end
@@ -62,9 +64,19 @@ class BookingsController < ApplicationController
     KurukaMailer.booking_email(booking).deliver
   end
 
+  def send_booking_update_mail(booking)
+    KurukaMailer.booking_updated_email(booking).deliver
+  end
+
   private
     def set_booking
       @booking = Booking.find(params[:id])
+    end
+
+    def booking_cost(booking)
+      cost = 0
+      booking.decorated_passengers.each { |passenger| cost += passenger.fare }
+      cost
     end
 
     def booking_params

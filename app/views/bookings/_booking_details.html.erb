@@ -10,7 +10,11 @@
 <div class="tab-content">
   <div class="top-20 text-right">
     <% if current_user %>
-      <%= link_to "Edit Reservation", edit_booking_path(booking) %>
+        <% if flight.departed? %>
+          <%= tooltip_element("Edit Reservation") %>
+        <% else %>
+          <%= link_to "Edit Reservation", edit_booking_path(booking) %>
+        <% end %>
     <% else %>
       <span class="opaque">You need to log in to edit this reservation</span>
     <% end %>
@@ -50,6 +54,16 @@
                 <div class="col-md-7 col">
                   <div class="ticket-label">Passenger</div>
                   <div class="col"><%= passenger.full_name %></div>
+                </div>
+                <div class="col-md-5 col ticket-right">
+                  <div class="ticket-label">Amount (in USD)</div>
+                  <div>$ <%= passenger.airfare.total_fare_in_dollar %></div>
+                </div>
+              </div>
+              <div class="row normRow">
+                <div class="col-md-7 col">
+                  <div class="ticket-label">Telephone</div>
+                  <div class="col"><%= passenger.phone %></div>
                 </div>
                 <div class="col-md-5 col ticket-right">
                   <div class="ticket-label">Status</div>

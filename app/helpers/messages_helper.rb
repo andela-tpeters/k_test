@@ -29,8 +29,24 @@ module MessagesHelper
     "Your details are shown below. This has also been sent to your email."
   end
 
+  def confirmed_past_booking_message
+    "This ticket is no longer in use."
+  end
+
   def booking_mail_subject_message
     "Kuruka Booking Confirmed!"
+  end
+
+  def booking_update_mail_subject_message
+    "Kuruka Booking Updated!"
+  end
+
+  def contact_mail_subject_message
+    "Kuruka Contact Message"
+  end
+
+  def contact_success_message
+    "Thank you for contacting us. We will get back to you as soon as possible"
   end
 
   def no_booking_found_message(booking_param)

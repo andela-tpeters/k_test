@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   protect_from_forgery except: [:hook]
+  
   def hook
     params.permit!
     status = params[:payment_status]

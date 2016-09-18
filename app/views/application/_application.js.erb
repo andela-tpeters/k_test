@@ -19,6 +19,10 @@
     $(document).ajaxComplete(function(){
         $(".loader").css("display", "none");
     });
+
+    $(document).ajaxError(function(){
+        $.notify('An error occurred while trying to process your request. Please try again.', 'error');
+    });
     
     //Responsive Nav
     $('li.dropdown').find('.fa-angle-down').each(function(){
@@ -50,17 +54,10 @@
     };
 
     // Contact form
-    var form = $('#main-contact-form');
-    form.submit(function(event){
+    $(document).on('submit', '#main-contact-form', function(event){
       event.preventDefault();
-      var form_status = $('<div class="form_status"></div>');
-      $.ajax({
-        url: $(this).attr('action'),
-        beforeSend: function(){
-          form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
-        }
-      }).done(function(data){
-        form_status.html('<p class="text-success">Thank you for contacting us. As early as possible  we will contact you</p>').delay(3000).fadeOut();
+      $.post( $(this).prop('action'), $(this).serialize(), function( data ) {
+        $.notify(data.message, 'success');
       });
     });
 
@@ -85,20 +82,5 @@
       });
     }
     floatLabel(".floatLabel");
-
-    // Geolocation
-    var requestUrl = "http://ip-api.com/json";
-
-    $.ajax({
-      url: requestUrl,
-      type: 'GET',
-      success: function(location) {
-        var city = location.city ? location.city : location.regionName;
-        $('.location').html("How is " + city + ", " + location.country + " today? Want to go somewhere else?");
-      },
-      error: function(err) {
-        $('.location').html("How's your day? Want to go somewhere fun today?");
-      }
-    });
   });
 </script>

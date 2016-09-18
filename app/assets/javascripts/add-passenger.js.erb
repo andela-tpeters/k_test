@@ -24,7 +24,6 @@ $(function(){
         $('#convert select').val(1);
       }
       var total_in_currency = $('#convert select').val() * total_in_dollar;
-      $('.total-cost input').val(total_in_dollar.toFixed(2));
       $('.dollar-total').text(total_in_dollar.toFixed(2));
       $('.currency-total').text(' ' + currency + ' ' + total_in_currency.toFixed(2));
       $(this).parents('.form-group').find('.selected-fare').text(currency + " " + total.toFixed(2) + " (tax inclusive)");

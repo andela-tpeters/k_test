@@ -331,10 +331,10 @@ button[data-toggle="collapse"],
   .control-indicator.first-class {
     background: #d9f5ff;
   }
-  .control-indicator.business {
+  .control-indicator.business-class {
     background: #cce697;
   }
-  .control-indicator.economy {
+  .control-indicator.economy-class {
     background: #ffc8b4;
   }
 }

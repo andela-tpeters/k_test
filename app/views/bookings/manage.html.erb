@@ -2,11 +2,8 @@
   Manage Bookings
 <% end %>
 <%= render partial: "users/page_heading", locals: {heading: 'Manage Bookings'} %>
-
+<%= render partial: "users/heading_caption", locals: { caption: "Use the booking reference number on your ticket to retrieve bookings here." } %>
 <div class="container">
-  <div class="col-md-12">
-    <h3 class="heading-caption">Use the booking reference number on your ticket to retrieve bookings here.</h3>
-  </div>
   <div class="col-md-12">
     <div class="row table-content">
       <%= form_for(:booking, :html => {:id => "manage_booking_form"},

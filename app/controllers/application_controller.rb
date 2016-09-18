@@ -9,5 +9,4 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include MessagesHelper
   include ResponseHelper
-
 end

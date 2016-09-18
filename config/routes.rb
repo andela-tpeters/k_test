@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'users/index', to: 'users#index', as: 'user_home'
   get 'profile', to: 'users#profile', as: 'user_profile'
   get 'home/index', to: 'home#index', as: 'home'
+  post 'send', to: 'contacts#send_mail', as: 'contact'
   get 'schedule', to: 'users#schedule', as: 'schedule'
   post 'search', to: 'flights#search', as: 'search'
   post 'hook', to: 'payments#hook', as: 'hook'
@@ -18,6 +19,6 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :bookings, only: [:edit, :new, :index, :destroy, :update, :show]
+  resources :bookings
   resources :sessions, only: [:create, :destroy]
 end
