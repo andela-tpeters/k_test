@@ -4,20 +4,19 @@ class BookingsController < ApplicationController
   before_action :require_login, only: [:edit, :update, :index]
 
   def index
-    @bookings = current_user.bookings if current_user
+    @bookings = current_user.bookings.order(created_at: :desc) if current_user
   end
 
   def select
     flight = Flight.find(params[:flight_radio])
-    respond(new_booking_path(flight: flight,
-      passengers: session[:passenger_count])
-    )
+    passenger_count = session[:passenger_count]
+    respond(new_booking_path(flight: flight, passengers: passenger_count))
   end
 
   def new
     @booking = Booking.new
     @booking.flight = Flight.find(params[:flight])
-    @booking.user = current_user if current_user
+    @booking.user = decorated_user if decorated_user
     @passenger_count = params[:passengers]
   end
 
@@ -34,25 +33,37 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.cost_in_dollar = booking_cost(@booking)
-    if @booking.save
-      session[:passenger_count] = nil
-      redirect_to booking_confirmation_path(@booking)
-      # redirect_to Payment.paypal_url(@booking, booking_confirmation_path(@booking))
-      send_booking_mail(@booking)
-    else
-      flash[:error] = @booking.errors.full_messages
-      redirect_back(fallback_location: new_booking_path)
-    end
+    @booking.save ? process_booking(@booking) : throw_booking_error(@booking)
+  end
+
+  def process_booking(booking)
+    clear_passenger_count
+    redirect_to booking_confirmation_path(booking)
+    # redirect_to Payment.paypal_url(booking, booking_confirmation_path(@booking))
+    send_booking_mail(booking)
+  end
+
+  def throw_booking_error(booking)
+    flash_message(:error, booking.errors.full_messages)
+    redirect_back(fallback_location: new_booking_path)
+  end
+
+  def clear_passenger_count
+    session[:passenger_count] = nil
   end
 
   def update
-    if @booking.update(booking_params)
-      flash[:success] = booking_update_success_message
-      send_booking_update_mail(@booking)
-    else
-      flash[:error] = full_message(@booking)
-    end
+    @booking.update(booking_params) ? process_update(@booking) : throw_update_error(@booking)
     redirect_back(fallback_location: edit_booking_path)
+  end
+
+  def process_booking_update(booking)
+    flash_message(:success, booking_update_success_message)
+    send_booking_update_mail(booking)
+  end
+
+  def throw_booking_update_error(booking)
+    flash_message(:error, full_message(booking))
   end
 
   def destroy
@@ -76,7 +87,7 @@ class BookingsController < ApplicationController
     def booking_cost(booking)
       cost = 0
       booking.decorated_passengers.each { |passenger| cost += passenger.fare }
-      cost
+      "%.2f" % cost
     end
 
     def booking_params

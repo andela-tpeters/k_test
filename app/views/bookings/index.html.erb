@@ -14,6 +14,7 @@
             <thead>
               <tr>
                 <th>Location</th>
+                <th>Departure</th>
                 <th>Booking ref</th>
                 <th>Flight No.</th>
                 <th>Flight Cost</th>
@@ -26,6 +27,7 @@
               <% @bookings.each do |booking| %>
                 <tr>
                   <td><%= booking.route_name %></td>
+                  <td><%= date_human_format(booking.departure_date) %></td>
                   <td><%= booking.booking_ref %></td>
                   <td><%= booking.flight.name %></td>
                   <td>$ <%= booking.cost_in_dollar %></td>
@@ -49,7 +51,7 @@
                     </td>
                   <% else %>
                     <td>
-                      <%= link_to 'Edit', edit_booking_path %>
+                      <%= link_to 'Edit', edit_booking_path(booking) %>
                     </td>
                     <td>
                       <%= link_to 'Cancel', booking, method: :delete, data: { confirm: 'Are you sure?' } %>

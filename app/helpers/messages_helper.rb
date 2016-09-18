@@ -7,6 +7,10 @@ module MessagesHelper
     "You have been logged in successfully."
   end
 
+  def flash_message(status, message)
+    flash[status] = message
+  end
+
   def no_flights_for_day_message
     "There are currently no flights for this date. "\
     "This flight is only available on:"
@@ -68,5 +72,9 @@ module MessagesHelper
   def no_bookings_message
     "You do not have any past bookings. "\
     "Please visit your home page to make a reservation."
+  end
+
+  def invalid_field_message(field)
+    "Your #{field} is incorrect"
   end
 end
