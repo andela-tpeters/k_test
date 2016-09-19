@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
-  before_action :set_flights, only: [:get_root, :schedule]
+  before_action :set_flights, only: [:schedule]
 
   def get_root
     current_user ? (render user_home_path) : (render home_path)

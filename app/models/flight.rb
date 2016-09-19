@@ -14,8 +14,8 @@ class Flight < ApplicationRecord
 
   def self.search_by_params(search_params)
     include_flight.
-        where(search_params).
-        where("departure_date > ?", Time.now)
+      where(search_params).
+      where("departure_date > ?", Time.now)
   end
 
   def self.recent
@@ -30,6 +30,10 @@ class Flight < ApplicationRecord
     recent.offset(4).first(4)
   end
 
+  def self.departure_date_range
+    (Date.today..last.departure_date)
+  end
+
   def self.departure_order_asc
     order(:departure_date).pluck(:departure_date).uniq
   end
@@ -39,7 +43,7 @@ class Flight < ApplicationRecord
   end
 
   def self.include_flight
-    all.includes(
+    includes(
       route: [:departure_airport, :arrival_airport, airfares: [:travel_class]]
     )
   end

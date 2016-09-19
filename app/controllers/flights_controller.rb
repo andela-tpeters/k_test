@@ -3,7 +3,7 @@ class FlightsController < ApplicationController
     @flights = Flight.search(reject_empty!(search_params.slice(:routes)))
     set_passenger_count
     respond_partial('flights/search_results', {
-      flights: FlightDecorator.new(@flights),
+      flights: @flights ? FlightDecorator.new(@flights) : nil,
       depart_date: search_params[:departure_date]
     })
   end

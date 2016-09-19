@@ -27,8 +27,7 @@
     <div class="cd-overlay"></div>
 </main>
 
-<div class="cd-flight view-flights">
-    <%= render partial: 'flights/search_results', locals: { flights: @flights, depart_date: Date.today.to_s } %>
-</div>
+<div class="cd-flight view-flights"></div>
+
 <a href="#0" class="cd-flight-close fa fa-remove"></a>
 <%= render partial: 'flights/search', formats: [:js] %>

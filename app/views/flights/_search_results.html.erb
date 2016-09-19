@@ -8,7 +8,7 @@
             <div class="scroller arrow-right"><i class="fa fa-chevron-right"></i></div>
             <div class="horizontal-tabs">
               <ul role="tablist" class="nav nav-tabs nav-tabs-horizontal">
-                <% flights.departure_date_range.each do |date| %>
+                <% Flight.departure_date_range.each do |date| %>
                 <li role="presentation" class="<%= date.to_s == depart_date ? 'active' : '' %>">
                   <a href="#<%= pack(date) %>" data-toggle="tab">
                     <span class="day"><%= day(date) %><hr></span>
@@ -30,7 +30,7 @@
                 <%= form.submit 'Select Flight', class: 'btn btn-primary', disabled: true %>
             </div>
             <% flights_by_day = nil %>
-            <% flights.departure_date_range.each do |date| %>
+            <% Flight.departure_date_range.each do |date| %>
                 <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade <%= date.to_s == depart_date ? 'in active' : '' %>">
                     <h2><%= full_date(date) %></h2>
                     <% flights_by_day = flights.by_day(date) %>

@@ -7,14 +7,6 @@ class FlightDecorator < Draper::Decorator
     )
   end
 
-  def departure_date_range
-    (Date.today..latest_flight_date.departure_date)
-  end
-
-  def latest_flight_date
-    object.order(:departure_date).last
-  end
-
   def uniq_departure_dates
     dates = object.order(:departure_date).pluck(:departure_date).map do |date|
       date.strftime("%Y-%m-%d")
