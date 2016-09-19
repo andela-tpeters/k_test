@@ -4,6 +4,6 @@ FactoryGirl.define do
     last_name "Nwosu"
     email "abc@gmail.com"
     password Auth.encrypt("password")
-    remember_token SecureRandom.urlsafe_base64
+    remember_digest SecureRandom.urlsafe_base64
   end
 end

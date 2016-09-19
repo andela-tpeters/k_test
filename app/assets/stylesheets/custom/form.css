@@ -230,8 +230,8 @@ input[type="radio"],
   padding: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,.5);
 }
-.collapsed-button .fa-phone {
-  font-size: 22px;
+.collapsed-button img {
+  height: 30px;
 }
 .fixed-form .fa-remove {
   color: #686868;
@@ -251,7 +251,7 @@ button[data-toggle="collapse"],
   background-color: #07B3A1;
   border: none;
   color: #fff;
-  padding: 12px 0;
+  padding: 10px 0;
 }
 .controls button:hover {
   background-color: #08ccb7;
