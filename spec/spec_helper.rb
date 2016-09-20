@@ -1,8 +1,8 @@
+require 'coveralls'
+Coveralls.wear!
 require "codeclimate-test-reporter"
-require "simpleCov"
 require "database_cleaner"
 require "capybara/rspec"
-SimpleCov.start "rails"
 CodeClimate::TestReporter.start
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

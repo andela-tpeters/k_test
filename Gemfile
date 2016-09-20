@@ -29,6 +29,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'letter_opener'
+  gem 'coveralls', require: false
 end
 
 group :production do
@@ -38,7 +39,6 @@ end
 group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
-  gem 'simplecov', require: false
   gem 'sqlite3'
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter', require: false
