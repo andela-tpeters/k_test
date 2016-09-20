@@ -10,12 +10,12 @@ class Payment < ApplicationRecord
         cmd: "_xclick",
         upload: 1,
         return: "#{ENV['app_host']}#{return_path}",
-        invoice: booking.id,
+        invoice: booking.booking_ref,
         amount: booking.cost_in_dollar,
         item_name: "Flight from #{booking.departure} to #{booking.arrival}",
         item_number: booking.booking_ref,
         quantity: '1',
-        notify_url: "#{ENV['app_host']}/hook"
+        notify_url: "#{ENV['paypal_notify_url']}/hook"
     }
     "#{ENV['paypal_host']}/cgi-bin/webscr?" + values.to_query
   end

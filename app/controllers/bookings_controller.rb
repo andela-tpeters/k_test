@@ -27,7 +27,7 @@ class BookingsController < ApplicationController
     if @booking
       (render partial: 'bookings/booking_details', locals: locals) && return
     end
-    respond_message("danger", no_booking_found_message(search_params))
+    respond_message "danger", no_booking_found_message(search_params)
   end
 
   def create
@@ -38,9 +38,9 @@ class BookingsController < ApplicationController
 
   def confirm_booking(booking)
     clear_passenger_count
-    redirect_to booking_confirmation_path(booking)
-    # redirect_to Payment.paypal_url(booking, booking_confirmation_path(@booking))
-    send_booking_mail(booking)
+    # redirect_to booking_confirmation_path(booking)
+    redirect_to Payment.paypal_url(booking, booking_confirmation_path(booking))
+    send_booking_mail booking
   end
 
   def show_booking_error(booking)

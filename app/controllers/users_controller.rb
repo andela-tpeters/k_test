@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def update
-    params = user_params.reject! {|key, value| value.blank?}
+    params = user_params.reject! { |key, value| value.blank? }
     if @user.update params
       flash_message :success, updated_user_message
     else
@@ -22,10 +22,10 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(
-        :id, :first_name, :last_name, :email,
-        :password, :password_confirmation, :avatar
-      )
-    end
+  def user_params
+    params.require(:user).permit(
+      :id, :first_name, :last_name, :email,
+      :password, :password_confirmation, :avatar
+    )
+  end
 end

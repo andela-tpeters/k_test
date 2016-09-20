@@ -10,16 +10,10 @@ class FlightsController < ApplicationController
 
   def reject_empty!(value_params)
     value_params.delete_if {|key, value| value.blank? }
-    value_params.values.each do |v|
-      reject_empty!(v) if v.is_a?(ActionController::Parameters)
+    value_params.values.each do |value|
+      reject_empty!(value) if value.is_a?(ActionController::Parameters)
     end
     value_params.delete_if {|key, value| value.blank? }
-    # value_params.delete_if do |key, value|
-    #   (value.blank? && !value.is_a? Array)
-    #   if value.is_a? Array
-    #     value.delete_if { |k, v| v.blank? }
-    #   end
-    # end
   end
 
   private
