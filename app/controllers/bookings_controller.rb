@@ -38,7 +38,6 @@ class BookingsController < ApplicationController
 
   def confirm_booking(booking)
     clear_passenger_count
-    # redirect_to booking_confirmation_path(booking)
     redirect_to Payment.paypal_url(booking, booking_confirmation_path(booking))
     send_booking_mail booking
   end
@@ -69,11 +68,11 @@ class BookingsController < ApplicationController
   end
 
   def send_booking_mail(booking)
-    KurukaMailer.booking_email(booking).deliver
+    KurukaMailer.booking_email(booking).deliver_now
   end
 
   def send_booking_update_mail(booking)
-    KurukaMailer.booking_updated_email(booking).deliver
+    KurukaMailer.booking_updated_email(booking).deliver_now
   end
 
   private

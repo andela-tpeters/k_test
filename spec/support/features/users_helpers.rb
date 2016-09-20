@@ -21,14 +21,15 @@ module Features
     def sign_up_with(first_name, last_name, email, password, password_confirm)
       visit root_path
       find_link('Sign In').click
-      save_and_open_page
-      find_link('create an account').click
-      fill_in "user[first_name]", with: first_name
-      fill_in "user[last_name]", with: last_name
-      fill_in "user[email]", with: email
-      fill_in "user[password]", with: password
-      fill_in "user[password_confirmation]", with: password_confirm
-      find_button("Create Account").click
+      within '.modal-content' do
+        find_link('create an account').click
+        fill_in "user[first_name]", with: first_name
+        fill_in "user[last_name]", with: last_name
+        fill_in "user[email]", with: email
+        fill_in "user[password]", with: password
+        fill_in "user[password_confirmation]", with: password_confirm
+        find_button("Create Account").click
+      end
     end
 
     def expect_user_to_be_signed_in

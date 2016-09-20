@@ -2,12 +2,6 @@ require "rails_helper"
 require "support/features/users_helpers"
 
 RSpec.feature "User signs up" do
-  before(:all) do
-    create(:airport)
-    create(:route)
-    create(:flight)
-  end
-
   scenario "by navigating to the page" do
     visit root_path
 
