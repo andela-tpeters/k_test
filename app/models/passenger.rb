@@ -12,4 +12,12 @@ class Passenger < ApplicationRecord
             :airfare,
             presence: true,
             allow_nil: false
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def fare
+    airfare.total_fare_in_dollar
+  end
 end

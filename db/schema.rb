@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 20160931172519) do
     t.datetime "avatar_updated_at"
     t.string   "password_digest"
     t.string   "remember_digest"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_digest"], name: "index_users_on_remember_digest"
   end

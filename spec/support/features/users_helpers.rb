@@ -18,23 +18,34 @@ module Features
       find_link('Log Out', match: :first).click
     end
 
-    def sign_up_with(first_name, last_name, email, password)
+    def sign_up_with(first_name, last_name, email, password, password_confirm)
       visit root_path
       find_link('Sign In').click
+      save_and_open_page
+      find_link('create an account').click
       fill_in "user[first_name]", with: first_name
       fill_in "user[last_name]", with: last_name
       fill_in "user[email]", with: email
       fill_in "user[password]", with: password
+      fill_in "user[password_confirmation]", with: password_confirm
       find_button("Create Account").click
     end
 
     def expect_user_to_be_signed_in
       visit root_path
-      expect(page).to have_button "Log Out"
+      expect(page).to have_link "Log Out"
     end
 
     def expect_user_to_be_signed_out
       expect(page).to have_content "Sign In"
+    end
+
+    def expect_invalid_param_error(param)
+      expect(page).to have_content "Your #{param} is incorrect"
+    end
+
+    def expect_blank_param_error(param)
+      expect(page).to have_content "#{param} must not be blank"
     end
   end
 end

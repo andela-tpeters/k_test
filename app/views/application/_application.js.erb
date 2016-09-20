@@ -23,8 +23,11 @@
       });
     });
 
+    floatLabel("#datetimepicker");
+
     $('#datetimepicker').datetimepicker({
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM-DD",
+      minDate: Date.now()
     });
 
     $(document).ajaxStart(function(){

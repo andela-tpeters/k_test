@@ -28,10 +28,14 @@ class Booking < ApplicationRecord
     flight.route_name
   end
 
-  def decorated_passengers
-    self.passengers.map do |passenger|
-      PassengerDecorator.new(passenger)
-    end
+  def passengers_names
+    passengers.map(&:full_name).join(", ")
+  end
+
+  def set_total_cost
+    cost = 0
+    passengers.each { |passenger| cost += passenger.fare }
+    self.cost_in_dollar = "%.2f" % cost
   end
 
   def decorated_flight

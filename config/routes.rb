@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  root 'users#get_root'
-  get 'users/index', to: 'users#index', as: 'user_home'
+  root 'home#get_root'
+  get 'users/home', to: 'users#home', as: 'user_home'
   get 'profile', to: 'users#profile', as: 'user_profile'
   get 'home/index', to: 'home#index', as: 'home'
   post 'send', to: 'contacts#send_mail', as: 'contact'
-  get 'schedule', to: 'users#schedule', as: 'schedule'
+  get 'schedule', to: 'home#schedule', as: 'schedule'
   post 'search', to: 'flights#search', as: 'search'
   post 'hook', to: 'payments#hook', as: 'hook'
   post 'login', to: 'sessions#create'

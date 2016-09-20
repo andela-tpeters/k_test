@@ -34,7 +34,9 @@
                 <div id="<%= pack(date) %>" role="tabpanel" class="tab-pane fade <%= date.to_s == depart_date ? 'in active' : '' %>">
                     <h2><%= full_date(date) %></h2>
                     <% flights_by_day = flights.by_day(date) %>
-                    <% if flights_by_day.blank? %>
+                    <% if flights.blank? %>
+                        <span class="message"><%= no_flights_message %></span>
+                    <% elsif flights_by_day.blank? %>
                         <span class="message"><%= no_flights_for_day_message %></span>
                         <ul class="available-dates">
                             <% flights.uniq_departure_dates.each do |flight_date| %>
@@ -45,8 +47,6 @@
                                 </li>
                             <% end %>
                         </ul>
-                    <% elsif flights.blank? %>
-                        <span class="message"><%= no_flights_message %></span>
                     <% else %>
                     <div class="table-responsive">
                         <table class="table">
@@ -64,7 +64,7 @@
                                         <tr>
                                             <td>
                                                 <label class="control control-radio">
-                                                    <%= radio_button_tag :flight_radio, flight.id %>
+                                                    <%= radio_button_tag :flight_id, flight.id %>
                                                     <div class="control-indicator"></div>
                                                 </label>
                                             </td>

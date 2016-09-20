@@ -17,7 +17,7 @@ module MessagesHelper
   end
 
   def no_flights_message
-    "There are currently no flights scheduled for the year. "\
+    "There are currently no flights scheduled for the year for this search. "\
     "Please check back later."
   end
 
@@ -61,7 +61,7 @@ module MessagesHelper
     "Your reservation was successfully updated."
   end
 
-  def full_message(model)
+  def full_error_message(model)
     model.errors.full_messages.join('<br>')
   end
 
@@ -76,5 +76,9 @@ module MessagesHelper
 
   def invalid_field_message(field)
     "Your #{field} is incorrect"
+  end
+
+  def flash_model_error_message(model)
+    flash_message :error, full_error_message(model)
   end
 end

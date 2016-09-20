@@ -1,45 +1,47 @@
 require "rails_helper"
-require "support/features/clearance_helpers"
+require "support/features/users_helpers"
 
-RSpec.feature "User login" do
+RSpec.feature "User logs in" do
+  before(:all) do
+    create_user "user@gmail.com", "password"
+    create(:airport)
+    create(:route)
+    create(:flight)
+  end
+
   scenario "with valid email and password" do
-    create(:user, password: "password", email: "user@example.com")
-    sign_in_with "user@example.com", "password"
+    sign_in_with "user@gmail.com", "password"
 
     expect_user_to_be_signed_in
   end
 
   scenario "with valid mixed-case email and password " do
-    create_user "user.name@example.com", "password"
-    sign_in_with "User.Name@example.com", "password"
+    sign_in_with "USER@gmail.com", "password"
 
     expect_user_to_be_signed_in
   end
 
-  scenario "tries with invalid password" do
-    create_user "user@example.com", "password"
-    sign_in_with "user@example.com", "wrong_password"
+  scenario "with invalid password" do
+    sign_in_with "user@gmail.com", "paSSword"
 
-    expect_page_to_display_sign_in_error
-    expect_user_to_be_signed_out
+    expect_invalid_param_error('password')
   end
 
-  scenario "tries with invalid email" do
-    sign_in_with "unknown.email@example.com", "password"
+  scenario "with invalid email" do
+    sign_in_with "wrong_user@gmail.com", "password"
 
-    expect_page_to_display_sign_in_error
-    expect_user_to_be_signed_out
+    expect_invalid_param_error('email')
+  end
+
+  scenario "with invalid email and invalid password" do
+    sign_in_with "wrong_user@gmail.com", "wrong_password"
+
+    expect_invalid_param_error('email')
   end
 
   private
 
-  def create_user(email, password)
-    FactoryGirl.create(:user, email: email, password: password)
-  end
-
-  def expect_page_to_display_sign_in_error
-    expect(page.body).to include(
-      I18n.t("flashes.failure_after_create", sign_up_path: sign_up_path)
-    )
-  end
+    def create_user(email, password)
+      create(:user, email: email, password: password)
+    end
 end

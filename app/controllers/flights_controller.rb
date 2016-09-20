@@ -2,10 +2,10 @@ class FlightsController < ApplicationController
   def search
     @flights = Flight.search(reject_empty!(search_params.slice(:routes)))
     set_passenger_count
-    respond_partial('flights/search_results', {
-      flights: @flights ? FlightDecorator.new(@flights) : nil,
-      depart_date: search_params[:departure_date]
-    })
+    render partial: 'flights/search_results', locals: {
+        flights: (FlightDecorator.new(@flights) if @flights) || nil,
+        depart_date: search_params[:departure_date]
+    }
   end
 
   def reject_empty!(value_params)
@@ -14,19 +14,20 @@ class FlightsController < ApplicationController
       reject_empty!(v) if v.is_a?(ActionController::Parameters)
     end
     value_params.delete_if {|key, value| value.blank? }
-  end
-
-  def set_passenger_count
-    passenger_count = params[:passenger_count]
-    session[:passenger_count] = passenger_count.blank? ? 1 : passenger_count
+    # value_params.delete_if do |key, value|
+    #   (value.blank? && !value.is_a? Array)
+    #   if value.is_a? Array
+    #     value.delete_if { |k, v| v.blank? }
+    #   end
+    # end
   end
 
   private
     
-    def search_params
-      params.require(:flight_search).permit(
-        :departure_date,
-        routes: [:departure_airport_id, :arrival_airport_id]
-      )
-    end
+  def search_params
+    params.require(:flight_search).permit(
+      :departure_date,
+      routes: [:departure_airport_id, :arrival_airport_id]
+    )
+  end
 end

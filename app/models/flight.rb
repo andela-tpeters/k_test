@@ -4,16 +4,22 @@ class Flight < ApplicationRecord
   has_many :bookings
   accepts_nested_attributes_for :route
 
+  def self.set
+    Flight.all.includes(
+      route: [:departure_airport, :arrival_airport, airfares: [:travel_class]]
+    )
+  end
+
   def self.search(params)
     params.blank? ? search_by_current : search_by_params(params)
   end
 
   def self.search_by_current
-    include_flight.where("departure_date > ?", Time.now)
+    include_joins.where("departure_date > ?", Time.now)
   end
 
   def self.search_by_params(search_params)
-    include_flight.
+    include_joins.
       where(search_params).
       where("departure_date > ?", Time.now)
   end
@@ -42,7 +48,7 @@ class Flight < ApplicationRecord
     order(:departure_date).last
   end
 
-  def self.include_flight
+  def self.include_joins
     includes(
       route: [:departure_airport, :arrival_airport, airfares: [:travel_class]]
     )
@@ -70,5 +76,18 @@ class Flight < ApplicationRecord
 
   def route_airports
     "#{route.departure_airport.name} to #{route.arrival_airport.name}"
+  end
+
+  def self.by_day(date)
+    where("departure_date between ? and ?",
+      date.beginning_of_day, date.end_of_day
+    )
+  end
+
+  def self.uniq_departure_dates
+    dates = order(:departure_date).pluck(:departure_date).map do |date|
+      date.strftime("%Y-%m-%d")
+    end
+    dates.uniq
   end
 end

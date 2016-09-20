@@ -16,20 +16,20 @@
     <%= select_tag :country, options_for_select((Country.all).map{|country| ["#{country.iso_currency}", country.exchange_rate]}), {include_blank: true, class: 'currency-select form-control'} %>
   </span>
 </div>
-<%= form_for @booking, :html => {:id => "booking_form"} do |form| %>
+<%= form_for @booking, html: {id: "booking_form"} do |form| %>
   <%= form.hidden_field :flight_id %>
   <%= hidden_field_tag :passenger_count, @passenger_count %>
-  <%= form.hidden_field :user_id, value: current_user ? current_user.id : nil %>
+  <%= form.hidden_field :user_id, value: current_user_id %>
   <%= form.fields_for :passengers do |passenger| %>
-    <%= render 'passenger_fields', :f => passenger %>
+    <%= render 'passenger_fields', f: passenger %>
   <% end %>
   <br>
   <div class="links pull-left">
     <%= link_to_add_association content_tag(:span, 'Add Passenger', class: "add_passenger"), form, :passengers, :class => 'btn btn-primary' %> 
   </div>
   <div class="total-cost pull-right">
-    Total (USD <span class="dollar-total"><%= @booking ? @booking.cost_in_dollar : '0.00' %></span>):
-    <span class="currency-total">USD <%= @booking ? @booking.cost_in_dollar : '0.00' %></span> 
+    Total (USD <span class="dollar-total"><%= get_booking_cost @booking %></span>):
+    <span class="currency-total">USD <%= get_booking_cost @booking %></span> 
   </div>
   <% unless current_user %>
     <div class="clear">

@@ -1,14 +1,14 @@
 require "rails_helper"
 require "support/features/users_helpers"
 
-RSpec.feature "User" do
+RSpec.feature "User logs out" do
   before(:all) do
     create(:airport)
     create(:route)
     create(:flight)
   end
 
-  scenario "signs out" do
+  scenario "by clicking log out link" do
     sign_in
     sign_out
 

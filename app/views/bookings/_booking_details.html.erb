@@ -1,5 +1,5 @@
 <% flight = booking.decorated_flight %>
-<% passengers = booking.decorated_passengers %>
+<% passengers = booking.passengers %>
 <ul class="nav nav-tabs ticket-tab">
   <% passengers.each_with_index do |passenger, index| %>
     <li class="<%= index == 0 ? 'active' : '' %>">
@@ -9,14 +9,10 @@
 </ul>
 <div class="tab-content">
   <div class="top-20 text-right">
-    <% if current_user %>
-        <% if flight.departed? %>
-          <%= tooltip_element("Edit Reservation") %>
-        <% else %>
-          <%= link_to "Edit Reservation", edit_booking_path(booking) %>
-        <% end %>
+    <% if flight.departed? %>
+      <%= tooltip_element("Edit Reservation") %>
     <% else %>
-      <span class="opaque">You need to log in to edit this reservation</span>
+      <%= link_to "Edit Reservation", edit_booking_path(booking) %>
     <% end %>
   </div>
   <% passengers.each_with_index do |passenger, index| %>

@@ -25,6 +25,10 @@ class User < ApplicationRecord
             length: { minimum: 6 },
             on: :create
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def downcase_email
     self.email = self.email.downcase
   end
