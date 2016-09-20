@@ -1,6 +1,6 @@
 class KurukaMailer < ActionMailer::Base
   include MessagesHelper
-  default from: "#{ENV['kuruka_email']}"
+  default from: "chineze.nwosu@andela.com"
   layout 'mailer'
 
   def booking_email(booking)
@@ -15,13 +15,14 @@ class KurukaMailer < ActionMailer::Base
     @contact = contact
     mail(
       from: contact.email,
-      to: "#{ENV['kuruka_email']}", 
+      to: "chineze.nwosu@andela.com", 
       subject: contact_mail_subject_message
     )
   end
 
   def mail_to(booking, subject)
     @booking = booking
+    @confirmation_path = "#{ENV['app_host']}/bookings/#{booking.id}/confirmation"
     mail to: booking.user_email, subject: subject
   end
 end

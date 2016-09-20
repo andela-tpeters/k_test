@@ -23,9 +23,9 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'cocoon', '>= 1.2.0'
 gem 'will_paginate', '~> 3.1.0'
+gem 'pry-rails'
 
 group :development, :test do
-  gem 'pry-rails'
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'letter_opener'

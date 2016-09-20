@@ -38,8 +38,8 @@ class BookingsController < ApplicationController
 
   def confirm_booking(booking)
     clear_passenger_count
-    redirect_to Payment.paypal_url(booking, booking_confirmation_path(booking))
     send_booking_mail booking
+    redirect_to Payment.paypal_url(booking, hook_path)
   end
 
   def show_booking_error(booking)
@@ -48,7 +48,7 @@ class BookingsController < ApplicationController
   end
 
   def update
-    booking.set_total_cost
+    @booking.set_total_cost
     if @booking.update booking_params
       confirm_update @booking
     else

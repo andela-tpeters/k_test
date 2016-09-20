@@ -12,7 +12,7 @@
     <tr style="font-size: 100%; margin: 0; padding: 0;">
         <td align="center">
             <p >
-                <a href="<%= url_for(host: ENV['app_host'], controller: "bookings", action: "confirmation", id: @booking.id) %>" target="_blank" style="color: white; text-decoration: none; font-weight: bold; border-radius: 2px; background: #0f93db; margin: 0; padding: 10px; border: none;">View your ticket here
+                <a href="<%= @confirmation_path %>" target="_blank" style="color: white; text-decoration: none; font-weight: bold; border-radius: 2px; background: #0f93db; margin: 0; padding: 10px; border: none;">View your ticket here
                 </a>
             </p>
         </td>
