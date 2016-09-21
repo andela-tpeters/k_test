@@ -9,7 +9,11 @@ class User < ApplicationRecord
   has_attached_file :avatar, 
                     styles: { :medium => "300x300>", :thumb => "100x100#" },
                     default_url: "/images/:style/avatar.jpg"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  IMAGE_REGEX = /\Aimage\/.*\Z/
+
+  validates_attachment_content_type :avatar, content_type: IMAGE_REGEX
 
   validates :first_name,
             :last_name,
@@ -18,7 +22,7 @@ class User < ApplicationRecord
             allow_nil: false
 
   validates :email,
-            format: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
+            format: EMAIL_REGEX,
             uniqueness: true
 
   validates :password,
@@ -27,10 +31,6 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def downcase_email
-    self.email = self.email.downcase
   end
 
   def remember
@@ -48,8 +48,12 @@ class User < ApplicationRecord
   end
 
   private
-  
+
     def generate_remember_token
       self.remember_digest = SecureRandom.urlsafe_base64
+    end
+
+    def downcase_email
+      self.email = self.email.downcase
     end
 end

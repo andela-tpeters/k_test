@@ -1,9 +1,12 @@
 class Booking < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :flight
+
   has_many :passengers, dependent: :destroy
   has_one :payment
+  
   before_create :set_booking_ref
+  
   accepts_nested_attributes_for :passengers,
                                 reject_if: :all_blank,
                                 allow_destroy: true

@@ -5,6 +5,6 @@ module ResponseHelper
   end
 
   def respond_json_error(message)
-    render :json => {success: false, errors: message}
+    render json: {success: false, errors: message}
   end
 end

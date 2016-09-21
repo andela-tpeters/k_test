@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
   end
 
   def select
-    flight = Flight.find_by id: params[:flight_id]
+    flight = Flight.find(id: params[:flight_id])
     passenger_count = session[:passenger_count]
     redirect_to new_booking_path flight: flight, passengers: passenger_count
   end
