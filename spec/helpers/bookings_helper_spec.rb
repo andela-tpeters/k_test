@@ -1,15 +1,24 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the BookingsHelper. For example:
-#
-# describe BookingsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe BookingsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe BookingsHelper do
+    before(:all) do
+      create(:airport)
+      create(:route)
+      create(:flight)
+      @booking = create :booking
+    end
+
+    describe "get_booking_cost" do
+      it "returns 0.00" do
+        expect(helper.get_booking_cost(@booking)).to eq('0.00')
+      end
+
+      it "returns the booking cost" do
+        @booking.cost_in_dollar = '123.45'
+        @booking.save
+        expect(helper.get_booking_cost(@booking)).to eq(123.45)
+      end
+    end
+  end
 end

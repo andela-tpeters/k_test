@@ -89,6 +89,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.11.1)
+      capybara (>= 2.3.0, < 2.8.0)
+      json
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -184,8 +189,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rails (0.3.4)
-      pry (>= 0.9.10)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
     puma (3.6.0)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -245,6 +250,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -252,6 +258,12 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    selenium-webdriver (2.53.4)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
+    shoulda-matchers (3.1.1)
+      activesupport (>= 4.0.0)
     simplecov (0.12.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -289,6 +301,7 @@ GEM
       activemodel (>= 5.0)
       debug_inspector
       railties (>= 5.0)
+    websocket (1.2.3)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -306,6 +319,7 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails (~> 4.17.42)
   byebug
   capybara
+  capybara-webkit
   cocoon (>= 1.2.0)
   codeclimate-test-reporter
   coffee-rails (~> 4.2)
@@ -325,13 +339,15 @@ DEPENDENCIES
   momentjs-rails (>= 2.9.0)
   paperclip (~> 5.0.0.beta1)
   pg (= 0.18.4)
-  pry-rails
+  pry-nav
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   responders
   rspec-rails (~> 3.5)
   rubocop
   sass-rails (~> 5.0)
+  selenium-webdriver
+  shoulda-matchers (~> 3.1)
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3

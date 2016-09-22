@@ -41,8 +41,8 @@ module Features
       expect(page).to have_content "Sign In"
     end
 
-    def expect_invalid_param_error(param)
-      expect(page).to have_content "Your #{param} is incorrect"
+    def expect_invalid_login_error
+      expect(page).to have_content "Your login information is incorrect"
     end
 
     def expect_blank_param_error(param)

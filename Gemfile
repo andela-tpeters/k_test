@@ -23,13 +23,15 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'cocoon', '>= 1.2.0'
 gem 'will_paginate', '~> 3.1.0'
-gem 'pry-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'letter_opener'
+  gem 'pry-nav'
   gem 'coveralls', require: false
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
 end
 
 group :production do
@@ -42,6 +44,7 @@ group :test do
   gem 'sqlite3'
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter', require: false
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do

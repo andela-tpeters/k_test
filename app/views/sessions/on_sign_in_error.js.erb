@@ -1,0 +1,6 @@
+$('#loginModal .modal-dialog').addClass('shake');
+$('.error').addClass('alert alert-danger').html("<%= message %><a class='close' data-dismiss='alert'>×</a>");
+$('input[type="password"]').val('');
+setTimeout( function(){ 
+    $('#loginModal .modal-dialog').removeClass('shake'); 
+}, 1000 );

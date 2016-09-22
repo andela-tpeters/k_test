@@ -1,21 +1,32 @@
 Rails.application.routes.draw do
   root 'home#get_root'
-  get 'users/home', to: 'users#home', as: 'user_home'
-  get 'profile', to: 'users#profile', as: 'user_profile'
-  get 'home/index', to: 'home#index', as: 'home'
-  post 'send', to: 'contacts#send_mail', as: 'contact'
-  get 'schedule', to: 'home#schedule', as: 'schedule'
-  post 'search', to: 'flights#search', as: 'search'
-  post 'hook', to: 'payments#hook', as: 'hook'
-  post 'login', to: 'sessions#create'
-  post 'signup', to: 'users#create'
-  delete 'logout', to: 'sessions#destroy'
+  
+  post 'send',          to: 'contacts#send_mail', as: 'contact'
+  post 'search',        to: 'flights#search', as: 'search'
+  post 'hook',          to: 'payments#hook', as: 'hook'
+  
+
+  scope path: "/sessions", controller: :sessions do
+    post 'login',       to: 'sessions#create'
+    delete 'logout',    to: 'sessions#destroy'
+  end
+
+  scope path: "/user", controller: :users do
+    get 'home',         to: 'users#home', as: 'user_home'
+    get 'profile',      to: 'users#profile', as: 'user_profile'
+    post 'signup',      to: 'users#create'
+  end
 
   scope path: "/bookings", controller: :bookings do
-    post 'select', to: 'bookings#select', as: 'select'
-    get ':id/confirmation', to: 'bookings#confirmation', as: 'booking_confirmation'
-    get 'manage', to: 'bookings#manage', as: 'manage_bookings'
-    post 'retrieve', to: 'bookings#retrieve', as: 'retrieve_booking'
+    post 'select',      to: 'bookings#select', as: 'select'
+    get ':id/confirm',  to: 'bookings#confirm', as: 'confirm_booking'
+    get 'manage',       to: 'bookings#manage', as: 'manage_bookings'
+    post 'retrieve',    to: 'bookings#retrieve', as: 'retrieve_booking'
+  end
+
+  scope controller: :home do
+    get 'schedule',     to: 'home#schedule', as: 'schedule'
+    get 'home',         to: 'home#index', as: 'home'
   end
 
   resources :users

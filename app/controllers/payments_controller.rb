@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
         status: :successful,
         transaction_ref: params[:txn_id],
         payment_date: Time.now)
-    redirect_to booking_confirmation_path(@booking)
+    redirect_to confirm_booking_path(@booking)
   end
 
   def validate_ipn_notification(raw)

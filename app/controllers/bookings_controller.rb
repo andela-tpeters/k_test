@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:edit, :update, :destroy, :confirmation]
+  before_action :set_booking, only: [:edit, :update, :destroy, :confirm]
   before_action :set_user
   before_action :require_login, only: [:edit, :update, :index]
 
@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
   end
 
   def select
-    flight = Flight.find(id: params[:flight_id])
+    flight = Flight.find_by(id: params[:flight_id])
     passenger_count = session[:passenger_count]
     redirect_to new_booking_path flight: flight, passengers: passenger_count
   end
@@ -39,7 +39,7 @@ class BookingsController < ApplicationController
   def confirm_booking(booking)
     clear_passenger_count
     send_booking_mail booking
-    redirect_to Payment.paypal_url(booking, hook_path)
+    redirect_to confirm_booking_path(booking)
   end
 
   def show_booking_error(booking)

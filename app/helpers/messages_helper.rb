@@ -78,6 +78,10 @@ module MessagesHelper
     "Your #{field} is incorrect"
   end
 
+  def invalid_login_message
+    "Your login information is incorrect"
+  end
+
   def flash_model_error_message(model)
     flash_message :error, full_error_message(model)
   end

@@ -1,42 +1,30 @@
 require "rails_helper"
 require "support/features/users_helpers"
 
-RSpec.feature "User logs in" do
+RSpec.feature "User logs in", js: true do
   before(:all) do
-    create_user "user@gmail.com", "password"
     create(:airport)
     create(:route)
     create(:flight)
+    create_user "user@gmail.com", "password"
   end
 
-  scenario "with valid email and password" do
-    sign_in_with "user@gmail.com", "password"
-
-    expect_user_to_be_signed_in
-  end
-
-  scenario "with valid mixed-case email and password " do
-    sign_in_with "USER@gmail.com", "password"
-
-    expect_user_to_be_signed_in
-  end
-
-  scenario "with invalid password" do
+  scenario "with invalid password", js: true do
     sign_in_with "user@gmail.com", "paSSword"
 
-    expect_invalid_param_error('password')
+    expect_invalid_login_error
   end
 
-  scenario "with invalid email" do
+  scenario "with invalid email", js: true do
     sign_in_with "wrong_user@gmail.com", "password"
 
-    expect_invalid_param_error('email')
+    expect_invalid_login_error
   end
 
-  scenario "with invalid email and invalid password" do
+  scenario "with invalid email and invalid password", js: true do
     sign_in_with "wrong_user@gmail.com", "wrong_password"
 
-    expect_invalid_param_error('email')
+    expect_invalid_login_error
   end
 
   private

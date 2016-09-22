@@ -4,14 +4,14 @@ class Airfare < ApplicationRecord
   has_many :passengers
 
   def service_charge_in_currency(country)
-    service_charge_in_dollar * country.exchange_rate
+    (service_charge_in_dollar * country.exchange_rate.to_i).to_f
   end
 
   def total_fare_in_dollar
-    service_charge_in_dollar * travel_class.tax_percent
+    (service_charge_in_dollar * travel_class.tax_percent).to_f
   end
 
   def total_fare_in_currency(country)
-    service_charge_in_currency(country) * travel_class.tax_percent
+    (service_charge_in_currency(country) * travel_class.tax_percent).to_f
   end
 end

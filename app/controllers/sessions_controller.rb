@@ -1,11 +1,15 @@
 class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:session][:email].downcase)
-    (prepare_for_sign_in(user) if authenticated_user?(user)) || invalidate(user)
+    if authenticated_user?(user)
+      prepare_for_sign_in(user)
+    else
+      invalidate_user
+    end
   end
 
-  def invalidate(user)
-    respond_json_error(invalid_field_message(user.nil? ? "email" : "password"))
+  def invalidate_user
+    respond_json_error invalid_login_message
   end
 
   def authenticated_user?(user)

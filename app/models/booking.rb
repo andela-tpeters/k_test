@@ -38,7 +38,7 @@ class Booking < ApplicationRecord
   def set_total_cost
     cost = 0
     passengers.each { |passenger| cost += passenger.fare }
-    self.cost_in_dollar = "%.2f" % cost
+    cost_in_dollar = "%.2f" % cost
   end
 
   def decorated_flight
@@ -46,10 +46,10 @@ class Booking < ApplicationRecord
   end
 
   def user_email
-    user ? user.email : passenger_email
+    (user.email if user) || passenger_email
   end
 
   def user_first_name
-    user ? user.first_name : user_email[/[^@]+/]
+    (user.first_name if user) || user_email[/[^@]+/]
   end
 end
