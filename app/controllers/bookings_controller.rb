@@ -5,8 +5,8 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = current_user.bookings.
-    paginate(page: params[:page], per_page: 10).
-    order(created_at: :desc) if current_user
+      paginate(page: params[:page], per_page: 10).
+        order(created_at: :desc) if current_user
   end
 
   def select

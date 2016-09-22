@@ -71,4 +71,64 @@ RSpec.describe Flight, type: :model do
       expect(Flight.last).to eql(@flight)
     end
   end
+
+  describe "#name" do
+    it "should return the name of the aircraft" do
+      expect(@flight.name).to eql('5N-3HD5')
+    end
+  end
+
+  describe "#route_airports" do
+    it "should return the departure and arrival airport name" do
+      expect(@flight.route_airports).
+        to eql('Nnamdi Azikiwe Airport to Nnamdi Azikiwe Airport')
+    end
+  end
+
+  describe "#departed?" do
+    it "should return true" do
+      @departed_flight = create :departed
+      expect(@departed_flight.departed?).to eql(true)
+    end
+  end
+
+  describe "#instance_methods" do
+    it "should respond to" do
+      expect(@flight).to respond_to(:name)
+    end
+
+    it "should respond to" do
+      expect(@flight).to respond_to(:arrival)
+    end
+
+    it "should respond to" do
+      expect(@flight).to respond_to(:departure)
+    end
+  end
+
+  describe "#class_methods" do
+    it "should respond to" do
+      expect(Flight).to respond_to(:set)
+    end
+
+    it "should respond to" do
+      expect(Flight).to respond_to(:search)
+    end
+
+    it "should respond to" do
+      expect(Flight).to respond_to(:search_by_current)
+    end
+
+    it "should respond to" do
+      expect(Flight).to respond_to(:search_by_params)
+    end
+
+    it "should respond to" do
+      expect(Flight).to respond_to(:by_day)
+    end
+
+    it "should respond to" do
+      expect(Flight).to respond_to(:uniq_departure_dates)
+    end
+  end
 end

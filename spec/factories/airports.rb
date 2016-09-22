@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :airport do
-    name 'Nnamdi Azikiwe International Airport'
+    name 'Nnamdi Azikiwe Airport'
     city 'Abuja'
     iata_code 'ABV'
     state
