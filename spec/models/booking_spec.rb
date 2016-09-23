@@ -1,11 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Booking, type: :model do
+  let(:user) do
+    {
+      first_name: "Chinese",
+      last_name: "Benny",
+      email: "user@gmail.com",
+      password: "password",
+    }
+  end
+
   before do
     create(:airport)
     create(:route)
     create(:flight)
-    @booking = create :booking
+    @booking = create :booking, user: nil
   end
 
   describe "#has_many" do
@@ -73,8 +82,11 @@ RSpec.describe Booking, type: :model do
 
   describe "#set_total_cost" do
     it "should return the total cost of a booking" do
+      passenger = create :passenger
+      @booking.passengers = [passenger]
       @booking.set_total_cost
-      expect(@booking.cost_in_dollar).to eql(1000.0)
+      @booking.save
+      expect(@booking.cost_in_dollar).to eql(1100.0)
     end
   end
 
@@ -88,14 +100,13 @@ RSpec.describe Booking, type: :model do
   describe "#user_email" do
     context "when user is registered" do
       it "should return the email of the user" do
-        @booking.user = @user
-        expect(@booking.user_email).to eql('abc@gmail.com')
+        @booking.user = User.create(user)
+        expect(@booking.user_email).to eql('user@gmail.com')
       end
     end
   
     context "when user is anonymous" do
       it "should return the email of the passenger" do
-        @booking.user = @user
         expect(@booking.user_email).to eql('passenger@gmail.com')
       end
     end
@@ -104,8 +115,8 @@ RSpec.describe Booking, type: :model do
   describe "#user_first_name" do
     context "when user is registered" do
       it "should return the first name of the user" do
-        @booking.user = @user
-        expect(@booking.user_first_name).to eql('Chineze')
+        @booking.user = User.create(user)
+        expect(@booking.user_first_name).to eql('Chinese')
       end
     end
 

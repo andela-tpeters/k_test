@@ -1,18 +1,16 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:edit, :update, :destroy, :confirm]
   before_action :set_user
-  before_action :require_login, only: [:edit, :update, :index]
+  before_action :require_login, only: [:index]
 
   def index
-    @bookings = current_user.bookings.
-      paginate(page: params[:page], per_page: 10).
-        order(created_at: :desc) if current_user
+    @bookings = current_user.bookings.paginate_and_order(params[:page])
   end
 
   def select
-    flight = Flight.find_by(id: params[:flight_id])
+    flight = Flight.find_by id: params[:flight_id]
     passenger_count = session[:passenger_count]
-    redirect_to new_booking_path flight: flight, passengers: passenger_count
+    redirect_to new_booking_path(flight: flight, passengers: passenger_count)
   end
 
   def new
@@ -25,7 +23,8 @@ class BookingsController < ApplicationController
     @booking = Booking.find_by(search_params)
     locals = { booking: @booking }
     if @booking
-      (render partial: 'bookings/booking_details', locals: locals) && return
+      render partial: 'bookings/booking_details', locals: locals
+      return
     end
     respond_message "danger", no_booking_found_message(search_params)
   end
@@ -54,7 +53,7 @@ class BookingsController < ApplicationController
     else
       flash_model_error_message @booking
     end
-    redirect_back fallback_location: edit_booking_path
+    redirect_back(fallback_location: edit_booking_path(@booking))
   end
 
   def confirm_update(booking)
@@ -78,14 +77,22 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
-    @booking = Booking.find_by id: params[:id]
+    @booking = Booking.find_by(id: params[:id])
   end
 
   def booking_params
     params.require(:booking).permit(
-      :flight_id, :user_id, :cost_in_dollar, :passenger_email,
+      :flight_id,
+      :user_id,
+      :cost_in_dollar,
+      :passenger_email,
       passengers_attributes:[
-        :id, :first_name, :last_name, :phone, :_destroy, :airfare_id
+        :id,
+        :first_name,
+        :last_name,
+        :phone,
+        :_destroy,
+        :airfare_id
       ]
     )
   end

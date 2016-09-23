@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:session][:email].downcase)
     if authenticated_user?(user)
-      prepare_for_sign_in(user)
+      prepare_for_sign_in user
     else
       invalidate_user
     end

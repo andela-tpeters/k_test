@@ -1,6 +1,6 @@
 module SessionsHelper
   def sign_in(user)
-    session['user_id'] = user.id
+    session[:user_id] = user.id
   end
 
   def remember(user)
@@ -48,6 +48,7 @@ module SessionsHelper
     sign_in user
     flash_message :success, log_in_message
     redirect_to root_url
+    return
   end
 
   def set_remember_me(user)

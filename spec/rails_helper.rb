@@ -21,7 +21,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryGirl::Syntax::Methods
-
+  config.render_views
 
   config.before(:suite) { DatabaseCleaner.clean_with :truncation }
   config.before(:each) { DatabaseCleaner.strategy = :transaction }

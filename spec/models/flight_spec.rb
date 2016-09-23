@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Flight, type: :model do
+  let(:flight) do
+    {
+      departure_date: Time.zone.now + 86_400 * 10,
+      arrival_date: Time.zone.now + 86_400 * 11,
+      aircraft_id: 1,
+      route_id: 1
+    }
+  end
+
   before do
     create(:airport)
     create(:route)
@@ -45,7 +54,7 @@ RSpec.describe Flight, type: :model do
 
   describe ".top_recent" do
     it "should return the first 4 flights" do
-      expect(Flight.top_recent[0]).to eql(@flight)
+      expect(Flight.top_recent).to include(@flight)
     end
   end
 
@@ -66,9 +75,10 @@ RSpec.describe Flight, type: :model do
     end
   end
 
-  describe ".last" do
+  describe ".last_by_date" do
     it "should return the last flight" do
-      expect(Flight.last).to eql(@flight)
+      new_flight = Flight.create flight
+      expect(Flight.last_by_date).to eql(new_flight)
     end
   end
 

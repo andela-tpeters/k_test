@@ -39,14 +39,14 @@ class Flight < ApplicationRecord
   end
 
   def self.departure_date_range
-    (Date.today..last.departure_date)
+    (Date.today..self.last_by_date.departure_date)
   end
 
   def self.departure_order_asc
     order(:departure_date).pluck(:departure_date).uniq
   end
 
-  def self.last
+  def self.last_by_date
     order(:departure_date).last
   end
 

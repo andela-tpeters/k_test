@@ -2,7 +2,7 @@ require "rails_helper"
 require "support/features/users_helpers"
 
 RSpec.feature "User logs out" do
-  before(:all) do
+  before do
     create(:airport)
     create(:route)
     create(:flight)

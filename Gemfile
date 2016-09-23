@@ -45,6 +45,7 @@ group :test do
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter', require: false
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
 end
 
 group :development do

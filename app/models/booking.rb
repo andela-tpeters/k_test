@@ -15,6 +15,10 @@ class Booking < ApplicationRecord
     self.booking_ref = SecureRandom.hex(4).upcase
   end
 
+  def self.paginate_and_order(page_params)
+    paginate(page: page_params, per_page: 10).order(created_at: :desc)
+  end
+
   def departure
     flight.departure
   end
@@ -38,7 +42,7 @@ class Booking < ApplicationRecord
   def set_total_cost
     cost = 0
     passengers.each { |passenger| cost += passenger.fare }
-    cost_in_dollar = "%.2f" % cost
+    self.cost_in_dollar = "%.2f" % cost
   end
 
   def decorated_flight
