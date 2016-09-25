@@ -1,6 +1,6 @@
 # Kuruka
 
-[![Build Status](https://travis-ci.org/andela-cnwosu/kuruka.svg?branch=develop)](https://travis-ci.org/andela-cnwosu/kuruka)
+[![Build Status](https://travis-ci.org/andela-tpeters/k_test.svg?branch=from-d)](https://travis-ci.org/andela-tpeters/k_test)
 [![Coverage Status](https://coveralls.io/repos/github/andela-cnwosu/kuruka/badge.svg?branch=develop)](https://coveralls.io/github/andela-cnwosu/kuruka?branch=develop)
 [![Issue Count](https://codeclimate.com/github/andela-cnwosu/kuruka/badges/issue_count.svg)](https://codeclimate.com/github/andela-cnwosu/kuruka)
 
